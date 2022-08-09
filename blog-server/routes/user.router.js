@@ -30,8 +30,8 @@ userRouter.get("/:id", auth, async (req, res, next) => {
 
   // we can access logged in users now anywhere
   console.log("Authenticated user:", req.user._id)
-  const usersAll = await User.findById(req.params.id)
-  res.json(usersAll)
+  const userSingle = await User.findById(req.params.id)
+  res.json(userSingle)
 })
 
 
@@ -112,6 +112,7 @@ userRouter.post("/login", async (req, res, next) => {
   // combine user object with token
   res.json({ ...userPublic, token })
 })
+
 
 // Update user
 // ROute: /user/:id

@@ -4,6 +4,7 @@ import cors from "cors"
 import morgan from "morgan"
 import "./connect-db.js"
 import userRouter from "./routes/user.router.js"
+import postRouter from "./routes/post.router.js"
 import { errorHandler404, errorHandlerGeneric } from "./lib/error-handler.js"
 
 const app = express()
@@ -13,11 +14,20 @@ app.use(cors()) // this is enough setup for token exchange
 app.use(express.json({limit: "200KB"})) // JSON Parser => req.body
 
 app.get("/", (req, res) => {
-  res.send("Hello from API!")
+  // res.send("Hello from API!")
+  res.send(`
+  
+  <h2>Welcome!</h2>
+<div>Our routes:</div>
+<div>Home: <a href="/">/</a></div>
+<div>User: <a href="/user">/user</a></div>
+<div>Posts: <a href="/posts">/posts</a></div>
+`)
 })
 
 // load ROUTERS
 app.use("/user", userRouter)
+app.use("/posts", postRouter)
 
 /// 404 error handler
 app.use( errorHandler404 )
