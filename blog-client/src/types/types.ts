@@ -1,7 +1,9 @@
 export type UserCreate = {
+  name: string;
   email: string
   password: string
   role?: string
+  avatar?: string
 }
 
 export type UserUpdate = {
@@ -18,7 +20,8 @@ export type User = {
   email: string,
   password: string,
   role: string,
-  token: string
+  token: string, 
+  avatar: string,
 }
 
 export type ContextData = {

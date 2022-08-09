@@ -7,6 +7,7 @@ import { Dashboard } from "./pages/Dashboard"
 import { Navbar } from "./components/Navbar"
 import { Admin } from "./pages/Admin"
 import { ProtectedPage } from "./components/ProtectedPage"
+import { Posts } from "./pages/Posts"
 
 function App() {
   return (
@@ -27,6 +28,12 @@ function App() {
               <Dashboard />
             </ProtectedPage>}
           />
+          <Route path="/posts"
+          element={
+            <ProtectedPage>
+              <Posts />
+            </ProtectedPage>
+          } />
           <Route
             path="/admin"
             element={
