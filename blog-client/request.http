@@ -27,7 +27,7 @@ POST {{API_URL}}/user
 Content-Type: application/json
 
 {
-  "username": "rob123",
+  "name": "rob123",
   "email": "rob@rob.com",
   "password": "rob123" 
 }
