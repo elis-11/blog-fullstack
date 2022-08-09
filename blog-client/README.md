@@ -1,20 +1,42 @@
-# React TypeScript Template for Frontend
+# Frontend React Template
 
-Here we will create a template with common things we need in the frontend:
+- Install basic Packages: 
+  - sass
+  - react-router-dom
 
-- Minimum 3 Pages:
+- Setup folder structure
+  - styles/ for all scss files
+  - pages/ for Page components
+  - components/ for reusable components on pages (e.g. Navbar)
+  - context/ for storing our data
+  - helpers/ for reusable functions (e.g. API calls)
+
+- Setup basic pages & Routes
   - Homepage
-  - Login / Signup page
-  - Dashboard page (protected - only after login)
-- User State
-- Context: Store data centrally
-- Login / Logout
-- After Login: 
-  - Store token
-  - Redirect to Dashboard / protected page
-- On Logout:
-  - Redirect to Homepage if we are on a protected page
-- Protect Routes
-  - Protect Dashboard page route - only logged in user can access
-- Get Protected Data from backend
-  - Fetch: Send token with header "Authorization"
+  - Login & Signup page
+  - Dashboard (protected / only for logged in users)
+
+- Setup Context
+  - Provide user state
+
+- Code Login
+  - Collect email & password using refs
+  - Submit email & password as JSON string to API
+  - If error: Show error from API (e.g. wrong password)
+  - If success: 
+    - Store user in state
+    - Clear any errors
+    - Redirect to Dashboard
+
+- Dashboard page
+  - load user data in useEffect hook
+  - fetch data using token (stored in state => user.token)
+  - send token in header "Authorization"
+
+- Authentication / Route protection
+  - Handle Page Refresh (restore user state on first load)
+  - Protect dashboard route
+  - Protect admin only routes
+
+TODO: 
+
