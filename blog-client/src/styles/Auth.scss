@@ -1,0 +1,130 @@
+.Home {
+  display: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+.Signup,
+.Login {
+  display: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  h2 {
+    padding: 1rem;
+  }
+
+  form {
+    padding: 1rem;
+    label {
+      img{
+        width: 100px;
+        cursor: pointer;
+        &:hover {
+          color: rgb(251, 248, 248);
+        }
+      }
+    }
+    div {
+      input {
+        width: 18rem;
+        height: 2rem;
+        padding-left: 1rem;
+        margin: 0.4rem;
+        background-color: transparent;
+        &:hover {
+          background-color: rgb(251, 248, 248);
+        }
+      }
+    }
+    button {
+      font-size: 1rem;
+      width: 18rem;
+      height: 2rem;
+      background-color: transparent;
+      &:hover {
+        background-color: rgb(251, 248, 248);
+      }
+    }
+  }
+}
+
+.Dashboard {
+  display: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  // background-image: linear-gradient(to right, rgb(242, 226, 226) , rgb(234, 234, 212));
+  width: 100%;
+  .users {
+    width: 70%;
+    margin: auto;
+    margin-top: 3rem;
+    display: column;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    .user {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      border: 1px solid rgb(196, 190, 190);
+      height: 2rem;
+      place-items: center;
+      .edit {
+        width: 100%;
+        display: flex;
+
+        .name {
+          border: none;
+          background-color: transparent;
+          padding-left: 1rem;
+          width: 35%;
+          text-align: left;
+          color: rgb(94, 93, 93);
+          font-size: 20px;
+        }
+        .email {
+          border: none;
+          background-color: transparent;
+          padding-left: 1rem;
+          text-align: left;
+          color: rgb(94, 93, 93);
+          font-size: 20px;
+        }
+        .save {
+          font-size: 1.2rem;
+          color: rgb(94, 93, 93);
+          margin: 0;
+          &:hover {
+            color: white;
+          }
+        }
+      }
+      .item {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+
+        .name {
+          width: 30%;
+          text-align: left;
+        }
+        .email {
+          width: 60%;
+          text-align: left;
+        }
+      }
+      .icons {
+        display: flex;
+        justify-content: right;
+        padding-right: 1rem;
+        .icon {
+          color: gray;
+          &:hover {
+            color: rgb(79, 58, 58);
+          }
+        }
+      }
+    }
+  }
+}
