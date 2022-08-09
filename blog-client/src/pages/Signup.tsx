@@ -87,7 +87,7 @@ export const Signup = () => {
         <div>
           <input ref={refPassword} type="password" placeholder="Password..." />
         </div>
-        <button type="submit">Login</button>
+        <button type="submit">Signup</button>
 
         {/* secret avatar image input handler 
           is not shown because it is ugly :) 

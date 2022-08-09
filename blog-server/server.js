@@ -10,7 +10,7 @@ const app = express()
 
 app.use(morgan("dev")) // log all requests to API
 app.use(cors()) // this is enough setup for token exchange
-app.use(express.json()) // JSON Parser => req.body
+app.use(express.json({limit: "200KB"})) // JSON Parser => req.body
 
 app.get("/", (req, res) => {
   res.send("Hello from API!")

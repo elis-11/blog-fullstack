@@ -50,7 +50,7 @@ export const Login = () => {
           <input
             ref={refEmail}
             type="text"
-            defaultValue={"el@el.net"}
+            defaultValue={"artur@gmail.com"}
             placeholder="Email.."
           />
         </div>
