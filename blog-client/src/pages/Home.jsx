@@ -1,18 +1,20 @@
-import { useDataContext } from "../context/DataProvider"
+import { useDataContext } from "../context/DataProvider";
+import "../styles/Auth.scss";
 
 export const Home = () => {
-  const { user } = useDataContext()
+  const { user } = useDataContext();
 
   return (
-    <div className="homepage">
-      <h2>Home</h2>
+    <div className="Home">
+      <h2>My Weebpage Template</h2>
+      <h3>Home</h3>
       {user && (
-        <div className="user-details">
-          <div>Name: {user.username}</div>
-          <div>Email: {user.email}</div>
-          <img style={{ width: "200px" }} src={user.avatar} />
+        <div className="user">
+          <img style={{ width: "100px" }} src={user.avatar} />
+          <div>Hello {user.name} !</div>
+          <div>{user.email}</div>
         </div>
       )}
     </div>
-  )
-}
+  );
+};

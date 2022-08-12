@@ -6,6 +6,7 @@ import {
   useState,
 } from "react";
 import { loadUserInLocalStorage } from "../helpers/localStorage";
+import { Post } from "../types/Posts.types";
 import { ContextData, User } from "../types/types";
 
 const DataContext = createContext<ContextData>({} as ContextData);

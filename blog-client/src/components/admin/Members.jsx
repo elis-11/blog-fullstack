@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { UsersList } from "../components/UsersList";
-import { useDataContext } from "../context/DataProvider";
-import { getUsersApi } from "../helpers/apiCalls";
-import "../styles/Auth.scss";
+import { useDataContext } from "../../context/DataProvider";
+import { getUsersApi } from "../../helpers/apiCalls";
+import "./Admin.scss";
+import { MemList } from "./MemList";
 
-export const Dashboard = () => {
+export const Members = () => {
   const navigate = useNavigate();
 
   const { user, users, setUsers, errors, setErrors } = useDataContext();
@@ -30,9 +30,9 @@ export const Dashboard = () => {
   }, [user]);
 
   return (
-    <div className="Dashboard">
-      <h2>Dashboard</h2>
-        <UsersList />
+    <div className="Members">
+      <h2>Members</h2>
+      <MemList />
       <div className="errors">{errors}</div>
     </div>
   );

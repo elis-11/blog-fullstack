@@ -1,49 +1,59 @@
-import "./styles/App.scss"
-import { useDataContext } from "./context/DataProvider"
-import { Route, Routes } from "react-router-dom"
-import { Home } from "./pages/Home"
-import { Login } from "./pages/Login"
-import { Signup } from "./pages/Signup"
-import { Dashboard } from "./pages/Dashboard"
-import { Navbar } from "./components/Navbar"
-import { Admin } from "./pages/Admin"
-import { ProtectedPage } from "./components/ProtectedPage"
+import { useDataContext } from "./context/DataProvider";
+import { Route, Routes } from "react-router-dom";
+import { Home } from "./pages/Home";
+import { Login } from "./pages/Login";
+import { Signup } from "./pages/Signup";
+import { Dashboard } from "./pages/Dashboard";
+import { Navbar } from "./components/Navbar";
+import "./styles/App.scss";
+import { Admin } from "./components/admin/Admin";
+import { ProtectedRoute } from "./components/ProtectedRoute";
+import { NotFound } from "./pages/NotFound";
+import { Posts } from "./pages/Posts";
 
 function App() {
+  const { user, setUser } = useDataContext();
+
   return (
     <div className="App">
       <header className="App-header">
-        <h2>My Webpage (Template)</h2>
         <Navbar />
       </header>
-      {/* MAIN CONTENT / PAGE */}
       <main>
         <Routes>
-          <Route index element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route
             path="/dashboard"
             element={
-              <ProtectedPage>
+              <ProtectedRoute>
                 <Dashboard />
-              </ProtectedPage>
+              </ProtectedRoute>
             }
           />
           <Route
-            path="/admin"
+            path="/posts"
             element={
-              <ProtectedPage admin>
-                <Admin />
-              </ProtectedPage>
+              <ProtectedRoute>
+                <Posts />
+              </ProtectedRoute>
             }
           />
-          <Route path="*" element={<div>Page does not exist</div>} />
+          <Route
+            path="/admin/*"
+            element={
+              <ProtectedRoute admin>
+                <Admin />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
-      <footer>&copy; Eliza Studios Inc.</footer>
+      <footer>&copy; Tralalas Studios Inc.</footer>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

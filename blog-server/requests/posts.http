@@ -5,8 +5,10 @@
 ### Posts
 GET {{API_URL}}/posts
 Authorization: {{TOKEN}}
+Content-Type: application/json
 
 
 ### Single Post
 GET {{API_URL}}/posts/62f26493e7a6cbfe1d1e85b7
 Authorization: {{TOKEN}}
+Content-Type: application/json

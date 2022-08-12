@@ -1,28 +1,30 @@
-import { createContext, useContext, useEffect, useState } from "react"
-import { loadUserInLocalStorage } from "../helpers/localStorage"
+import { useState, createContext, useContext } from "react";
+import { loadUserInLocalStorage } from "../helpers/LocallStorage";
 
-const DataContext = createContext()
+const DataContext = createContext();
 
-// this here gets me data from central context in any component
-export const useDataContext = () => useContext(DataContext)
+export const useDataContext = () => useContext(DataContext);
 
 export const DataProvider = ({ children }) => {
+  
+  const userLs = loadUserInLocalStorage();
 
-  // check if user is already logged in by looking it up from local storage
-  const userLs = loadUserInLocalStorage()
+  const [user, setUser] = useState(userLs);
+  const [users, setUsers] = useState([]);
+  const [posts, setPosts] = useState([]);
+  const [errors, setErrors] = useState("");
 
-  const [user, setUser] = useState(userLs) // use user from localstorage as default
-  const [users, setUsers] = useState([])
-  const [errors, setErrors] = useState("")
-
-  const sharedData = { 
-    user, setUser, 
-    users, setUsers,
-    errors, setErrors 
-  }
-
-  return <DataContext.Provider value={ sharedData }>
-    {children}
-  </DataContext.Provider>
-
-}
+  const sharedData = {
+    user,
+    setUser,
+    users,
+    setUsers,
+    posts,
+    setPosts,
+    errors,
+    setErrors,
+  };
+  return (
+    <DataContext.Provider value={sharedData}>{children}</DataContext.Provider>
+  );
+};
