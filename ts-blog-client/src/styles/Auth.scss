@@ -104,13 +104,19 @@
         width: 100%;
         display: flex;
         justify-content: space-around;
-
+        .avatar {
+          width: 15%;
+          img{
+            width: 30px;
+            border-radius: 50%;
+          }
+        }
         .name {
           width: 30%;
           text-align: left;
         }
         .email {
-          width: 60%;
+          width: 50%;
           text-align: left;
         }
       }

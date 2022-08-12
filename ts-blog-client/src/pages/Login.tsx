@@ -10,17 +10,17 @@ export const Login = () => {
   // use setUser to place logged in user in state => login
   const { setUser, errors, setErrors } = useDataContext()
 
-  const refEmail = useRef()
-  const refPassword = useRef()
+  const refEmail = useRef<HTMLInputElement>(null)
+  const refPassword = useRef<HTMLInputElement>(null)
 
   const navigate = useNavigate()
 
-  const onLoginSubmit = async (e) => {
+  const onLoginSubmit: React.FormEventHandler<HTMLFormElement>  = async (e) => {
     e.preventDefault()
     console.log("Login at API...")
 
-    const email = refEmail.current.value
-    const password = refPassword.current.value
+    const email = refEmail?.current?.value
+    const password = refPassword?.current?.value
 
     if(!email || !password) {
       setErrors("HEYY! Email und Passwort vergessen? Jetzt aber!")
@@ -43,7 +43,7 @@ export const Login = () => {
   }
 
   return (
-    <div className="login-form">
+    <div className="Login">
       <h2>Login</h2>
       <form onSubmit={onLoginSubmit}>
         <div>

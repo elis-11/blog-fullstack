@@ -1,75 +1,81 @@
-import { useRef, useState } from "react"
-import { useNavigate } from "react-router-dom"
-import { useDataContext } from "../context/DataProvider"
-import { signupApi } from "../helpers/apiCalls"
+import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDataContext } from "../context/DataProvider";
+import { signupApi } from "../helpers/apiCalls";
 
 export const Signup = () => {
-  const { errors, setErrors } = useDataContext()
+  const { errors, setErrors } = useDataContext();
 
   // handle INPUT fields with refs
-  const refName = useRef()
-  const refEmail = useRef()
-  const refPassword = useRef()
+  // const refName = useRef();   // - JS
+  const refName = useRef<HTMLInputElement>(null);   // <HTMLInputElement>(null) - is TS
+  const refEmail = useRef<HTMLInputElement>(null);
+  const refPassword = useRef<HTMLInputElement>(null);
   // store avatar changes in state
   const [avatarPreview, setAvatarPreview] = useState(
-    "https://res.cloudinary.com/losrobbos/image/upload/v1659617969/zoegjihc8gaq76vc8l2i.png"
-  )
-  
-  const navigate = useNavigate()
+    "https://res.cloudinary.com/dngl4djva/image/upload/v1659703451/default_mwdlea.png"
+  );
 
-  const onSignupSubmit = async (e) => {
-    e.preventDefault()
+  const navigate = useNavigate();
+
+  const onSignupSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
+    e.preventDefault();
 
     // grab input values from refs on submit
-    const name = refName.current.value
-    const email = refEmail.current.value
-    const password = refPassword.current.value
-    const avatar = avatarPreview
+    const name = refName?.current?.value;
+    const email = refEmail?.current?.value;
+    const password = refPassword?.current?.value;
+    const avatar = avatarPreview;
 
     // has user provided all data in form?
     if (!name || !email || !password) {
-      console.log("Missing fields...")
-      return setErrors("Bitte Username, Email und Password angeben! DANKE!")
+      console.log("Missing fields...");
+      return setErrors("Bitte Username, Email und Password angeben! DANKE!");
     }
 
     // perform signup against API
-    const result = await signupApi({ name, email, password, avatar })
+    const result = await signupApi({ name, email, password, avatar });
 
-    console.log(result)
+    console.log(result);
 
     // error on signup? missing fields? wrong formats? show it!
     if (result.error) {
-      return setErrors(result.error)
+      return setErrors(result.error);
     }
 
     // put logged in user into state
-    setErrors("") // clear previous errors
-    navigate("/") // go to dashboard on successful login
-  }
+    setErrors(""); // clear previous errors
+    navigate("/"); // go to dashboard on successful login
+  };
 
-  const handleAvatarChange = (e) => {
+  const handleAvatarChange: React.ChangeEventHandler<HTMLInputElement> = (
+    e
+  ) => {
+    if (!e.target.files) {
+      // connected with "let fileSelected = e.target.files[0]" for TS
+      return;
+    }
     // grab selected file (binary / BLOB)
-    let fileSelected = e.target.files[0]
+    let fileSelected = e.target.files[0];
 
-    if (!fileSelected) return
+    if (!fileSelected) return;
 
     // convert BLOB to string
-    let fileReader = new FileReader()
-    fileReader.readAsDataURL(fileSelected) // concert to base64 encoded string
-    // wait until file is fully loaded / converted to base64 
+    let fileReader = new FileReader();
+    fileReader.readAsDataURL(fileSelected); // concert to base64 encoded string
+    // wait until file is fully loaded / converted to base64
     // (once file fully loaded the "onloadedend" event below fires)
     fileReader.onloadend = (ev) => {
-      // store the file in state 
+      // store the file in state
       // => this will trigger the update of the image / preview
-      setAvatarPreview(fileReader.result)
-    }
-  }
+      setAvatarPreview(fileReader.result as string);    // as string - is TS
+    };
+  };
 
   return (
-    <div className="signup-form">
+    <div className="Signup">
       <h2>Signup</h2>
       <form onSubmit={onSignupSubmit}>
-        
         {/* AVATAR PREVIEW 
           Show default avatar or if avatar user selected on click
         */}
@@ -103,5 +109,5 @@ export const Signup = () => {
       </form>
       <div className="errors">{errors}</div>
     </div>
-  )
-}
+  );
+};

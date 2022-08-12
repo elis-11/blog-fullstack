@@ -3,17 +3,16 @@ const { Schema, model } = mongoose;
 
 const PostSchema = new Schema(
   {
-    title: { type: String },
+    title: { type: String, required: true },
     author: { type: String, required: true },
     description: { type: String },
-    likes: { type: Number },
-    dislikes: { type: Number },
+    likes: { type: Number, default: 0 },
+    dislikes: { type: Number, default: 0 },
     image: { type: String },
   },
   {
     versionKey: false,
     timestamps: true,
-    collection: "posts",
   }
 );
 

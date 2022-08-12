@@ -1,13 +1,7 @@
-import {
-  createContext,
-  ReactNode,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, ReactNode, useContext, useState } from "react";
 import { loadUserInLocalStorage } from "../helpers/localStorage";
-import { Post } from "../types/Posts.types";
-import { ContextData, User } from "../types/types";
+import { IPost } from "../types/post.types";
+import { ContextData, User } from "../types/user.types";
 
 const DataContext = createContext<ContextData>({} as ContextData);
 
@@ -25,7 +19,7 @@ export const DataProvider = ({ children }: Props) => {
   const [user, setUser] = useState<User | undefined>(userLs); // use user from localstorage as default
   const [users, setUsers] = useState<User[]>([]);
   const [errors, setErrors] = useState<string>("");
-  const [posts, setPosts] = useState<Post[]>([]);
+  const [posts, setPosts] = useState<IPost[]>([]);
 
   const sharedData = {
     user,

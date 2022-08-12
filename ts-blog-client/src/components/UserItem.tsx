@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { deleteUserApi, updateUserApi } from "../helpers/apiCalls";
 import { useDataContext } from "../context/DataProvider";
-import { User } from "../types/types";
+import { User } from "../types/user.types";
 import { AiTwotoneEdit, AiFillDelete } from "react-icons/ai";
 
 export const UserItem = ({ user }: { user: User }) => {
@@ -71,6 +71,9 @@ export const UserItem = ({ user }: { user: User }) => {
       ) : (
         // view / display mode
         <div className="item">
+          <div className="avatar">
+            <img src={userCopy.avatar} />
+          </div>
           <div className="name">{userCopy.name}</div>
           <div className="email">{userCopy.email}</div>
         </div>

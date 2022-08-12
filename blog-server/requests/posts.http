@@ -12,3 +12,19 @@ Content-Type: application/json
 GET {{API_URL}}/posts/62f26493e7a6cbfe1d1e85b7
 Authorization: {{TOKEN}}
 Content-Type: application/json
+
+### Create Post
+POST {{API_URL}}/posts
+Content-Type: application/json
+Authorization: {{TOKEN}}
+
+{
+   "title": "I am Senior TypeScript Dev soon",
+    "author": "Elis",
+    "description": "Yadda Yadda. Lots of typescript. Love it or hate it",
+    "image": "https://images.unsplash.com/photo-1466133633688-187f0b492390?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=150&ixid=MnwxfDB8MXxyYW5kb218MHx8bmF0dXJlLDB8fHx8fHwxNjU5OTY1MzYw&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=150"
+}
+
+### Delete Post
+DELETE {{API_URL}}/posts/62f68dd712b8598dfed8b72e
+Authorization: {{TOKEN}}

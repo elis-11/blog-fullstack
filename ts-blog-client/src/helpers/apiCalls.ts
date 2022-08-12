@@ -1,4 +1,4 @@
-import { UserCreate, UserUpdate } from "../types/types";
+import { UserCreate, UserUpdate } from "../types/user.types";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -14,12 +14,8 @@ export const getUsersApi = async (token: string) => {
   return response.json();
 };
 
-export const getPostsApi = async (token: string) => {
-  const response = await fetch(`${API_URL}/posts`, {
-    headers: {
-      Authorization: token,
-    },
-  });
+export const getPostsApi = async () => {
+  const response = await fetch(`${API_URL}/posts`);
   return response.json();
 };
 

@@ -13,7 +13,7 @@ const userRouter = Router()
 // Route: /user
 userRouter.get("/", auth, async (req, res, next) => {
   // we can access logged in users now anywhere
-  console.log("Authenticated user:", req.user._id)
+  // console.log("Authenticated user:", req.user._id)
   const usersAll = await User.find()
   res.json(usersAll)
 })
@@ -29,7 +29,7 @@ userRouter.get("/admin", auth, isAdmin, async (req, res, next) => {
 userRouter.get("/:id", auth, async (req, res, next) => {
 
   // we can access logged in users now anywhere
-  console.log("Authenticated user:", req.user._id)
+  // console.log("Authenticated user:", req.user._id)
   const userSingle = await User.findById(req.params.id)
   res.json(userSingle)
 })
@@ -60,6 +60,8 @@ userRouter.post("/", async (req, res, next) => {
   // store new user in dataase
   const user = await User.create(userData)
   res.json(user) // send response to frontend
+
+  if(!avatarImageStr) return
 
   // upload image to cloudinary
   const resCloudinary = await cloudinary.uploader.upload(avatarImageStr)

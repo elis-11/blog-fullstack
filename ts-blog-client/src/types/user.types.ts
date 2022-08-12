@@ -1,27 +1,30 @@
+import {IPost} from "./post.types"
+
 export type UserCreate = {
   name: string;
   email: string
   password: string
-  role?: string
   avatar?: string
+  role?: string
 }
 
 export type UserUpdate = {
   _id: string
+  name?: string
   email?: string
   password?: string
+  avatar?: string
   role?: string
 }
-
 
 export type User = {
   _id: string,
   name: string,
   email: string,
   password: string,
+  avatar?: string
   role: string,
   token: string, 
-  avatar: string,
 }
 
 export type ContextData = {
@@ -31,5 +34,7 @@ export type ContextData = {
   setUsers: React.Dispatch<React.SetStateAction<User[]>>
   errors: string
   setErrors: React.Dispatch<React.SetStateAction<string>>
+  posts: IPost[]
+  setPosts: React.Dispatch<React.SetStateAction<IPost[]>>
 }
 

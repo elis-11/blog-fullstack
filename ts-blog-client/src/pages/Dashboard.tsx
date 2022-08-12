@@ -17,12 +17,13 @@ export const Dashboard = () => {
 
     // not logged in?
     // stop here / dont load protected data
-    if(!user){
-      return navigate("/login")
-    }
-
+    // if(!user){
+    //   return navigate("/login")
+    // }
+ 
     // only fetch data if user is there (=logged in)
     const loadData = async () => {
+      if(!user) return
       // get protected data from backend using token
       const result = await getUsersApi(user.token)
 
