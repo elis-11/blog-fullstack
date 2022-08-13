@@ -1,6 +1,6 @@
 const LOGIN_USER = "LOGIN_USER"
 
-export const storeUserInLocalStorage = (user) => {
+export const storeUserInLocalStorage = (user: any) => {
   localStorage.setItem(LOGIN_USER, JSON.stringify(user))
 }
 
