@@ -19,6 +19,9 @@
         border: 1px solid #fff;
         height: 2rem;
         place-items: center;
+        &:hover {
+          background-color: rgb(249, 249, 246);
+        }
         .edit {
           width: 100%;
           display: flex;

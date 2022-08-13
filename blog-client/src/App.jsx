@@ -10,6 +10,7 @@ import { Admin } from "./components/admin/Admin";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { NotFound } from "./pages/NotFound";
 import { Posts } from "./pages/Posts";
+import { PostDetails } from "./pages/PostDetails";
 
 function App() {
   const { user, setUser } = useDataContext();
@@ -37,6 +38,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <Posts />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/posts/:id"
+            element={
+              <ProtectedRoute>
+                <PostDetails />
               </ProtectedRoute>
             }
           />

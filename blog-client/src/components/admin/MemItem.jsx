@@ -53,8 +53,7 @@ export const MemItem = ({ user }) => {
         <div className="edit">
           <div className="avatar">
             <img
-              style={{ width: "30px", borderRadius: "50%" }}
-              src={user.avatar}
+              src={userCopy.avatar}
             />
           </div>
           <input

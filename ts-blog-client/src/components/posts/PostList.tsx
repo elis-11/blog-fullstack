@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { useDataContext } from "../../context/DataProvider";
-// import "./Posts.scss";
 
 export const PostList = () => {
   const { posts } = useDataContext();

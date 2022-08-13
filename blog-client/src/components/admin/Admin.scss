@@ -56,13 +56,20 @@
         border: 1px solid #fff;
         height: 2rem;
         place-items: center;
+        &:hover {
+          background-color: rgb(249, 249, 246);
+        }
+
         .edit {
           width: 100%;
           display: flex;
           .avatar {
             width: 18%;
+            img{
+              width: 30px;
+              border-radius: 50%;
+            }
           }
-
           .name {
             border: none;
             background-color: transparent;
@@ -96,8 +103,14 @@
           justify-content: space-around;
           .avatar {
             width: 18%;
+            img{
+              width: 30px;
+              border-radius: 50%;
+              &:hover {
+                width: 60px;
+              }
+            }
           }
-
           .name {
             width: 30%;
             text-align: left;
