@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { UsersList } from "../components/UsersList";
+// import { UsersList } from "../components/UsersList";
+import { UsersList } from "../components/users/UsersList";
 import { useDataContext } from "../context/DataProvider";
 import { getUsersApi } from "../helpers/apiCalls";
-import "../styles/Auth.scss";
+import "../components/users/Users.scss";
 
 export const Dashboard = () => {
   const navigate = useNavigate();

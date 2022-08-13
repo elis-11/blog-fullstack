@@ -1,4 +1,5 @@
-import { useDataContext } from "../context/DataProvider";
+// import { useDataContext } from "../context/DataProvider";
+import { useDataContext } from "../../context/DataProvider";
 import { UserItem } from "./UserItem";
 
 export const UsersList = () => {

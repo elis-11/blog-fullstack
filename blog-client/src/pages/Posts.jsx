@@ -5,8 +5,8 @@ export const Posts = () => {
 
   return (
     <div>
-        hjkhkhkh
       <div className="Posts">
+        <h2>Posts</h2>
         <div className="content">
           {posts.map((post) => (
             <div className="post" key={posts._id}>

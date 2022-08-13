@@ -16,6 +16,16 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+.Home {
+  display: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  img{
+    box-shadow: 1px 1px 2px white, 0 0 15px white, 0 0 15px white;
+    border: 1px solid white;
+  }
+}
 
 .App {
   text-align: center;

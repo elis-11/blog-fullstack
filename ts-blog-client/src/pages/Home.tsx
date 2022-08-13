@@ -9,7 +9,7 @@ export const Home = () => {
       {user && (
         <div className="user-details">
           <img style={{ width: "200px" }} src={user.avatar} />
-          <div>Name: {user.name}</div>
+          <div>Hello {user.name}!</div>
           <div>Email: {user.email}</div>
         </div>
       )}

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { AiTwotoneEdit, AiFillDelete } from "react-icons/ai";
 import { MdSaveAlt } from "react-icons/md";
-import { useDataContext } from "../context/DataProvider";
-import { deleteUserApi, updateUserApi } from "../helpers/apiCalls";
+import { useDataContext } from "../../context/DataProvider";
+import { deleteUserApi, updateUserApi } from "../../helpers/apiCalls";
 
 export const UserItem = ({ user }) => {
   const { user: userLoggedIn, users, setUsers } = useDataContext(); // import from context & renamed user to other variable -> userLoggedIn
