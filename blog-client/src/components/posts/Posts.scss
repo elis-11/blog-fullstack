@@ -1,0 +1,28 @@
+.Posts {
+    width: 100%;
+    display: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 3rem;
+    .content {
+      width: 80%;
+      margin: auto;
+      margin-top: 3rem;
+      display: flex;
+      flex-wrap: wrap;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      .post {
+        width: 26%;
+        border: 1px solid rgb(228, 207, 207);
+        padding: 2%;
+        margin: 3.2%;
+        box-shadow: 0 4px 8px 0 rgb(228, 207, 207), 0 6px 20px 0 rgb(228, 207, 207);
+      }
+    }
+  }
+  .Details {
+    color: red;
+    margin-top: 3rem;
+  }
+  
