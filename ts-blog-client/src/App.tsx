@@ -9,6 +9,7 @@ import { Admin } from "./pages/Admin";
 import { ProtectedPage } from "./components/ProtectedPage";
 import { Posts } from "./pages/Posts";
 import { PostDetails } from "./pages/PostDetails";
+import { NotFound } from "./pages/NotFound";
 
 function App() {
   return (
@@ -41,7 +42,8 @@ function App() {
               </ProtectedPage>
             }
           />
-          <Route path="*" element={<div>Page does not exist</div>} />
+          {/* <Route path="*" element={<div>Page does not exist</div>} /> */}
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
       <footer>&copy; Eliza Studios Inc.</footer>
