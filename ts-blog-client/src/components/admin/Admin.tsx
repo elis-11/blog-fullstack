@@ -1,7 +1,7 @@
 import { NavLink, Route, Routes, useNavigate } from "react-router-dom";
-import { Members } from "../components/admin/Members";
-import { Projects } from "../components/admin/Projects";
-import "../components/admin/Admin.scss";
+import "./Admin.scss";
+import { Members } from "./Members";
+import { Projects } from "./Projects";
 
 export const Admin = () => {
   const navigate = useNavigate();

@@ -7,7 +7,7 @@
         "email": "elis@gmail.com",
         "password": "$2a$10$6lJZmvKfo08jleX0AgtGFeCRiDr6lwkadcocXtl.T9iLeyClKECKe",
         "avatar": "https://res.cloudinary.com/dngl4djva/image/upload/v1659806569/l01vvcesxa2spjtjttmd.png",
-        "role": "Admin",
+        "role": "admin",
         "createdAt": {
             "$date": {
                 "$numberLong": "1659806567575"
@@ -27,7 +27,7 @@
         "email": "robert@gmail.com",
         "password": "$2a$10$wmCCMDG7PLqvOT1nuP9aoeQrBuHi4IxOu81.PIrdpaNFPqTSCQbHK",
         "avatar": "https://res.cloudinary.com/dngl4djva/image/upload/v1659806682/rxbaguf87fmx2o294ngn.png",
-        "role": "Admin",
+        "role": "admin",
         "createdAt": {
             "$date": {
                 "$numberLong": "1659806681222"
@@ -47,7 +47,7 @@
         "email": "albert@gmail.com",
         "password": "$2a$10$7Ve/cxcw7aFHwOav4a0GI.Su8MdfZBwVD1EKQ07XUzk.jJCjAStBG",
         "avatar": "https://res.cloudinary.com/dngl4djva/image/upload/v1659732694/oszjnptact6iibr02xq7.png",
-        "role": "Admin",
+        "role": "admin",
         "createdAt": {
             "$date": {
                 "$numberLong": "1659732678289"
@@ -66,7 +66,7 @@
         "name": "Lila",
         "email": "lila@gmail.com",
         "password": "$2a$10$RL0HC829/CaxeTQMXgqVHODOVZqQbvYnewVmjDQReEXOsIwhmBqdW",
-        "role": "User",
+        "role": "user",
         "createdAt": {
             "$date": {
                 "$numberLong": "1659383255234"
@@ -85,7 +85,7 @@
         "name": "Diana",
         "email": "diana@gmail.com",
         "password": "$2a$10$ayuFV1wLZ0qWju0jGEmt7eq/R.YbuHziaVg9waSsZqXxtJlb6H6n.",
-        "role": "User",
+        "role": "user",
         "createdAt": {
             "$date": {
                 "$numberLong": "1659693235427"
@@ -104,7 +104,7 @@
         "name": "Amir",
         "email": "amir@gmail.com",
         "password": "$2a$10$BcY9mtR0Z4ZNBu/4rlWns.AMujXFyS2FuvKKbccjWZYZXMch8/OXS",
-        "role": "User",
+        "role": "user",
         "createdAt": {
             "$date": {
                 "$numberLong": "1659702902736"
@@ -124,7 +124,7 @@
         "email": "inna@gmail.com",
         "password": "$2a$10$9Dbnfe3WA07idf/CrgLZtuc1HwKAa86JUhIBQPCxlpWEDlwx1wZAi",
         "avatar": "https://res.cloudinary.com/dngl4djva/image/upload/v1659703232/ag1kza3l4laknidmlko6.png",
-        "role": "User",
+        "role": "user",
         "createdAt": {
             "$date": {
                 "$numberLong": "1659703231863"
@@ -143,7 +143,7 @@
         "name": "Ralf",
         "email": "ralf@gmail.com",
         "password": "$2a$10$bU19zbJtFslm7m169RYOYurEwnNdBsLi33Mpg3HH2MjuwLxCrUeUO",
-        "role": "User",
+        "role": "user",
         "createdAt": {
             "$date": {
                 "$numberLong": "1659703275895"
@@ -163,7 +163,7 @@
         "email": "tumur@gmail.com",
         "password": "$2a$10$lIS53uUtkVburz7Q5KsS3.SEA30fV/hnFMXbZuctzSrNv/QwY6ZtW",
         "avatar": "https://res.cloudinary.com/dngl4djva/image/upload/v1659703866/chme3pl0hj8im022wl6v.png",
-        "role": "User",
+        "role": "user",
         "createdAt": {
             "$date": {
                 "$numberLong": "1659703865236"
@@ -183,7 +183,7 @@
         "email": "ilon@gmail.com",
         "password": "$2a$10$dky//i4u.OmnHZ7Y3K/wMucSipaSMfUr8YywsM18B/IeVpqsZJ2ia",
         "avatar": "https://res.cloudinary.com/dngl4djva/image/upload/v1659703451/default_mwdlea.png",
-        "role": "User",
+        "role": "user",
         "createdAt": {
             "$date": {
                 "$numberLong": "1659705598396"
@@ -203,7 +203,7 @@
         "email": "ola@gmail.com",
         "password": "$2a$10$rGHiJa2RznMbnIXxRZLcN.dqbssLVlO93fAkItuOfsmpxyaDivY5m",
         "avatar": "https://res.cloudinary.com/dngl4djva/image/upload/v1659715875/utwcqmdznnpccowg3dkp.png",
-        "role": "User",
+        "role": "user",
         "createdAt": {
             "$date": {
                 "$numberLong": "1659715873227"
@@ -223,7 +223,7 @@
         "email": "linda@gmail.com",
         "password": "$2a$10$4/XxGvkqCotrjT1lt6JtKOAPHleAj6ty5lIENPiCJaMQyZnSW4dXK",
         "avatar": "https://res.cloudinary.com/dngl4djva/image/upload/v1659716469/p9rtmipcnnaqih9lmkcf.png",
-        "role": "User",
+        "role": "user",
         "createdAt": {
             "$date": {
                 "$numberLong": "1659716464562"
@@ -243,7 +243,7 @@
         "email": "lisa@gmail.com",
         "password": "$2a$10$W/YnElU0NUNmgvIobXjPKO4KLA57r6sbHJpj322MFhj0C1Rtz9KS.",
         "avatar": "https://res.cloudinary.com/dngl4djva/image/upload/v1659703451/default_mwdlea.png",
-        "role": "User",
+        "role": "user",
         "createdAt": {
             "$date": {
                 "$numberLong": "1659729800607"
@@ -263,7 +263,7 @@
         "email": "elsa@gmail.com",
         "password": "$2a$10$kr1sjk6Ym3ldqDK1rdFFJ.DTNGnV8b1PFJVnE3Owa7ZkH/J4CKm1e",
         "avatar": "https://res.cloudinary.com/dngl4djva/image/upload/v1659729856/yrju8laqroeeq24fxfgy.png",
-        "role": "User",
+        "role": "user",
         "createdAt": {
             "$date": {
                 "$numberLong": "1659729842090"
@@ -283,7 +283,7 @@
         "email": "rimma@gmail.com",
         "password": "$2a$10$O2YHnpFcO/gYsM4D.qxgH.KdHp/zgmxWN3ayDLWmcXr.jtgArlo4q",
         "avatar": "https://res.cloudinary.com/dngl4djva/image/upload/v1659732504/uk2uumqecn2j0loi93wl.png",
-        "role": "User",
+        "role": "user",
         "createdAt": {
             "$date": {
                 "$numberLong": "1659732502621"
@@ -303,7 +303,7 @@
         "email": "inga@gmail.com",
         "password": "$2a$10$7hL/1DNDHw52ZDPP0cXCLezW0TR6PJGHSL8pH2l24QmbEFYvB/.8G",
         "avatar": "https://res.cloudinary.com/dngl4djva/image/upload/v1659806327/haylcsj8lfisfgi9uyg1.png",
-        "role": "User",
+        "role": "user",
         "createdAt": {
             "$date": {
                 "$numberLong": "1659806325993"
@@ -323,6 +323,6 @@
         "email": "artur@gmail.com",
         "password": "$2a$10$jH1HV0CrZt8ICVLt0r762eFKqRJ96bQXjwNu1eUR7F6xKZXJgTP8S",
         "avatar": "https://res.cloudinary.com/dngl4djva/image/upload/v1660034173/bwdxxactminhva3rfzud.png",
-        "role": "User"
+        "role": "user"
     }
 ]

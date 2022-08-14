@@ -19,7 +19,7 @@ userRouter.get("/", auth, async (req, res, next) => {
 })
 
 userRouter.get("/admin", auth, isAdmin, async (req, res, next) => {
-  const admins = await User.find({ role: "Admin" }) // filter all admins
+  const admins = await User.find({ role: "admin" }) // filter all admins
   res.json(admins)
 })
 

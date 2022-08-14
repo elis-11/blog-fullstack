@@ -18,7 +18,7 @@ export const ProtectedPage = ({ children, admin = false }: Props) => {
 
   // this route has admin protection! is user admin?
   // if not => kick out! 
-  if(admin && user.role !== "Admin") {
+  if(admin && user.role !== "admin") {
     return <Navigate to={"/login"} /> 
   }
 
