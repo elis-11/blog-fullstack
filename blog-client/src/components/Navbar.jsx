@@ -17,12 +17,54 @@ export const Navbar = () => {
   return (
     <div>
       <nav>
-        <NavLink to="/">Home</NavLink>
-        {!user && <NavLink to="/login">Login</NavLink>}
-        {!user && <NavLink to="/signup">Signup</NavLink>}
-        {user && <NavLink to="/dashboard">Dashboard</NavLink>}
-        {user && <NavLink to="/posts">Posts</NavLink>}
-        {user?.role === "admin" && <NavLink to="/admin">Admin</NavLink>}
+        <NavLink
+          to="/"
+          className={(navData) => (navData.isActive ? "active" : "none")}
+          end
+        >
+          {" "}
+          Home
+        </NavLink>
+        {!user && (
+          <NavLink
+            to="/login"
+            className={(navData) => (navData.isActive ? "active" : "none")}
+          >
+            Login
+          </NavLink>
+        )}
+        {!user && (
+          <NavLink
+            to="/signup"
+            className={(navData) => (navData.isActive ? "active" : "none")}
+          >
+            Signup
+          </NavLink>
+        )}
+        {user && (
+          <NavLink
+            to="/dashboard"
+            className={(navData) => (navData.isActive ? "active" : "none")}
+          >
+            Dashboard
+          </NavLink>
+        )}
+        {user && (
+          <NavLink
+            to="/posts"
+            className={(navData) => (navData.isActive ? "active" : "none")}
+          >
+            Posts
+          </NavLink>
+        )}
+        {user?.role === "admin" && (
+          <NavLink
+            to="/admin"
+            className={(navData) => (navData.isActive ? "active" : "none")}
+          >
+            Admin
+          </NavLink>
+        )}
         {user && (
           <NavLink to="#" onClick={logout}>
             Logout
