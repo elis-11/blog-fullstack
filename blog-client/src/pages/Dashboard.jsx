@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-// import { UsersList } from "../components/UsersList";
 import { UsersList } from "../components/users/UsersList";
 import { useDataContext } from "../context/DataProvider";
 import { getUsersApi } from "../helpers/apiCalls";
@@ -33,7 +32,16 @@ export const Dashboard = () => {
   return (
     <div className="Dashboard">
       <h2>Dashboard</h2>
+      <h3 style={{color: 'white'}}>
+        {users.length} List{" "}
+        {users.length === 1 ? "User" : "Users"}
+      </h3>
+      {users.length ? (
         <UsersList />
+) : (
+          <p style={{ marginTop: '2rem', textAlign: 'center' }}></p>
+        )
+      } 
       <div className="errors">{errors}</div>
     </div>
   );

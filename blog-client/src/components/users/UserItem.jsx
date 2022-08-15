@@ -8,10 +8,8 @@ export const UserItem = ({ user }) => {
   const { user: userLoggedIn, users, setUsers } = useDataContext(); // import from context & renamed user to other variable -> userLoggedIn
   const [editMode, setEditMode] = useState(false);
   const [userCopy, setUserCopy] = useState(user);
-
+  
   const handleChange = (e) => {
-    // console.log(userCopy);
-    // console.log(e.target.value);
     // create Copy before state update & update in one step
     const updated = { ...userCopy, [e.target.name]: e.target.value };
     // console.log(updated);
@@ -32,15 +30,15 @@ export const UserItem = ({ user }) => {
     const usersCopy = users.map((_user) => {
       return _user._id === userUpdatedApi._id ? userUpdatedApi : _user;
     });
-
+    
     setUsers(usersCopy);
   };
-
+  
   const handleDelete = async () => {
     const response = await deleteUserApi(userLoggedIn.token, userCopy._id);
     // const response = await deleteUserApi(userLoggedIn.token, user._id);
     console.log(response);
-
+    
     const usersCopy = users.filter((_user) => {
       return _user._id !== userCopy._id;
     });
@@ -49,6 +47,7 @@ export const UserItem = ({ user }) => {
 
   return (
     <div className="user" key={user._id}>
+
       {editMode ? (
         <div className="edit">
           <div className="avatar">
