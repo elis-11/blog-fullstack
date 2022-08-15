@@ -1,8 +1,10 @@
+import { User } from "../types/user.types";
+
 const LOGIN_USER = "LOGIN_USER";
 
-export const storeUserInLocalStorage = (user: any) => {
+export function storeUserInLocalStorage(user: User) {
   localStorage.setItem(LOGIN_USER, JSON.stringify(user));
-};
+}
 
 export const deleteUserInLocalStorage = () => {
   localStorage.removeItem(LOGIN_USER);
