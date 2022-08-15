@@ -10,13 +10,6 @@ export const getUsersApi = async (token) => {
   return response.json();
 };
 
-export const getPostsApi = async (token) => {
-  const response = await fetch(`${API_URL}/posts`, {
-    headers: { Authorization: token },
-  })
-  return response.json()
-}
-
 // SIGNUP
 // export const signupApi = async (name, email, password) => {  // without AVATAR
 export const signupApi = async (name, email, password, avatar) => {
@@ -57,16 +50,6 @@ export const updateUserApi = async (token, userId, updateData) => {
   return response.json();
 };
 
-export const deleteUserApi = async (token, userId) => {
-  const response = await fetch(`${API_URL}/user/${userId}`, {
-    method: "DELETE",
-    headers: {
-      Authorization: token,
-    }, // for JWT
-  });
-  return response.json();
-};
-
 // export const updateUserApiCookies = async (userId, updateData) => {
 //   const response = await fetch(`${API_URL}/user/${userId}`, {
 //     method: "PATCH",
@@ -79,3 +62,93 @@ export const deleteUserApi = async (token, userId) => {
 //   // parse updated user from API
 //   return response.json()
 // }
+
+export const deleteUserApi = async (token, userId) => {
+  const response = await fetch(`${API_URL}/user/${userId}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: token,
+    }, // for JWT
+  });
+  return response.json();
+};
+
+// POSTS
+export const getPostsApi = async (token) => {
+  const response = await fetch(`${API_URL}/posts`, {
+    headers: { Authorization: token },
+  });
+  return response.json();
+};
+
+export const createPostApi = async (image, title, author, description) => {
+  const response = await fetch(`${API_URL}/posts`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ image, title, author, description }),
+  });
+  return response.json();
+};
+
+// UPDATE
+export const updatePostApi = async (token, postId, updateData) => {
+  const response = await fetch(`${API_URL}/posts/${postId}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: token,
+    }, // for JWT
+    //  credentials: include  <-wenn ohne JWT
+    body: JSON.stringify(updateData),
+  });
+  return response.json();
+};
+
+
+export const deletePostApi = async (token, postId) => {
+const response = await fetch(`${API_URL}/posts/${postId}`, {
+  method: 'DELETE',
+  headers: { Authorization: token}
+})
+return response.json()
+}
+
+// COMMENTS
+export const getCommentsApi = async (token) => {
+  const response = await fetch(`${API_URL}/comments`, {
+    headers: { Authorization: token },
+  });
+  return response.json();
+};
+
+export const createCommentApi = async (text, author) => {
+  const response = await fetch(`${API_URL}/posts`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ text, author }),
+  });
+  return response.json();
+};
+
+// UPDATE
+export const updateCommentApi = async (token, commentId, updateData) => {
+  const response = await fetch(`${API_URL}/comments/${commentId}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: token,
+    }, // for JWT
+    //  credentials: include  <-wenn ohne JWT
+    body: JSON.stringify(updateData),
+  });
+  return response.json();
+};
+
+export const deleteCommentApi = async (token, commentId) => {
+  const response = await fetch(`${API_URL}/comments/${commentId}`, {
+    method: 'DELETE',
+    headers: { Authorization: token}
+  })
+  return response.json()
+  }
+  

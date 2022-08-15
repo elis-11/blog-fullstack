@@ -1,5 +1,5 @@
 @API_URL = http://localhost:5000
-@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmVlYTM2NzA5ZGMxYjQ3YzQzM2E1ZGEiLCJuYW1lIjoiRWxpcyIsImVtYWlsIjoiZWxpc0BnbWFpbC5jb20iLCJhdmF0YXIiOiJodHRwczovL3Jlcy5jbG91ZGluYXJ5LmNvbS9kbmdsNGRqdmEvaW1hZ2UvdXBsb2FkL3YxNjU5ODA2NTY5L2wwMXZ2Y2VzeGEyc3BqdGp0dG1kLnBuZyIsInJvbGUiOiJBZG1pbiIsImNyZWF0ZWRBdCI6IjIwMjItMDgtMDZUMTc6MjI6NDcuNTc1WiIsInVwZGF0ZWRBdCI6IjIwMjItMDgtMDZUMTc6MjI6NDkuNDM5WiIsImlhdCI6MTY2MDA1ODgxNiwiZXhwIjoxNjYwNDkwODE2fQ.-6_qMRUpwQAA_P3jH4xGdaVQGECQh0kKj8At-yAsuqQ
+@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmVlYTM2NzA5ZGMxYjQ3YzQzM2E1ZGEiLCJuYW1lIjoiRWxpcyIsImVtYWlsIjoiZWxpc0BnbWFpbC5jb20iLCJhdmF0YXIiOiJodHRwczovL3Jlcy5jbG91ZGluYXJ5LmNvbS9kbmdsNGRqdmEvaW1hZ2UvdXBsb2FkL3YxNjU5ODA2NTY5L2wwMXZ2Y2VzeGEyc3BqdGp0dG1kLnBuZyIsInJvbGUiOiJhZG1pbiIsImNyZWF0ZWRBdCI6IjIwMjItMDgtMDZUMTc6MjI6NDcuNTc1WiIsInVwZGF0ZWRBdCI6IjIwMjItMDgtMTNUMTg6MTU6NTkuMDU5WiIsImlhdCI6MTY2MDQ5ODQ3MSwiZXhwIjoxNjYwOTMwNDcxfQ.4V_ahpdp1-O9Zz4HNJaGo2Qb1EhtxKEmEPISbzm1Ol0
 
 
 GET {{API_URL}}/
@@ -16,15 +16,6 @@ Authorization: {{TOKEN}}
 ### User single
 GET {{API_URL}}/user/62eea3d909dc1b47c433a5e0
 Authorization: {{TOKEN}}
-
-# IF WE WOULD CREATE A TODO in this template
-# POST {{API_URL}}/todo
-# Content-Type: application/json
-# Authorization: {{TOKEN}}
-
-# {
-#   "title": "Code some frontend for JWT"
-# }
 
 ### Signup
 POST {{API_URL}}/user
@@ -46,11 +37,9 @@ Content-Type: application/json
   "password": "elis" 
 }
 
-@USER_ID = 62e28056af54e394a2c0a999
 
 ### UPDATE user
-PATCH {{API_URL}}/user/{{USER_ID}}
-Authorization: {{TOKEN}}
+PATCH {{API_URL}}/user/
 Content-Type: application/json
 
 {
@@ -60,6 +49,6 @@ Content-Type: application/json
 }
 
 ### Delete user
-DELETE {{API_URL}}/user/{{USER_ID}}
+DELETE {{API_URL}}/user/
 Authorization: {{TOKEN}}
 
