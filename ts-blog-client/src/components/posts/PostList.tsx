@@ -20,10 +20,11 @@ export const PostList = () => {
           </div>
           <div>{post.description}</div>
           <div>
-            <Link to={`/posts/${post._id}`}>Read more...</Link>
+            {/* <Link to={`/posts/${post._id}`}>Read more...</Link> */}
+            <Link to={`/posts/${post._id}`} state={post}>Read more...</Link>
           </div>
         </div>
-      ))}
+      ))} 
     </div>
   );
 };

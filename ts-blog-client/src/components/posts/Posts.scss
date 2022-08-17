@@ -22,7 +22,13 @@
     }
   }
   .Details {
-    color: red;
+    color: grey;
     margin-top: 3rem;
+    .title{
+      padding: 1em;
+    }
+    .author{
+      padding: 1em;
+    }
   }
   
