@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDataContext } from "../../context/DataProvider";
 import { getUsersApi } from "../../helpers/apiCalls";
@@ -8,6 +8,7 @@ import { MemList } from "./MemList";
 export const Members = () => {
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
+  const inputRef = useRef()
 
   const { user, users, setUsers, errors, setErrors } = useDataContext();
 
@@ -38,7 +39,10 @@ export const Members = () => {
 
   return (
     <div className="Members">
-      <h2>Members</h2>
+      <h2>
+        {users.length} {users.length === 1 ? "Member" : "Members"}
+      </h2>
+
       <div className="search">
         <form
           onSubmit={(e) => {
@@ -46,6 +50,8 @@ export const Members = () => {
           }}
         >
           <input
+          autoFocus
+          ref={inputRef}
             id="search"
             type="text"
             role="search"
@@ -56,7 +62,7 @@ export const Members = () => {
         </form>
       </div>
 
-      <MemList users={filteredUsers}/>
+      <MemList users={filteredUsers} />
       <div className="errors">{errors}</div>
     </div>
   );

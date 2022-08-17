@@ -1,8 +1,8 @@
 import { useDataContext } from "../../context/DataProvider";
 import { UserItem } from "./UserItem";
 
-export const UsersList = () => {
-  const { users } = useDataContext();
+export const UsersList = ({ users}) => {
+  // const { users } = useDataContext();
 
   return (
     <div className="users">

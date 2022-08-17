@@ -5,6 +5,16 @@
     text-align: center;
     // background-image: linear-gradient(to right, rgb(242, 226, 226) , rgb(234, 234, 212));
     width: 100%;
+    .search{
+      input{
+        width: 30%;
+        height: 2rem;
+        font-size: 18px;
+        padding-left: 1.5em;
+        background-color: transparent;
+      }
+    }
+
     .users {
       width: 70%;
       margin: auto;
@@ -21,6 +31,7 @@
         place-items: center;
         &:hover {
           background-color: rgb(249, 249, 246);
+          color: rgb(209, 30, 30);
         }
         .edit {
           width: 100%;
