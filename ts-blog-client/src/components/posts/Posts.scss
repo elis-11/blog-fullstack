@@ -18,8 +18,15 @@
         padding: 2%;
         margin: 3.2%;
         box-shadow: 0 4px 8px 0 rgb(228, 207, 207), 0 6px 20px 0 rgb(228, 207, 207);
+        img{
+          width: 3rem;
+        }
       }
     }
+  }
+  .avatar{
+    width: 3rem;
+    border-radius: 50%;
   }
   .Details {
     color: grey;

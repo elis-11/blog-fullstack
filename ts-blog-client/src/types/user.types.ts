@@ -1,6 +1,6 @@
 import {IPost} from "./post.types"
 
-export type UserCreate = {
+export interface UserCreate {
   name: string;
   email: string
   password: string
@@ -8,7 +8,7 @@ export type UserCreate = {
   role?: string
 }
 
-export type UserUpdate = {
+export interface UserUpdate {
   _id: string
   name?: string
   email?: string
@@ -17,11 +17,10 @@ export type UserUpdate = {
   role?: string
 }
 
-export type User = {
+export interface User {
   _id: string,
   name: string,
   email: string,
-  password: string,
   avatar?: string
   role: string,
   token: string, 

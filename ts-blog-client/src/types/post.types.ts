@@ -1,7 +1,9 @@
+import { User } from "./user.types";
 
 export interface IPostCreate {
   title: string;
-  author: string;
+  // author: string;
+  author: User;
   description?: string;
 }
 

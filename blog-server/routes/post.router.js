@@ -6,13 +6,16 @@ const postRouter = Router();
 
 // get all Posts
 postRouter.get("/", async (req, res, next) => {
-  const postsAll = await Post.find();
+  // const postsAll = await Post.find();
+  const postsAll = await Post.find().populate("author"); // to schow author avatar
   res.json(postsAll);
 });
 
 // get single post
 postRouter.get("/:id", auth, async (req, res, next) => {
-  const singlePost = await Post.findById(req.params.id);
+  // const singlePost = await Post.findById(req.params.id);
+  // populate - user details
+  const singlePost = await Post.findById(req.params.id).populate("author");
   res.json(singlePost);
 });
 

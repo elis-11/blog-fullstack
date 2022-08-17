@@ -16,7 +16,8 @@ export const PostList = () => {
           <div>{post.title}</div>
           <div>
             {/* {post.createdAt.slice(0, 10)} by {post.author} */}
-            {post.createdAt.substring(0, 10)} by {post.author}
+            {post.createdAt.substring(0, 10)} by {post.author.name}
+            {/* {post.createdAt.substring(0, 10)} by {post.author.name} {post.author.avatar} */}
           </div>
           <div>{post.description}</div>
           <div>
