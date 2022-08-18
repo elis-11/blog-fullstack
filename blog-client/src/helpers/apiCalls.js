@@ -74,10 +74,8 @@ export const deleteUserApi = async (token, userId) => {
 };
 
 // POSTS
-export const getPostsApi = async (token) => {
-  const response = await fetch(`${API_URL}/posts`, {
-    headers: { Authorization: token },
-  });
+export const getPostsApi = async () => {
+  const response = await fetch(`${API_URL}/posts`);
   return response.json();
 };
 
@@ -104,20 +102,17 @@ export const updatePostApi = async (token, postId, updateData) => {
   return response.json();
 };
 
-
 export const deletePostApi = async (token, postId) => {
-const response = await fetch(`${API_URL}/posts/${postId}`, {
-  method: 'DELETE',
-  headers: { Authorization: token}
-})
-return response.json()
-}
-
-// COMMENTS
-export const getCommentsApi = async (token) => {
-  const response = await fetch(`${API_URL}/comments`, {
+  const response = await fetch(`${API_URL}/posts/${postId}`, {
+    method: "DELETE",
     headers: { Authorization: token },
   });
+  return response.json();
+};
+
+// COMMENTS
+export const getCommentsApi = async () => {
+  const response = await fetch(`${API_URL}/comments`);
   return response.json();
 };
 
@@ -146,9 +141,8 @@ export const updateCommentApi = async (token, commentId, updateData) => {
 
 export const deleteCommentApi = async (token, commentId) => {
   const response = await fetch(`${API_URL}/comments/${commentId}`, {
-    method: 'DELETE',
-    headers: { Authorization: token}
-  })
-  return response.json()
-  }
-  
+    method: "DELETE",
+    headers: { Authorization: token },
+  });
+  return response.json();
+};

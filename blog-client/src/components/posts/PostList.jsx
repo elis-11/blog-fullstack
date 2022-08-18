@@ -14,11 +14,11 @@ export const PostList = () => {
             </div>
             <div>{post.title}</div>
             <div>
-              {post.createdAt.slice(0, 10)} by {post.author}
+              {post.createdAt.slice(0, 10)} by {post.author.name}
             </div>
             <div>{post.description}</div>
             <div>
-              <Link to={`/posts/${post._id}`}>Read more...</Link>
+              <Link to={`/posts/${post._id}`} state={post}>Read more...</Link>
             </div>
           </div>
         </div>
