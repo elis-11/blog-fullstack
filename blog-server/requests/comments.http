@@ -13,8 +13,9 @@ Content-Type: application/json
 Authorization: {{TOKEN}}
 
 {
-    "text": "Hi",
-    "author": "Artur"
+    "post": "62f6c21d8360b0e44d348bf2",
+    "author": "62eea36709dc1b47c433a5da",
+    "description": ":|"
 }
 
 ### update comment

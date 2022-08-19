@@ -1,29 +1,42 @@
 import { Router } from "express";
-import { auth } from "../lib/auth.middleware.js";
 import Comment from "../models/Comment.js";
+import { auth } from "../lib/auth.middleware.js";
+import { v2 as cloudinary } from "cloudinary";
 
 const commentRouter = Router();
 
 // all comments
 commentRouter.get("/", async (req, res, next) => {
-  const allComments = await Comment.find();
+  const allComments = await Comment.find().populate("author");
   res.json(allComments);
 });
 
 // single comment
 commentRouter.get("/:id", async (req, res, next) => {
-  const singleComment = await Comment.findById(req.params.id);
+  const singleComment = await Comment.findById(req.params.id).populate(
+    "author"
+  );
   res.json(singleComment);
 });
 
 // create comment
 commentRouter.post("/", auth, async (req, res, next) => {
-  const comment = await Comment.create(req.body);
+  let comment = await Comment.create(req.body);
+  comment= await comment.populate("author")
   res.json(comment);
 
-  const commentUpdated = await Comment.findByIdAndUpdate(comment._id, {
-    new: true,
-  });
+  if (!comment.image) return;
+
+  const resCloudinary = await cloudinary.uploader.upload(comment.image);
+  console.log(resCloudinary);
+
+  const avatarUrlCloudinary = resCloudinary.secure_url;
+  const commentUpdated = await Comment.findByIdAndUpdate(
+    comment.id,
+    { image: avatarUrlCloudinary },
+    { new: true }
+  );
+  console.log(commentUpdated);
 });
 
 // update comment
