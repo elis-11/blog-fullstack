@@ -1,3 +1,4 @@
+import { MdLogout } from "react-icons/md";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDataContext } from "../context/DataProvider";
 import { deleteUserInLocalStorage } from "../helpers/localStorage";
@@ -24,7 +25,7 @@ export const Navbar = () => {
       {user?.role === "admin" && <NavLink to="/admin">Admin</NavLink>}
       {user && (
         <NavLink to="#" onClick={logout}>
-          Logout
+          <MdLogout/>
         </NavLink>
       )}
     </nav>

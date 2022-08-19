@@ -1,3 +1,4 @@
+import { ICommentCreate } from "../types/post.types";
 import { UserCreate, UserUpdate } from "../types/user.types";
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -11,11 +12,6 @@ export const getUsersApi = async (token: string) => {
       Authorization: token,
     },
   });
-  return response.json();
-};
-
-export const getPostsApi = async () => {
-  const response = await fetch(`${API_URL}/posts`);
   return response.json();
 };
 
@@ -78,5 +74,31 @@ export const deleteUserApi = async (token: string, userId: string) => {
   });
 
   // parse updated user from API
+  return response.json();
+};
+
+// POSTS
+export const getPostsApi = async () => {
+  const response = await fetch(`${API_URL}/posts`);
+  return response.json();
+};
+
+export const getPostOneApi = async (postId: string) => {
+  const response = await fetch(`${API_URL}/posts/${postId}`);
+  return response.json();
+};
+
+export const createPostCommentApi = async (
+  token: string,
+  commentData: ICommentCreate
+) => {
+  const response = await fetch(`${API_URL}/comments`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: token, // needed to send JWT token
+    },
+    body: JSON.stringify(commentData),
+  });
   return response.json();
 };

@@ -1,6 +1,8 @@
 import { Router } from "express";
-import { auth } from "../lib/auth.middleware.js";
 import Post from "../models/Post.js";
+import { auth } from "../lib/auth.middleware.js";
+import { v2 as cloudinary} from "cloudinary"
+import Comment from "../models/Comment.js";
 
 const postRouter = Router();
 
@@ -12,11 +14,26 @@ postRouter.get("/", async (req, res, next) => {
 });
 
 // get single post
-postRouter.get("/:id", auth, async (req, res, next) => {
-  // const singlePost = await Post.findById(req.params.id);
-  // populate - user details
-  const singlePost = await Post.findById(req.params.id).populate("author");
-  res.json(singlePost);
+// postRouter.get("/:id", auth, async (req, res, next) => {
+//   // const singlePost = await Post.findById(req.params.id);
+//   // populate - user details
+//   const singlePost = await Post.findById(req.params.id).populate("author");
+//   res.json(singlePost);
+// });
+
+// get single post + all realted comments
+postRouter.get("/:id", async (req, res, next) => {
+  const post = await Post.findById(req.params.id).populate("author");
+  const comments = await Comment.find({post: req.params.id}).populate("author")
+  res.json({
+    ...post.toObject(),
+    comments
+  });
+});
+
+// GET ALL COMMENTS OF ONE POST
+postRouter.get("/:id/comments", auth, async (req, res, next) => {
+  res.json(postComments);
 });
 
 // create new post

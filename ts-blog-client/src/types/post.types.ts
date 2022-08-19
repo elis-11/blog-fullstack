@@ -14,4 +14,21 @@ export interface IPost extends IPostCreate {
   image?: string;
   createdAt: string;
   updatedAt: string;
+  comments?: Array<IComment>;
+}
+
+export interface ICommentCreate {
+  post: string; // postId
+  author: string; // authorId
+  description: string;
+}
+
+export interface IComment {
+  _id: string;
+  author: User;
+  description: string;
+  links: number;
+  dislikes: number;
+  createdAt: string;
+  updatedAt: string;
 }

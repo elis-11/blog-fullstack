@@ -1,41 +1,71 @@
 .Posts {
-    width: 100%;
-    display: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+  width: 100%;
+  display: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 3rem;
+  .content {
+    width: 80%;
+    margin: auto;
     margin-top: 3rem;
-    .content {
-      width: 80%;
-      margin: auto;
-      margin-top: 3rem;
-      display: flex;
-      flex-wrap: wrap;
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-      .post {
-        width: 26%;
-        border: 1px solid rgb(228, 207, 207);
-        padding: 2%;
-        margin: 3.2%;
-        box-shadow: 0 4px 8px 0 rgb(228, 207, 207), 0 6px 20px 0 rgb(228, 207, 207);
-        img{
-          width: 3rem;
+    display: flex;
+    flex-wrap: wrap;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    .post {
+      width: 26%;
+      border: 1px solid white;
+      padding: 2%;
+      margin: 3.2%;
+      box-shadow: 0 4px 8px 0 white, 0 6px 20px 0 white;
+      img {
+        width: 8rem;
+        margin-bottom: 2rem;
+      }
+      a {
+        text-decoration: none;
+        color: rgb(183, 180, 180);
+        text-shadow: 1px 1px 2px #000000;
+        &:hover {
+          color: #fff;
+          text-shadow: 2px 1px 2px #fff;
         }
       }
     }
   }
-  .avatar{
-    width: 3rem;
-    border-radius: 50%;
+}
+.avatar {
+  width: 3rem;
+  border-radius: 50%;
+}
+.Details {
+  color: grey;
+  margin-top: 3rem;
+  .title {
+    padding: 1em;
   }
-  .Details {
-    color: grey;
-    margin-top: 3rem;
-    .title{
-      padding: 1em;
+  .author {
+    padding: 1em;
+  }
+  .comment-action{
+    input{
+      width: 60%;
+      height: 2rem;
+      background-color: transparent;
     }
-    .author{
-      padding: 1em;
+    button{
+      font-size: 14px;
+      height: 1.8rem;
+      background: none;
     }
   }
-  
+
+  .comments{
+    padding: 20px;
+    border: 2px solid #ccc;
+    .comment{
+      padding: 3px;
+      border: 1px solid #ccc;
+    }
+  }
+}
