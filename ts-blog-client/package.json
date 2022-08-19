@@ -1,5 +1,5 @@
 {
-  "name": "blog-client",
+  "name": "ts-blog-client",
   "private": true,
   "version": "0.0.0",
   "scripts": {

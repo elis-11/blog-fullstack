@@ -1,4 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
+import { MdLogout } from "react-icons/md";
 import { useDataContext } from "../context/DataProvider";
 import { deleteUserInLocalStorage } from "../helpers/LocallStorage";
 
@@ -49,14 +50,12 @@ export const Navbar = () => {
             Dashboard
           </NavLink>
         )}
-        {user && (
           <NavLink
             to="/posts"
             className={(navData) => (navData.isActive ? "active" : "none")}
           >
             Posts
           </NavLink>
-        )}
         {user?.role === "admin" && (
           <NavLink
             to="/admin"
@@ -67,7 +66,7 @@ export const Navbar = () => {
         )}
         {user && (
           <NavLink to="#" onClick={logout}>
-            Logout
+          <MdLogout/>
           </NavLink>
         )}
       </nav>

@@ -1,4 +1,3 @@
-import "./styles/App.scss";
 import { Route, Routes } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { Login } from "./pages/Login";
@@ -10,15 +9,15 @@ import { ProtectedPage } from "./components/ProtectedPage";
 import { Posts } from "./pages/Posts";
 import { PostDetails } from "./pages/PostDetails";
 import { NotFound } from "./pages/NotFound";
+import "./styles/App.scss";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h2>Blog Fullstack</h2>
+        <h2>Blog Fullstack TS</h2>
         <Navbar />
       </header>
-      {/* MAIN CONTENT / PAGE */}
       <main>
         <Routes>
           <Route index element={<Home />} />

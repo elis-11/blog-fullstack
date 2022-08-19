@@ -70,6 +70,10 @@
       border: 1px solid rgb(196, 190, 190);
       height: 2rem;
       place-items: center;
+      &:hover {
+        color: rgb(249, 249, 246);
+      }
+
       .edit {
         width: 100%;
         display: flex;
