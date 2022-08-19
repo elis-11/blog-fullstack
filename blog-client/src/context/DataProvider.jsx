@@ -11,9 +11,8 @@ export const DataProvider = ({ children }) => {
 
   const [user, setUser] = useState(userLs);
   const [users, setUsers] = useState([]);
-  const [posts, setPosts] = useState([]);
   const [errors, setErrors] = useState("");
-  const [comments, setComments] = useState([]);
+  const [posts, setPosts] = useState([]);
 
   const sharedData = {
     user,
@@ -22,8 +21,6 @@ export const DataProvider = ({ children }) => {
     setUsers,
     posts,
     setPosts,
-    comments,
-    setComments,
     errors,
     setErrors,
   };

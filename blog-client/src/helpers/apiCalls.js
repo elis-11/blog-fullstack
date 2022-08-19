@@ -79,11 +79,20 @@ export const getPostsApi = async () => {
   return response.json();
 };
 
-export const createPostApi = async (image, title, author, description) => {
-  const response = await fetch(`${API_URL}/posts`, {
+export const getPostsOneApi= async (postId) => {
+  const response = await fetch(`${API_URL}/posts/${postId}`)
+  return response.json()
+}
+
+// export const createPostCommentApi = async (token, avatar, title, author, description) => {
+export const createPostCommentApi = async (token, commentData) => {
+  const response = await fetch(`${API_URL}/comments`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ image, title, author, description }),
+    headers: { "Content-Type": "application/json",
+  Authorization: token,
+  },
+    // body: JSON.stringify({ avatar, title, author, description }),
+    body: JSON.stringify(commentData),
   });
   return response.json();
 };
