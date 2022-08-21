@@ -73,12 +73,13 @@
       }
     }
   }
-      .comment-action{
+      .add-comment{
         input{
           width: 60%;
           height: 2rem;
           padding-left: 1rem;
           background-color: transparent;
+          margin: 1rem;
         }
         button{
           font-size: 14px;

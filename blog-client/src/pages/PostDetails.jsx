@@ -57,8 +57,8 @@ export const PostDetails = () => {
       <div>{post.description}</div>
 
       {/* create new comment */}
-      <div className="comment-action">
-        <input ref={refCommentNew} type="text" placeholder="New comment..." />
+      <div className="add-comment">
+        <input ref={refCommentNew} type="text" placeholder="Add comment..." />
         <button onClick={onCommentSubmit}>Add</button>
       </div>
 

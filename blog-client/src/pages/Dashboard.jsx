@@ -6,9 +6,9 @@ import { getUsersApi } from "../helpers/apiCalls";
 import "../components/users/Users.scss";
 
 export const Dashboard = () => {
-  const [search, setSearch]= useState("")
+  const [search, setSearch] = useState("");
   const navigate = useNavigate();
-  const inputRef= useRef();
+  const inputRef = useRef();
 
   const { user, users, setUsers, errors, setErrors } = useDataContext();
 
@@ -31,38 +31,40 @@ export const Dashboard = () => {
     loadData();
   }, [user]);
 
-  const filteredUsers= users.filter(
-    user => 
-    user.name.toLowerCase().includes(search.toLowerCase()) ||
-    user.email.toLowerCase().includes(search.toLowerCase())
-  )
+  const filteredUsers = users.filter(
+    (user) =>
+      user.name.toLowerCase().includes(search.toLowerCase()) ||
+      user.email.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
     <div className="Dashboard">
-      <h2 style={{color: 'white'}}>
-        {users.length} List{" "}
-        {users.length === 1 ? "User" : "Users"}
+      <h2 style={{ color: "white" }}>
+        {users.length} List {users.length === 1 ? "User" : "Users"}
       </h2>
       <div className="search">
-        <form onSubmit={e=>{e.preventDefault()}}>
-          <input 
-          autoFocus
-          ref={inputRef}
-          id="search"
-          type="text"
-          role="search"
-          placeholder="Search..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+          }}
+        >
+          <input
+            autoFocus
+            ref={inputRef}
+            id="search"
+            type="text"
+            role="search"
+            placeholder="Search..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
           />
         </form>
       </div>
       {users.length ? (
         <UsersList users={filteredUsers} />
-) : (
-          <p style={{ marginTop: '2rem', textAlign: 'center' }}></p>
-        )
-      } 
+      ) : (
+        <p style={{ marginTop: "2rem", textAlign: "center" }}></p>
+      )}
       <div className="errors">{errors}</div>
     </div>
   );
