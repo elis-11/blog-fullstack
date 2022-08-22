@@ -27,9 +27,9 @@
         text-decoration: none;
         color: rgb(183, 180, 180);
         text-shadow: 1px 1px 2px #000000;
-        &:hover{
+        &:hover {
           color: #fff;
-        text-shadow: 2px 1px 2px #fff;
+          text-shadow: 2px 1px 2px #fff;
         }
       }
     }
@@ -49,43 +49,41 @@
   .author {
     padding: 1em;
   }
-  .comments{
+  .add-comment {
+    input {
+      width: 60%;
+      height: 2rem;
+      background-color: transparent;
+      margin: 1rem;
+      padding-left: 1rem;
+    }
+    button {
+      font-size: 14px;
+      height: 1.8rem;
+      background: none;
+    }
+  }
+
+  .comments {
     padding: 20px;
     border: 2px solid #ccc;
-    .comment{
+    .comment {
       padding: 3px;
       border: 1px solid #ccc;
       display: flex;
       place-items: center;
-      .avatar{
-        padding: .1em 
+      .avatar {
+        padding: 0.1em;
       }
       .name {
-        margin-left: .5em;
+        margin-left: 0.5em;
         display: flex;
         width: 7%;
       }
-      .description{
-        justify-content: start;
-        border: 1px solid #ccc;
+      .description {
         width: 80%;
-        flex-direction: start;
+        text-align: left;
       }
     }
   }
-      .add-comment{
-        input{
-          width: 60%;
-          height: 2rem;
-          padding-left: 1rem;
-          background-color: transparent;
-          margin: 1rem;
-        }
-        button{
-          font-size: 14px;
-          height: 1.8rem;
-          background-color: transparent;
-        }
-    }
-
 }
