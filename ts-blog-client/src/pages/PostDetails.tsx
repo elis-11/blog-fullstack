@@ -31,7 +31,7 @@ export const PostDetails = () => {
     fetchPostData();
   }, []);
 
-  const onCommentSubmit = async () => {
+  const onCommentCreate = async () => {
     console.log("Creating new comment...");
 
     if (!post || !user || !refCommentNew.current) return;
@@ -46,6 +46,7 @@ export const PostDetails = () => {
     let commentsNew = [...(post.comments || []), commentNewApi];
 
     setPost({ ...post, comments: commentsNew });
+    refCommentNew.current.value = "";
   };
 
   if (!post) return <div>Post loading...</div>;
@@ -64,17 +65,19 @@ export const PostDetails = () => {
       <div>{post.description}</div>
 
       {/* create new comment */}
-      <div className="comment-action">
-        <input ref={refCommentNew} type="text" placeholder="New comment..." />
-        <button onClick={onCommentSubmit}>Add</button>
+      <div className="add-comment">
+        <input autoFocus ref={refCommentNew} type="text" placeholder="Add comment..." />
+        <button onClick={onCommentCreate}>Add</button>
       </div>
 
       <div className="comments">
         {post.comments?.reverse().map((comment) => (
           <div key={comment._id} className="comment">
+            <span>
             <img src={comment.author.avatar} className="avatar" />
+            </span>
             <span className="name">{comment.author.name}: </span>
-            <div className="description"> {comment.description}</div>
+            <span className="description"> {comment.description}</span>
             {/* <AiFillLike onClick={() => setLikes((likes) => likes + 1)} /> */}
             {/* <span>{comment.likes}</span> */}
             {/* <AiFillDislike onClick={() => setDislikes((dislikes) => dislikes + 1)} /> */}

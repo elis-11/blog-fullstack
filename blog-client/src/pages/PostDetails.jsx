@@ -25,21 +25,30 @@ export const PostDetails = () => {
     fetchPostData();
   }, []);
 
-  const onCommentSubmit = async () => {
+  const onCommentCreate = async () => {
     console.log("Creating new comment...");
 
     if (!post || !user || !refCommentNew.current) return;
 
+    // create new comment
     const commentNew = {
       post: post._id,
       author: user._id,
       description: refCommentNew.current.value,
     };
+
+    // send new comment to backend
     const commentNewApi = await createPostCommentApi(user.token, commentNew);
 
+    // create new comments array
+    // copy all old comments (if empty =>take empty array) + add new comment created
     let commentsNew = [...(post.comments || []), commentNewApi];
 
+    // update comments in post
     setPost({ ...post, comments: commentsNew });
+
+    // clear refinput field => value
+    refCommentNew.current.value = "";
   };
 
   if (!post) return <div>Post loading...</div>;
@@ -58,8 +67,8 @@ export const PostDetails = () => {
 
       {/* create new comment */}
       <div className="add-comment">
-        <input ref={refCommentNew} type="text" placeholder="Add comment..." />
-        <button onClick={onCommentSubmit}>Add</button>
+        <input autoFocus ref={refCommentNew} type="text" placeholder="Add comment..." />
+        <button onClick={onCommentCreate}>Add</button>
       </div>
 
       <div className="comments">

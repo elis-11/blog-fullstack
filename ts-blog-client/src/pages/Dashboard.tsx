@@ -1,13 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserList } from "../components/UserList";
 import { useDataContext } from "../context/DataProvider";
 import { getUsersApi } from "../helpers/apiCalls";
+import '../styles/App.scss';
 
 export const Dashboard = () => {
-  // const [search, setSearch] = useState("");
+  const [search, setSearch] = useState("");
   const navigate = useNavigate();
-  // const inputRef = useRef<HTMLInputElement>();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const { user, users, setUsers, errors, setErrors } = useDataContext();
 
@@ -17,9 +18,9 @@ export const Dashboard = () => {
   useEffect(() => {
     // not logged in?
     // stop here / dont load protected data
-    // if(!user){
-    //   return navigate("/login")
-    // }
+    if(!user){
+      return navigate("/login")
+    }
 
     // only fetch data if user is there (=logged in)
     const loadData = async () => {
@@ -39,11 +40,11 @@ export const Dashboard = () => {
     loadData();
   }, [user]); // useEffect should just act if user logged in
 
-  // const filteredUsers = users.filter(
-  //   (user) =>
-  //     user.name.toLowerCase().includes(search.toLowerCase()) ||
-  //     user.email.toLowerCase().includes(search.toLowerCase())
-  // );
+  const filteredUsers = users.filter(
+    (user) =>
+      user.name.toLowerCase().includes(search.toLowerCase()) ||
+      user.email.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
     <div className="Dashboard">
@@ -58,20 +59,21 @@ export const Dashboard = () => {
           }}
         >
           <input
-            // autoFocus
-            // ref={inputRef}
+            autoFocus
+            ref={inputRef}
             id="search"
             type="text"
             role="search"
             placeholder="Search..."
-            // value={search}
-            // onChange={(e) => setSearch(e.target.value)}
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
           />{" "}
         </form>
       </div>
 
       {/* DISPLAY LIST OF USERS */}
       <UserList />
+      {/* <UserList users={filteredUsers}/> */}
 
       {/* SHOW ERRORS */}
       <div className="errors">{errors}</div>
