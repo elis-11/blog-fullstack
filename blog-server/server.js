@@ -17,12 +17,12 @@ app.use(express.json({ limit: "200KB" })); // JSON Parser => req.body
 app.get("/", (req, res) => {
   // res.send("Hello from API!")
   res.send(`
-  
   <h2>Welcome!</h2>
 <div>Our routes:</div>
 <div>Home: <a href="/">/</a></div>
 <div>User: <a href="/user">/user</a></div>
 <div>Posts: <a href="/posts">/posts</a></div>
+<div>Comments: <a href="/comments">/comments</a></div>
 `);
 });
 

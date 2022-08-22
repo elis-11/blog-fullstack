@@ -12,7 +12,6 @@ const UserSchema = new Schema(
   {
     versionKey: false,
     timestamps: true,
-    collection: "users",
 
     // use toJSON hook function transform
     // is always called on res.json BEFORE data is sent
