@@ -32,10 +32,11 @@ postRouter.get("/:id", async (req, res, next) => {
 });
 
 // GET ALL COMMENTS OF ONE POST
-postRouter.get("/:id/comments", auth, async (req, res, next) => {
-  res.json(postComments);
-});
+// postRouter.get("/:id/comments", auth, async (req, res, next) => {
+//   res.json(postComments);
+// });
 
+// create post (protected)
 // create new post
 postRouter.post("/", auth, async (req, res, next) => {
   const post = await Post.create(req.body);

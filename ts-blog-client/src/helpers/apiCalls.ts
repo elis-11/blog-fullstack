@@ -98,7 +98,21 @@ export const createPostCommentApi = async (
       "Content-Type": "application/json",
       Authorization: token, // needed to send JWT token
     },
+    // convert object to string that we can send over the wire!
     body: JSON.stringify(commentData),
   });
   return response.json();
+};
+
+export const deletePostCommentApi = async (
+  token: string,
+  commentId: string
+) => {
+  const response = await fetch(`${API_URL}/comments/${commentId}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: token,
+    },
+  });
+  return response.json();  
 };

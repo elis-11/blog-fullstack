@@ -14,7 +14,10 @@ export interface IPost extends IPostCreate {
   image?: string;
   createdAt: string;
   updatedAt: string;
-  comments?: Array<IComment>;
+}
+
+export interface IPostDetails extends IPost {
+  comments: Array<IComment>;
 }
 
 export interface ICommentCreate {

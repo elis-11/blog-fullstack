@@ -31,6 +31,16 @@
           text-shadow: 2px 1px 2px #fff;
         }
       }
+      .data{
+        display: flex;
+        justify-content: space-around;
+        place-items: center;
+        .post-avatar{
+          width: 2rem;
+          border-radius: 50%;
+          box-shadow: 0 4px 8px 0 
+        }
+      }
     }
   }
 }
@@ -70,11 +80,15 @@
       border: 1px solid #ccc;
       display: flex;
       place-items: center;
-      .avatar{
-        padding: .1em 
+      // .icon-avatar{
+     .icon-avatar{
+        padding: .5em;
+        width:3rem;
+        border-radius: 50%;
       }
       .name {
         margin-left: .5em;
+        margin-right: 2rem;
         display: flex;
         width: 7%;
       }

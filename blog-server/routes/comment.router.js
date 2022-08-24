@@ -11,7 +11,7 @@ commentRouter.get("/", async (req, res, next) => {
   res.json(allComments);
 });
 
-// single comment
+// single comment    Route/comment/:id
 commentRouter.get("/:id", async (req, res, next) => {
   const singleComment = await Comment.findById(req.params.id).populate(
     "author"
@@ -19,10 +19,10 @@ commentRouter.get("/:id", async (req, res, next) => {
   res.json(singleComment);
 });
 
-// create comment
+// create comment (protected)
 commentRouter.post("/", auth, async (req, res, next) => {
   let comment = await Comment.create(req.body);
-  comment= await comment.populate("author")
+  comment = await comment.populate("author");
   res.json(comment);
 
   if (!comment.image) return;
@@ -41,14 +41,17 @@ commentRouter.post("/", auth, async (req, res, next) => {
 
 // update comment
 commentRouter.patch("/:id", auth, async (req, res, next) => {
+  const commentUpdateData = req.body;
+  const commentId = req.params.id;
+
   try {
     const commentUpdated = await Comment.findByIdAndUpdate(
-      req.params.id,
-      req.body,
+      commentId,
+      commentUpdateData,
       {
         new: true,
       }
-    );
+    ).populate("author");
     res.json(commentUpdated);
   } catch (err) {
     next(err);

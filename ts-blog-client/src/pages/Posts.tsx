@@ -15,6 +15,8 @@ export const Posts = () => {
     const loadData = async () => {
       // get protected data from backend using token
       const result = await getPostsApi();
+      console.log(result);
+      
 
       // if error from backend (e.g. no valid token) => show the error in UI
       if (result.error) {
