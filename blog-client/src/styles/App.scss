@@ -60,6 +60,12 @@ code {
     justify-content: center;
     gap: 30px;
     padding: 2rem;
+    img{
+      width: 2rem;
+      border-radius: 50%;
+      border: 1px solid #ccc;
+      padding-left: 0;
+    }
 
     a {
       text-transform: uppercase;

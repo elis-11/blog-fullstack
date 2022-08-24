@@ -53,13 +53,13 @@ export const Navbar = () => {
           <NavLink
             to="/posts"
             className={(navData) => (navData.isActive ? "active" : "none")}
-          >
+            >
             Posts
           </NavLink>
         {user?.role === "admin" && (
           <NavLink
-            to="/admin"
-            className={(navData) => (navData.isActive ? "active" : "none")}
+          to="/admin"
+          className={(navData) => (navData.isActive ? "active" : "none")}
           >
             Admin
           </NavLink>
@@ -67,6 +67,14 @@ export const Navbar = () => {
         {user && (
           <NavLink to="#" onClick={logout}>
           <MdLogout/>
+          </NavLink>
+        )}
+        {user && (
+          <NavLink
+            to="/"
+            className={(navData) => (navData.isActive ? "active" : "none")}
+          >
+            <img src={user.avatar}/>
           </NavLink>
         )}
       </nav>

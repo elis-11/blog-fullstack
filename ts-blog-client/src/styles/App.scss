@@ -45,6 +45,13 @@ nav {
   justify-content: center;
   gap: 30px;
 
+  img{
+    width: 2rem;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    padding-left: 0;
+  }
+
   a {
     text-transform: uppercase;
     text-decoration: none;

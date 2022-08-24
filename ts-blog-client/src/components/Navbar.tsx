@@ -28,6 +28,9 @@ export const Navbar = () => {
           <MdLogout/>
         </NavLink>
       )}
+      {user && <NavLink to="/">
+        <img src={user.avatar}/>
+        </NavLink>}
     </nav>
   );
 };
