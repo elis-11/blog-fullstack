@@ -39,22 +39,28 @@ postRouter.get("/:id", async (req, res, next) => {
 // create post (protected)
 // create new post
 postRouter.post("/", auth, async (req, res, next) => {
+
+  try {
   const post = await Post.create(req.body);
-  res.json(post);
-
+  await post.populate("author")
+  
   if (!post.image) return;
-
+  
   // upload image to cloudinary
   const resCloudinary = await cloudinary.uploader.upload(post.image);
   console.log(resCloudinary);
-
+  
   const avatarUrlCloudinary = resCloudinary.secure_url;
   const postUpdated = await Post.findByIdAndUpdate(
     post._id,
     { image: avatarUrlCloudinary },
     { new: true }
-  );
-  console.log(postUpdated);
+    );
+    console.log(postUpdated);
+    res.json(post);
+} catch (err) {
+  next(err);
+}
 });
 
 // update post

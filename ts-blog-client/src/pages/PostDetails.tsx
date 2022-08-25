@@ -141,15 +141,14 @@ export const PostDetails = () => {
         />
         <button onClick={onCommentCreate}>Add</button>
       </div>
-
+ 
       <div className="comments">
-        {
-        post.comments?.reverse().map((comment) => (
+        {([...post.comments] || []).reverse().map((comment) => (
           <div key={comment._id} className="comment">
-            {/* <span>
+            <span>
               <img src={comment.author.avatar} className="icon-avatar" />
-            </span> */}
-            {/* <span className="name">{comment.author.name} </span> */}
+            </span>
+            <span className="name">{comment.author.name} </span>
             <span className="description"> {comment.description}</span>
             <div className="stats">
               <span>
