@@ -30,7 +30,7 @@ export interface IComment {
   _id: string;
   author: User;
   description: string;
-  links: number;
+  likes: number;
   dislikes: number;
   createdAt: string;
   updatedAt: string;

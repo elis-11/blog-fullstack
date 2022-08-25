@@ -21,7 +21,9 @@ commentRouter.get("/:id", async (req, res, next) => {
 
 // create comment (protected)
 commentRouter.post("/", auth, async (req, res, next) => {
-  let comment = await Comment.create(req.body);
+  const commentData = req.body;
+
+  let comment = await Comment.create(commentData);
   comment = await comment.populate("author");
   res.json(comment);
 
@@ -51,6 +53,40 @@ commentRouter.patch("/:id", auth, async (req, res, next) => {
       {
         new: true,
       }
+    ).populate("author");
+    res.json(commentUpdated);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// update / increment likes
+commentRouter.patch("/:id/update_likes", auth, async (req, res, next) => {
+  const commentId = req.params.id;
+
+  // increment likes field by one
+  try {
+    const commentUpdated = await Comment.findByIdAndUpdate(
+      commentId,
+      { $inc: { likes: 1 } },
+      { new: true }
+    ).populate("author");
+    res.json(commentUpdated);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// update / increment dislikes
+commentRouter.patch("/:id/update_dislikes", auth, async (req, res, next) => {
+  const commentId = req.params.id;
+
+  // increment dislikes field by one
+  try {
+    const commentUpdated = await Comment.findByIdAndUpdate(
+      commentId,
+      { $inc: { dislikes: 1 } },
+      { new: true }
     ).populate("author");
     res.json(commentUpdated);
   } catch (err) {

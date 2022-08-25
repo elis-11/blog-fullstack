@@ -1,0 +1,58 @@
+[
+    {
+    "_id": "63065304b0d05a8a2677f6bd",
+    "title": "I am Senior Fullstack Dev!!!",
+    "author": {
+    "_id": "62f21c7cd7fb55b34e34b2cb",
+    "name": "Artur",
+    "email": "artur@gmail.com",
+    "avatar": "https://res.cloudinary.com/dngl4djva/image/upload/v1660034173/bwdxxactminhva3rfzud.png",
+    "role": "admin",
+    "updatedAt": "2022-08-17T21:29:33.116Z"
+    },
+    "description": "I Love it!!!",
+    "likes": 0,
+    "dislikes": 0,
+    "image": "https://res.cloudinary.com/dngl4djva/image/upload/v1661358853/icl0q8thppevgm1puh4f.jpg",
+    "createdAt": "2022-08-24T16:34:12.959Z",
+    "updatedAt": "2022-08-24T16:34:14.059Z"
+    },
+    {
+    "_id": "6306537bb0d05a8a2677f6c0",
+    "title": "I am Senior Fullstack Dev soon",
+    "author": {
+    "_id": "62eea3d909dc1b47c433a5e0",
+    "name": "Robert",
+    "email": "robert@gmail.com",
+    "avatar": "https://res.cloudinary.com/dngl4djva/image/upload/v1659806682/rxbaguf87fmx2o294ngn.png",
+    "role": "admin",
+    "createdAt": "2022-08-06T17:24:41.222Z",
+    "updatedAt": "2022-08-06T17:24:43.355Z"
+    },
+    "description": "Yadda Yadda.",
+    "likes": 0,
+    "dislikes": 0,
+    "image": "https://res.cloudinary.com/dngl4djva/image/upload/v1661358972/wkhwlfgjrfivebjdimyu.jpg",
+    "createdAt": "2022-08-24T16:36:11.256Z",
+    "updatedAt": "2022-08-24T16:36:12.766Z"
+    },
+    {
+    "_id": "63065393b0d05a8a2677f6c3",
+    "title": "I am Senior TypeScript Dev soon",
+    "author": {
+    "_id": "62eea36709dc1b47c433a5da",
+    "name": "Elis",
+    "email": "elis@gmail.com",
+    "avatar": "https://res.cloudinary.com/dngl4djva/image/upload/v1659806569/l01vvcesxa2spjtjttmd.png",
+    "role": "admin",
+    "createdAt": "2022-08-06T17:22:47.575Z",
+    "updatedAt": "2022-08-15T14:12:26.350Z"
+    },
+    "description": "Yadda Yadda.",
+    "likes": 0,
+    "dislikes": 0,
+    "image": "https://res.cloudinary.com/dngl4djva/image/upload/v1661358996/pifbqvzomaveatvtmcza.jpg",
+    "createdAt": "2022-08-24T16:36:35.565Z",
+    "updatedAt": "2022-08-24T16:36:36.803Z"
+    }
+    ]

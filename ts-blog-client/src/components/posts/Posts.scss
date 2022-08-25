@@ -73,9 +73,9 @@
   }
 
   .comments{
-    padding: 20px;
-    border: 2px solid #ccc;
     .comment{
+      display: flex;
+      justify-content: space-around;
       padding: 3px;
       border: 1px solid #ccc;
       display: flex;
@@ -93,8 +93,16 @@
         width: 7%;
       }
       .description{
-        width: 70%;
+        width: 60%;
         text-align: left;
+      }
+      .stats{
+        width: 10%;
+      }
+      .delete{
+        width: 4%;
+        font-size: 1.2rem;
+        flex-direction: right;
       }
 
     }

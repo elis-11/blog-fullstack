@@ -6,6 +6,8 @@ import {
   createPostCommentApi,
   deletePostCommentApi,
   getPostOneApi,
+  updatePostCommentDislikes,
+  updatePostCommentLikes,
 } from "../helpers/apiCalls";
 import {
   ICommentCreate,
@@ -13,13 +15,11 @@ import {
   IComment,
   IPostDetails,
 } from "../types/post.types";
-// import "../components/posts/Post.scss";
 
 export const PostDetails = () => {
   const { user } = useDataContext(); // --- version 1
   const [post, setPost] = useState<IPostDetails>();
-  // const [likes, setLikes] = useState<IComment>(0);
-  // const [dislikes, setDislikes] = useState<IComment>(0)>
+  // const [comment, setComment] = useState<IPostDetails>();
 
   // const location = useLocation(); // --- version 2
   // const post = location.state as IPost; // as IPost for TS
@@ -40,6 +40,39 @@ export const PostDetails = () => {
     };
     fetchPostData();
   }, []);
+
+  // LIKES
+  const onCommentLike = async (commentId: string) => {
+    if (!user || !post) return;
+
+    // 1. step => update s at API
+    const commentUpdated = await updatePostCommentLikes(user.token, commentId);
+
+    // 2. step => update s in state
+    const commentsUpdated = post.comments.map((comment) => {
+      return comment._id === commentId ? commentUpdated : comment;
+    });
+
+    // overwrite comments in post
+    setPost({ ...post, comments: commentsUpdated });
+  };
+
+  // DISLIKES
+  const onCommentDislike = async (commentId: string) => {
+    if (!user || !post) return;
+
+    // 1.step => update dislikes at API
+    const commentUpdated = await updatePostCommentDislikes(
+      user.token,
+      commentId
+    );
+
+    // 2.step => update dislikes in state
+    const commentsUpdated = post.comments.map((comment) => {
+      return comment._id === commentId ? commentUpdated : comment;
+    });
+    setPost({ ...post, comments: commentsUpdated });
+  };
 
   const onCommentDelete = async (commentId: string) => {
     if (!user || !post) return;
@@ -110,16 +143,28 @@ export const PostDetails = () => {
       </div>
 
       <div className="comments">
-        {post.comments?.reverse().map((comment) => (
+        {
+        post.comments?.reverse().map((comment) => (
           <div key={comment._id} className="comment">
-            <span>
+            {/* <span>
               <img src={comment.author.avatar} className="icon-avatar" />
-            </span>
-            <span className="name">{comment.author.name}: </span>
+            </span> */}
+            {/* <span className="name">{comment.author.name} </span> */}
             <span className="description"> {comment.description}</span>
-            {/* <span><AiFillLike onClick={() => onCommentLike(comment._id)} />{comment.likes}</span> */}
-            {/* <span><AiFillDislike onClick={() => onCommentDislike(comment._id)} />{comment.dislikes}</span> */}
-            <AiFillDelete onClick={() => onCommentDelete(comment._id)} />
+            <div className="stats">
+              <span>
+                <AiFillLike onClick={() => onCommentLike(comment._id)} />
+                {comment.likes}
+              </span>
+              <span>
+                <AiFillDislike onClick={() => onCommentDislike(comment._id)} />
+                {comment.dislikes}
+              </span>
+            </div>
+            <AiFillDelete
+              className="delete"
+              onClick={() => onCommentDelete(comment._id)}
+            />
           </div>
         ))}
       </div>

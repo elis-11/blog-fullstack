@@ -1,6 +1,6 @@
 @API_URL = http://localhost:5000
 
-@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmVlYTM2NzA5ZGMxYjQ3YzQzM2E1ZGEiLCJuYW1lIjoiRWxpcyIsImVtYWlsIjoiZWxpc0BnbWFpbC5jb20iLCJhdmF0YXIiOiJodHRwczovL3Jlcy5jbG91ZGluYXJ5LmNvbS9kbmdsNGRqdmEvaW1hZ2UvdXBsb2FkL3YxNjU5ODA2NTY5L2wwMXZ2Y2VzeGEyc3BqdGp0dG1kLnBuZyIsInJvbGUiOiJhZG1pbiIsImNyZWF0ZWRBdCI6IjIwMjItMDgtMDZUMTc6MjI6NDcuNTc1WiIsInVwZGF0ZWRBdCI6IjIwMjItMDgtMTVUMTQ6MTI6MjYuMzUwWiIsImlhdCI6MTY2MTI5MDcxNSwiZXhwIjoxNjYxNzIyNzE1fQ.xlAlN2z_lko2RxOf3lgZWiw5nRsi25kpwSiDPBMTADc
+@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmVlYTM2NzA5ZGMxYjQ3YzQzM2E1ZGEiLCJuYW1lIjoiRWxpcyIsImVtYWlsIjoiZWxpc0BnbWFpbC5jb20iLCJhdmF0YXIiOiJodHRwczovL3Jlcy5jbG91ZGluYXJ5LmNvbS9kbmdsNGRqdmEvaW1hZ2UvdXBsb2FkL3YxNjU5ODA2NTY5L2wwMXZ2Y2VzeGEyc3BqdGp0dG1kLnBuZyIsInJvbGUiOiJhZG1pbiIsImNyZWF0ZWRBdCI6IjIwMjItMDgtMDZUMTc6MjI6NDcuNTc1WiIsInVwZGF0ZWRBdCI6IjIwMjItMDgtMTVUMTQ6MTI6MjYuMzUwWiIsImlhdCI6MTY2MTQxNTMxMywiZXhwIjoxNjYxODQ3MzEzfQ.jxFSA1eM8NCekNwQdJ0Z44yQbsfFnPX34XubCi3mwXU
 
 ###All Posts
 GET {{API_URL}}/posts
@@ -18,10 +18,18 @@ Content-Type: application/json
 Authorization: {{TOKEN}}
 
 {
-"title": "I am Senior TypeScript Dev soon",
-"author": "62eea36709dc1b47c433a5da",
-"description": "Yadda Yadda.",
-"image": "https://images.unsplash.com/photo-1466133633688-187f0b492390?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=150&ixid=MnwxfDB8MXxyYW5kb218MHx8bmF0dXJlLDB8fHx8fHwxNjU5OTY1MzYw&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=150"
+  "title": "I am Senior TypeScript Dev soon",
+  "author": {
+  "_id": "62eea36709dc1b47c433a5da",
+  "name": "Elis",
+  "email": "elis@gmail.com",
+  "avatar": "https://res.cloudinary.com/dngl4djva/image/upload/v1659806569/l01vvcesxa2spjtjttmd.png",
+  "role": "admin",
+  "createdAt": "2022-08-06T17:22:47.575Z",
+  "updatedAt": "2022-08-15T14:12:26.350Z"
+  },
+  "description": "Yadda Yadda.",
+  "image": "https://res.cloudinary.com/dngl4djva/image/upload/v1661358996/pifbqvzomaveatvtmcza.jpg"
 }
 
 ### Update Post
@@ -35,5 +43,5 @@ Authorization: {{TOKEN}}
 
 
 ### Delete Post
-DELETE {{API_URL}}/posts/62f68dd712b8598dfed8b72e
+DELETE {{API_URL}}/posts/6307347ca3adad91dc0543c4
 Authorization: {{TOKEN}}

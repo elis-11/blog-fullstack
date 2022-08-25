@@ -27,7 +27,6 @@ userRouter.get("/admin", auth, isAdmin, async (req, res, next) => {
 // GET SINGLE USER
 // Route /user/:id
 userRouter.get("/:id", auth, async (req, res, next) => {
-
   // we can access logged in users now anywhere
   // console.log("Authenticated user:", req.user._id)
   const userSingle = await User.findById(req.params.id)

@@ -78,6 +78,7 @@ export const deleteUserApi = async (token: string, userId: string) => {
 };
 
 // POSTS
+// get all posts
 export const getPostsApi = async () => {
   const response = await fetch(`${API_URL}/posts`);
   return response.json();
@@ -114,5 +115,35 @@ export const deletePostCommentApi = async (
       Authorization: token,
     },
   });
-  return response.json();  
+  return response.json();
+};
+
+// likes
+export const updatePostCommentLikes = async (
+  token: string,
+  commentId: string
+) => {
+  const response = await fetch(
+    `${API_URL}/comments/${commentId}/update_likes`,
+    {
+      method: "PATCH",
+      headers: { Authorization: token },
+    }
+  );
+  return response.json();
+};
+
+// dislikes
+export const updatePostCommentDislikes = async (
+  token: string,
+  commentId: string
+) => {
+  const response = await fetch(
+    `${API_URL}/comments/${commentId}/update_dislikes`,
+    {
+      method: "PATCH",
+      headers: { Authorization: token },
+    }
+  );
+  return response.json();
 };
