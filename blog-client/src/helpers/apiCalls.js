@@ -11,6 +11,12 @@ export const getUsersApi = async (token) => {
   return response.json();
 };
 
+export const getUserOneApi = async (userId) => {
+  const response = await fetch(`${API_URL}/user/${userId}`);
+  return response.json();
+};
+
+
 // SIGNUP +
 // export const signupApi = async (name, email, password) => {  // without AVATAR
 export const signupApi = async (name, email, password, avatar) => {
@@ -85,8 +91,19 @@ export const getPostsApi = async () => {
 };
 
 // single Post +
-export const getPostsOneApi = async (postId) => {
+export const getPostOneApi = async (postId) => {
   const response = await fetch(`${API_URL}/posts/${postId}`);
+  return response.json();
+};
+
+//  CREATE POST -
+export const createPostApi = async (token, postData) => {
+  const response = await fetch(`${API_URL}/posts`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", 
+    Authorization: token },
+    body: JSON.stringify(postData),
+  });
   return response.json();
 };
 
@@ -125,8 +142,7 @@ export const getCommentsApi = async () => {
 export const createPostCommentApi = async (token, commentData) => {
   const response = await fetch(`${API_URL}/comments`, {
     method: "POST",
-    headers: {  "Content-Type": "application/json", 
-      Authorization: token },
+    headers: { "Content-Type": "application/json", Authorization: token },
 
     // convert object to string that we can send over the wire!
     // body: JSON.stringify({ avatar, title, author, description }),
@@ -148,19 +164,25 @@ export const deletePostCommentApi = async (token, commentId) => {
 
 // likes
 export const updatePostCommentLikes = async (token, commentId) => {
-  const response = await fetch(`${API_URL}/comments/${commentId}/update_likes`, {
-    method: "PATCH",
-    headers: {Authorization: token},
-  })
+  const response = await fetch(
+    `${API_URL}/comments/${commentId}/update_likes`,
+    {
+      method: "PATCH",
+      headers: { Authorization: token },
+    }
+  );
   return response.json();
-}
-export const updatePostCommentDislikes = async (token, commentId)=>{
-  const response = await fetch(`${API_URL}/comments/${commentId}/update_dislikes`, {
-    method: "PATCH",
-  headers: {Authorization: token},
-  })
+};
+export const updatePostCommentDislikes = async (token, commentId) => {
+  const response = await fetch(
+    `${API_URL}/comments/${commentId}/update_dislikes`,
+    {
+      method: "PATCH",
+      headers: { Authorization: token },
+    }
+  );
   return response.json();
-}
+};
 
 // UPDATE -
 export const updateCommentApi = async (token, commentId, updateData) => {
