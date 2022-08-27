@@ -27,9 +27,10 @@ userRouter.get("/admin", auth, isAdmin, async (req, res, next) => {
 // GET SINGLE USER
 // Route /user/:id
 userRouter.get("/:id", auth, async (req, res, next) => {
+  const userId = req.params.id
   // we can access logged in users now anywhere
   // console.log("Authenticated user:", req.user._id)
-  const userSingle = await User.findById(req.params.id)
+  const userSingle = await User.findById(userId)
   res.json(userSingle)
 })
 
@@ -37,10 +38,8 @@ userRouter.get("/:id", auth, async (req, res, next) => {
 // SIGNUP user
 // Route POST /user
 userRouter.post("/", async (req, res, next) => {
-
   const userData = req.body
   const { email} = userData
-
   const userExists = await User.findOne({ email })
 
   // we receive image as string from frontend
@@ -52,16 +51,13 @@ userRouter.post("/", async (req, res, next) => {
       error: "We already got that user. But thank you!"
     })
   }
-
   // hash password BEFORE storing user in DB
   userData.password = bcrypt.hashSync(userData.password, 10)
-
   // store new user in dataase
   const user = await User.create(userData)
   res.json(user) // send response to frontend
 
   if(!avatarImageStr) return
-
   // upload image to cloudinary
   const resCloudinary = await cloudinary.uploader.upload(avatarImageStr)
   console.log(resCloudinary)

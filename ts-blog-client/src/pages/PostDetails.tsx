@@ -74,22 +74,6 @@ export const PostDetails = () => {
     setPost({ ...post, comments: commentsUpdated });
   };
 
-  const onCommentDelete = async (commentId: string) => {
-    if (!user || !post) return;
-
-    // 1.step => delete comment at API
-    const commentDeleted = await deletePostCommentApi(user.token, commentId);
-    console.log(commentDeleted);
-
-    // 2.step => delete comment in state
-    // overwrite old comment array with new one
-    const commentsCopy = post.comments.filter(
-      (comment) => comment._id !== commentId
-    );
-    console.log(commentsCopy);
-
-    setPost({ ...post, comments: commentsCopy });
-  };
 
   const onCommentCreate = async () => {
     console.log("Creating new comment...");
@@ -113,6 +97,23 @@ export const PostDetails = () => {
 
     // clear refInput in post
     refCommentNew.current.value = "";
+  };
+
+  const onCommentDelete = async (commentId: string) => {
+    if (!user || !post) return;
+
+    // 1.step => delete comment at API
+    const commentDeleted = await deletePostCommentApi(user.token, commentId);
+    console.log(commentDeleted);
+
+    // 2.step => delete comment in state
+    // overwrite old comment array with new one
+    const commentsCopy = post.comments.filter(
+      (comment) => comment._id !== commentId
+    );
+    console.log(commentsCopy);
+
+    setPost({ ...post, comments: commentsCopy });
   };
 
   // if not post loaded => show at least something to the user

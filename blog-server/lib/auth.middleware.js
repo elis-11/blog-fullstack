@@ -11,6 +11,7 @@ export const auth = (req, res, next) => {
   // check if token is valid!
   try {
     const decodedUser = jwt.verify(token, config.JWT_SECRET)
+    // console.log(decodedUser);
     req.user = decodedUser // store decoded user info in request so we know who is talking to us
     next()
   }

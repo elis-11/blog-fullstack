@@ -5,6 +5,8 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 console.log({ API_URL });
 
+// *******************USERS**************
+// All users +
 export const getUsersApi = async (token: string) => {
   const response = await fetch(`${API_URL}/user`, {
     // send token to protected route => so API can identify us and allows us access!
@@ -15,7 +17,7 @@ export const getUsersApi = async (token: string) => {
   return response.json();
 };
 
-// signup
+// signup +
 export const signupApi = async (userData: UserCreate) => {
   console.log(userData);
 
@@ -31,7 +33,7 @@ export const signupApi = async (userData: UserCreate) => {
   return response.json();
 };
 
-// login
+// login +
 export const loginApi = async (email: string, password: string) => {
   const response = await fetch(`${API_URL}/user/login`, {
     method: "POST",
@@ -45,7 +47,7 @@ export const loginApi = async (email: string, password: string) => {
   return response.json();
 };
 
-// update user at API
+// update user at API +
 export const updateUserApi = async (
   token: string,
   userId: string,
@@ -65,6 +67,7 @@ export const updateUserApi = async (
   return response.json();
 };
 
+// delete +
 export const deleteUserApi = async (token: string, userId: string) => {
   const response = await fetch(`${API_URL}/user/${userId}`, {
     method: "DELETE",
@@ -77,18 +80,21 @@ export const deleteUserApi = async (token: string, userId: string) => {
   return response.json();
 };
 
-// POSTS
-// get all posts
+// *******************POSTS**************
+// get all posts +
 export const getPostsApi = async () => {
   const response = await fetch(`${API_URL}/posts`);
   return response.json();
 };
 
+// single post +
 export const getPostOneApi = async (postId: string) => {
   const response = await fetch(`${API_URL}/posts/${postId}`);
   return response.json();
 };
 
+// *******************COMMENTS**************
+// Create Comment +
 export const createPostCommentApi = async (
   token: string,
   commentData: ICommentCreate
@@ -105,6 +111,7 @@ export const createPostCommentApi = async (
   return response.json();
 };
 
+// delete comment +
 export const deletePostCommentApi = async (
   token: string,
   commentId: string
@@ -118,7 +125,7 @@ export const deletePostCommentApi = async (
   return response.json();
 };
 
-// likes
+// likes +
 export const updatePostCommentLikes = async (
   token: string,
   commentId: string
@@ -133,7 +140,7 @@ export const updatePostCommentLikes = async (
   return response.json();
 };
 
-// dislikes
+// dislikes +
 export const updatePostCommentDislikes = async (
   token: string,
   commentId: string
