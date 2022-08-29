@@ -1,9 +1,13 @@
 import { useDataContext } from "../context/DataProvider"
 import { UserItem } from "./UserItem"
-// import { User } from "../types/user.types"
+import { ContextData, User } from "../types/user.types"
 
-export const UserList = () => {
-  const { users } = useDataContext()
+type Props ={ 
+  users: User[]
+}
+
+export const UserList = ({users}: Props) => {
+  // const { users } = useDataContext()
   return (
     <div className="users">
       {users.map((user) =>  

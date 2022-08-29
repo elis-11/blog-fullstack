@@ -25,12 +25,14 @@ export const Navbar = () => {
       {user?.role === "admin" && <NavLink to="/admin">Admin</NavLink>}
       {user && (
         <NavLink to="#" onClick={logout}>
-          <MdLogout/>
+          <MdLogout />
         </NavLink>
       )}
-      {user && <NavLink to="/">
-        <img src={user.avatar}/>
-        </NavLink>}
+      {user && (
+        <NavLink to="/">
+          <img src={user.avatar} />
+        </NavLink>
+      )}
     </nav>
   );
 };

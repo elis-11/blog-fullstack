@@ -22,6 +22,7 @@ export const Posts = () => {
       if (result.error) {
         return setErrors(result.error);
       }
+      
 
       // store received users in our central data state
       setErrors("");
@@ -32,7 +33,7 @@ export const Posts = () => {
 
   return (
     <div className="Posts">
-      <h2>Posts</h2>
+      <h2>Total: {posts.length} {posts.length === 1 ? "Post" : "Posts"}</h2>
       <PostList />
       {/* SHOW ERRORS */}
       <div className="errors">{errors}</div>

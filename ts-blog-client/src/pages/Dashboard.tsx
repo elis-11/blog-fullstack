@@ -12,7 +12,6 @@ export const Dashboard = () => {
 
   const { user, users, setUsers, errors, setErrors } = useDataContext();
 
-  // useEffect
   // fetch me data I dont have so far from backend on LOAD
   // and afterwards store them in context
   useEffect(() => {
@@ -24,7 +23,7 @@ export const Dashboard = () => {
 
     // only fetch data if user is there (=logged in)
     const loadData = async () => {
-      if (!user) return;
+      // if (!user) return;
       // get protected data from backend using token
       const result = await getUsersApi(user.token);
 
@@ -32,11 +31,12 @@ export const Dashboard = () => {
       if (result.error) {
         return setErrors(result.error);
       }
-
       // store received users in our central data state
       setErrors("");
       setUsers(result);
     };
+    console.log(user);
+    
     loadData();
   }, [user]); // useEffect should just act if user logged in
 
@@ -72,8 +72,8 @@ export const Dashboard = () => {
       </div>
 
       {/* DISPLAY LIST OF USERS */}
-      <UserList />
-      {/* <UserList users={filteredUsers}/> */}
+      {/* <UserList /> */}
+      <UserList users={filteredUsers}/>
 
       {/* SHOW ERRORS */}
       <div className="errors">{errors}</div>
