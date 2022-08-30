@@ -108,7 +108,7 @@ export const createPostApi = async (token, postData) => {
 };
 
 // UPDATE  POST -
-export const updatePostApi = async (token, postId, updateData) => {
+export const updatePostApi = async (token, postId, postData) => {
   const response = await fetch(`${API_URL}/posts/${postId}`, {
     method: "PATCH",
     headers: {
@@ -116,7 +116,7 @@ export const updatePostApi = async (token, postId, updateData) => {
       Authorization: token,
     }, // for JWT
     //  credentials: include  <-wenn ohne JWT
-    body: JSON.stringify(updateData),
+    body: JSON.stringify(postData),
   });
   return response.json();
 };

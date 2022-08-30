@@ -1,6 +1,6 @@
 import { useDataContext } from "../context/DataProvider"
 import { UserItem } from "./UserItem"
-import { ContextData, User } from "../types/user.types"
+import { User } from "../types/user.types"
 
 type Props ={ 
   users: User[]

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { AiTwotoneEdit, AiFillDelete } from "react-icons/ai";
 import { MdSaveAlt } from "react-icons/md";
 import { useDataContext } from "../../context/DataProvider";

@@ -12,6 +12,7 @@ export const Signup = () => {
   const refPassword = useRef();
   const [avatarPreview, setAvatarPreview] = useState(
     "https://res.cloudinary.com/dngl4djva/image/upload/v1659703451/default_mwdlea.png"
+    // 'https://res.cloudinary.com/dngl4djva/image/upload/v1661546536/qeusp7zptbc6w57nebsc.png'
   );
   const navigate = useNavigate();
 
