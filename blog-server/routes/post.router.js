@@ -9,7 +9,7 @@ const postRouter = Router();
 // get all Posts +
 postRouter.get("/", async (req, res, next) => {
   // const postsAll = await Post.find();
-  const postsAll = await Post.find().populate("author"); // to schow author avatar
+  const postsAll = await Post.find()  //.populate("author"); // to schow author avatar
   res.json(postsAll);
 });
 
@@ -23,10 +23,9 @@ postRouter.get("/", async (req, res, next) => {
 
 // get single post + all realted comments +
 postRouter.get("/:id", async (req, res, next) => {
-  const post = await Post.findById(req.params.id).populate("author");
-  const comments = await Comment.find({ post: req.params.id }).populate(
-    "author"
-  );
+  const post = await Post.findById(req.params.id)   //.populate("author");
+  const comments = await Comment.find({ post: req.params.id })
+  // .populate("author");
   res.json({
     ...post.toObject(),
     comments,
@@ -77,7 +76,7 @@ postRouter.post("/", auth, async (req, res, next) => {
 
   try {
     const post = await Post.create(postData);
-    await post.populate("author");
+    // await post.populate("author");
 
     if (!postImageString) return;
 
@@ -108,8 +107,7 @@ postRouter.patch("/:id", auth, async (req, res, next) => {
 
   try {
     const postUpdated = await Post.findByIdAndUpdate(postId, postUpdateData, {
-      new: true,
-    }).populate("author");
+      new: true,}) //  .populate("author");
     res.json(postUpdated);
   } catch (err) {
     next(err);

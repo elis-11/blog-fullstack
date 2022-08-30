@@ -9,10 +9,9 @@ import {
   updatePostCommentDislikes,
   updatePostCommentLikes,
 } from "../helpers/apiCalls";
+import { ICommentCreate } from "../types/comment.types";
 import {
-  ICommentCreate,
   IPost,
-  IComment,
   IPostDetails,
 } from "../types/post.types";
 
@@ -35,7 +34,7 @@ export const PostDetails = () => {
 
     const fetchPostData = async () => {
       const postApi = await getPostOneApi(id);
-      console.log(postApi);
+      console.log(postApi.comments);
       setPost(postApi);
     };
     fetchPostData();
@@ -74,6 +73,24 @@ export const PostDetails = () => {
     setPost({ ...post, comments: commentsUpdated });
   };
 
+      // 1. delete comment at API
+  // 2. delete comment in nested comment array of post state 
+  const onCommentDelete = async (commentId: string) => {
+    if (!user || !post) return;
+
+    // 1.step => delete comment at API
+    const commentDeleted = await deletePostCommentApi(user.token, commentId);
+    console.log(commentDeleted);
+
+    // 2.step => delete comment in state
+    // overwrite old comment array with new one
+    const commentsCopy = post.comments.filter(
+      (comment) => comment._id !== commentId
+    );
+    console.log(commentsCopy);
+
+    setPost({ ...post, comments: commentsCopy });
+  };
 
   const onCommentCreate = async () => {
     console.log("Creating new comment...");
@@ -99,22 +116,6 @@ export const PostDetails = () => {
     refCommentNew.current.value = "";
   };
 
-  const onCommentDelete = async (commentId: string) => {
-    if (!user || !post) return;
-
-    // 1.step => delete comment at API
-    const commentDeleted = await deletePostCommentApi(user.token, commentId);
-    console.log(commentDeleted);
-
-    // 2.step => delete comment in state
-    // overwrite old comment array with new one
-    const commentsCopy = post.comments.filter(
-      (comment) => comment._id !== commentId
-    );
-    console.log(commentsCopy);
-
-    setPost({ ...post, comments: commentsCopy });
-  };
 
   // if not post loaded => show at least something to the user
   if (!post) return <div>Post loading...</div>;
@@ -147,18 +148,18 @@ export const PostDetails = () => {
         {([...post.comments] || []).reverse().map((comment) => (
           <div key={comment._id} className="comment">
             <span>
-              <img src={comment.author.avatar} className="icon-avatar" />
+              <img src={comment.author?.avatar} className="icon-avatar" />
             </span>
-            <span className="name">{comment.author.name} </span>
+            <span className="name">{comment.author?.name} </span>
             <span className="description"> {comment.description}</span>
             <div className="stats">
               <span>
                 <AiFillLike onClick={() => onCommentLike(comment._id)} />
-                {comment.likes}
+                {comment.likes.length}
               </span>
               <span>
                 <AiFillDislike onClick={() => onCommentDislike(comment._id)} />
-                {comment.dislikes}
+                {comment.dislikes.length}
               </span>
             </div>
             <AiFillDelete

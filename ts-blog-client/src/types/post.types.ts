@@ -1,3 +1,4 @@
+import { IComment } from "./comment.types";
 import { User } from "./user.types";
 
 export interface IPostCreate {
@@ -18,20 +19,4 @@ export interface IPost extends IPostCreate {
 
 export interface IPostDetails extends IPost {
   comments: Array<IComment>;
-}
-
-export interface ICommentCreate {
-  post: string; // postId
-  author: string; // authorId
-  description: string;
-}
-
-export interface IComment {
-  _id: string;
-  author: User;
-  description: string;
-  likes: number;
-  dislikes: number;
-  createdAt: string;
-  updatedAt: string;
 }

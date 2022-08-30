@@ -1,5 +1,5 @@
 @API_URL = http://localhost:5000
-@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmVlYTM2NzA5ZGMxYjQ3YzQzM2E1ZGEiLCJuYW1lIjoiRWxpcyIsImVtYWlsIjoiZWxpc0BnbWFpbC5jb20iLCJhdmF0YXIiOiJodHRwczovL3Jlcy5jbG91ZGluYXJ5LmNvbS9kbmdsNGRqdmEvaW1hZ2UvdXBsb2FkL3YxNjU5ODA2NTY5L2wwMXZ2Y2VzeGEyc3BqdGp0dG1kLnBuZyIsInJvbGUiOiJhZG1pbiIsImNyZWF0ZWRBdCI6IjIwMjItMDgtMDZUMTc6MjI6NDcuNTc1WiIsInVwZGF0ZWRBdCI6IjIwMjItMDgtMTVUMTQ6MTI6MjYuMzUwWiIsImlhdCI6MTY2MTQxNTMxMywiZXhwIjoxNjYxODQ3MzEzfQ.jxFSA1eM8NCekNwQdJ0Z44yQbsfFnPX34XubCi3mwXU
+@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmVlYTM2NzA5ZGMxYjQ3YzQzM2E1ZGEiLCJuYW1lIjoiRWxpcyIsImVtYWlsIjoiZWxpc0BnbWFpbC5jb20iLCJhdmF0YXIiOiJodHRwczovL3Jlcy5jbG91ZGluYXJ5LmNvbS9kbmdsNGRqdmEvaW1hZ2UvdXBsb2FkL3YxNjU5ODA2NTY5L2wwMXZ2Y2VzeGEyc3BqdGp0dG1kLnBuZyIsInJvbGUiOiJhZG1pbiIsImNyZWF0ZWRBdCI6IjIwMjItMDgtMDZUMTc6MjI6NDcuNTc1WiIsInVwZGF0ZWRBdCI6IjIwMjItMDgtMTVUMTQ6MTI6MjYuMzUwWiIsImlhdCI6MTY2MTg2MTY3NywiZXhwIjoxNjYyMjkzNjc3fQ.QQGz54UOAAEP3v8W35L9H-rU5sxV00b7B_F_AxUSvlY
 
 ###
 GET {{API_URL}}/
@@ -14,7 +14,7 @@ GET {{API_URL}}/user/admin
 Authorization: {{TOKEN}}
 
 ### User single
-GET {{API_URL}}/user/62eea3d909dc1b47c433a5e0
+GET {{API_URL}}/user/62f6cfda14387a8273885a0a
 Authorization: {{TOKEN}}
 
 ### Signup
@@ -39,13 +39,11 @@ Content-Type: application/json
 
 
 ### UPDATE user
-PATCH {{API_URL}}/user/
+PATCH {{API_URL}}/user/62f66b50c544613c5af2e995
 Content-Type: application/json
 
 {
-  "name": "losrobbos",
-  "email": "los@los.com",
-  "password": "losl123" 
+  "role": "admin"
 }
 
 ### Delete user
