@@ -1,5 +1,6 @@
-import { ICommentCreate } from "../types/post.types";
+import { ICommentCreate } from "../types/comment.types";
 import { UserCreate, UserUpdate } from "../types/user.types";
+import {IPostUpdate} from "../types/post.types"
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -92,6 +93,16 @@ export const getPostOneApi = async (postId: string) => {
   const response = await fetch(`${API_URL}/posts/${postId}`);
   return response.json();
 };
+
+// update post
+export const updatePostApi = async (token: string, postId: string, postData: IPostUpdate)=>{
+const response = await fetch(`${API_URL}/posts/${postId}`, {
+  method: 'PATCH',
+  headers: { 'Content-Type': 'application/json', Authorization: token},
+  body: JSON.stringify(postData),
+})
+return response.json();
+}
 
 // *******************COMMENTS**************
 // Create Comment +

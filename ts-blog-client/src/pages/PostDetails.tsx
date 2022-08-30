@@ -1,32 +1,30 @@
 import { useEffect, useRef, useState } from "react";
 import { AiFillDislike, AiFillLike, AiFillDelete } from "react-icons/ai";
+import { FaEdit } from "react-icons/fa";
+import { MdCancel, MdSaveAlt } from "react-icons/md";
 import { useLocation, useParams } from "react-router-dom";
 import { useDataContext } from "../context/DataProvider"; // --- version 1
 import {
   createPostCommentApi,
   deletePostCommentApi,
   getPostOneApi,
+  updatePostApi,
   updatePostCommentDislikes,
   updatePostCommentLikes,
 } from "../helpers/apiCalls";
 import { ICommentCreate } from "../types/comment.types";
-import {
-  IPost,
-  IPostDetails,
-} from "../types/post.types";
+import { IPost, IPostDetails, IPostUpdate } from "../types/post.types";
 
 export const PostDetails = () => {
-  const { user } = useDataContext(); // --- version 1
+  const { user, posts, setPosts } = useDataContext();
+  const [editMode, setEditMode] = useState(false);
   const [post, setPost] = useState<IPostDetails>();
-  // const [comment, setComment] = useState<IPostDetails>();
 
-  // const location = useLocation(); // --- version 2
-  // const post = location.state as IPost; // as IPost for TS
-  // console.log(location.state);
+  const { id } = useParams();
 
-  const { id } = useParams(); //--- version 1
-  // // filter out post with given id
-  // const post = posts.find((post) => post._id === id);   // --- version 1
+  const refPostTitle = useRef<HTMLInputElement>(null);
+  const refPostDescription = useRef<HTMLTextAreaElement>(null);
+
   const refCommentNew = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -39,6 +37,30 @@ export const PostDetails = () => {
     };
     fetchPostData();
   }, []);
+
+  const onCommentCreate = async () => {
+    console.log("Creating new comment...");
+
+    if (!post || !user || !refCommentNew.current) return;
+    // create new comment
+    const commentNew: ICommentCreate = {
+      post: post._id,
+      author: user._id,
+      description: refCommentNew.current.value,
+    };
+    //send new comment to backend
+    const commentNewApi = await createPostCommentApi(user.token, commentNew);
+
+    // create new comment Array
+    // copy all old comments and new comment created
+    let commentsNew = [...post.comments, commentNewApi];
+
+    // update comments in post
+    setPost({ ...post, comments: commentsNew });
+
+    // clear refInput in post
+    refCommentNew.current.value = "";
+  };
 
   // LIKES
   const onCommentLike = async (commentId: string) => {
@@ -73,8 +95,32 @@ export const PostDetails = () => {
     setPost({ ...post, comments: commentsUpdated });
   };
 
-      // 1. delete comment at API
-  // 2. delete comment in nested comment array of post state 
+  // update post
+  const onPostUpdate = async () => {
+    // if neither title or description updated => return
+    if (!user || !post || !refPostTitle.current || !refPostDescription.current)
+      return;
+
+    // update object for sending to API
+    const postUpdate: IPostUpdate = {
+      title: refPostTitle.current.value,
+      description: refPostDescription.current.value,
+    };
+
+    // send update data to API (backend)
+    const postUpdated = await updatePostApi(user.token, post._id, postUpdate);
+    console.log(postUpdated);
+
+    // update post in list of posts using map!
+    const postsUpdated = posts.map((_post) => {
+      return _post._id === post._id ? postUpdated : _post;
+    });
+    setPosts(postsUpdated); // put copy in to state => overwrite posts
+    setPost(postUpdated); // update post in current page
+    setEditMode(false); //
+  };
+
+  // delete comment
   const onCommentDelete = async (commentId: string) => {
     if (!user || !post) return;
 
@@ -82,7 +128,7 @@ export const PostDetails = () => {
     const commentDeleted = await deletePostCommentApi(user.token, commentId);
     console.log(commentDeleted);
 
-    // 2.step => delete comment in state
+    // 2. delete comment in nested comment array of post state
     // overwrite old comment array with new one
     const commentsCopy = post.comments.filter(
       (comment) => comment._id !== commentId
@@ -92,46 +138,48 @@ export const PostDetails = () => {
     setPost({ ...post, comments: commentsCopy });
   };
 
-  const onCommentCreate = async () => {
-    console.log("Creating new comment...");
-
-    if (!post || !user || !refCommentNew.current) return;
-    // create new comment
-    const commentNew: ICommentCreate = {
-      post: post._id,
-      author: user._id,
-      description: refCommentNew.current.value,
-    };
-    //send new comment to backend
-    const commentNewApi = await createPostCommentApi(user.token, commentNew);
-
-    // create new comment Array
-    // copy all old comments and new comment created
-    let commentsNew = [...post.comments, commentNewApi];
-
-    // update comments in post
-    setPost({ ...post, comments: commentsNew });
-
-    // clear refInput in post
-    refCommentNew.current.value = "";
-  };
-
-
   // if not post loaded => show at least something to the user
   if (!post) return <div>Post loading...</div>;
 
   return (
     <div className="Details">
-      <div>
-        <img src={post.image} />
+      <div className="post-details">
+        <div>
+          <img src={post.image} />
+        </div>
+
+        {editMode ? (
+          // show edit files
+          <>
+            <input defaultValue={post.title} type="text" ref={refPostTitle} />
+            <textarea
+              defaultValue={post.description}
+              ref={refPostDescription}
+            ></textarea>
+            <div className="edit-icons">
+              <MdCancel
+                className="edit-icon"
+                onClick={() => setEditMode(false)}
+              />
+              <MdSaveAlt className="edit-icon" onClick={onPostUpdate} />
+            </div>
+          </>
+        ) : (
+          // show readonly post info
+          <>
+            <div className="title">{post.title}</div>
+            <div className="author">
+              <img src={post.author.avatar} className="avatar" />
+              {post.author.name}: {post.createdAt.slice(0, 10)}
+              {/* {post.createdAt.slice(0, 10)} by {post.author.name} */}
+            </div>
+            <div>{post.description}</div>
+          </>
+        )}
       </div>
-      <div className="title">{post.title}</div>
-      <div className="author">
-        <img src={post.author.avatar} className="avatar" />
-        {post.author.name}: {post.createdAt.slice(0, 10)}
-        {/* {post.createdAt.slice(0, 10)} by {post.author.name} */}
+      <div className="post-edit">
+        <FaEdit onClick={() => setEditMode(!editMode)} />
       </div>
-      <div>{post.description}</div>
 
       {/* create new comment */}
       <div className="add-comment">
@@ -143,9 +191,10 @@ export const PostDetails = () => {
         />
         <button onClick={onCommentCreate}>Add</button>
       </div>
- 
+
       <div className="comments">
-        {([...post.comments] || []).reverse().map((comment) => (
+        {/* {([...post.comments] || []).reverse().map((comment) => ( */}
+        {post.comments?.map((comment) => (
           <div key={comment._id} className="comment">
             <span>
               <img src={comment.author?.avatar} className="icon-avatar" />
@@ -154,8 +203,10 @@ export const PostDetails = () => {
             <span className="description"> {comment.description}</span>
             <div className="stats">
               <span>
-                <AiFillLike className="icon"
-                 onClick={() => onCommentLike(comment._id)} />
+                <AiFillLike
+                  className="icon"
+                  onClick={() => onCommentLike(comment._id)}
+                />
                 {comment.likes.length}
               </span>
               <span>

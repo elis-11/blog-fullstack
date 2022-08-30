@@ -6,6 +6,13 @@ export interface IPostCreate {
   // author: string;
   author: User;
   description?: string;
+  image?: string;
+}
+
+export interface IPostUpdate {
+  title?: string;
+  description?: string;
+  image?: string;
 }
 
 export interface IPost extends IPostCreate {
