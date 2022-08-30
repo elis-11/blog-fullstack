@@ -154,7 +154,8 @@ export const PostDetails = () => {
             <span className="description"> {comment.description}</span>
             <div className="stats">
               <span>
-                <AiFillLike onClick={() => onCommentLike(comment._id)} />
+                <AiFillLike className="icon"
+                 onClick={() => onCommentLike(comment._id)} />
                 {comment.likes.length}
               </span>
               <span>
