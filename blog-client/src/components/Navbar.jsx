@@ -16,68 +16,28 @@ export const Navbar = () => {
   };
 
   return (
-    <div>
-      <nav>
-        <NavLink
-          to="/"
-          className={(navData) => (navData.isActive ? "active" : "none")}
-          end
-        >
-          {" "}
-          Home
-        </NavLink>
-        {!user && (
-          <NavLink
-            to="/login"
-            className={(navData) => (navData.isActive ? "active" : "none")}
-          >
-            Login
-          </NavLink>
-        )}
-        {!user && (
-          <NavLink
-            to="/signup"
-            className={(navData) => (navData.isActive ? "active" : "none")}
-          >
-            Signup
-          </NavLink>
-        )}
-        {user && (
-          <NavLink
-            to="/dashboard"
-            className={(navData) => (navData.isActive ? "active" : "none")}
-          >
-            Dashboard
-          </NavLink>
-        )}
-          <NavLink
-            to="/posts"
-            className={(navData) => (navData.isActive ? "active" : "none")}
-            >
-            Posts
-          </NavLink>
-        {user?.role === "admin" && (
-          <NavLink
-          to="/admin"
-          className={(navData) => (navData.isActive ? "active" : "none")}
-          >
-            Admin
-          </NavLink>
-        )}
+    <div className="Navbar">
+      <div className="logo">{user && <NavLink to="/">JS</NavLink>}</div>
+      <div className="nav">
+        <NavLink to="/"> Home</NavLink>
+        {!user && <NavLink to="/login">Login</NavLink>}
+        {!user && <NavLink to="/signup">Signup</NavLink>}
+        {user && <NavLink to="/dashboard">Dashboard</NavLink>}
+        <NavLink to="/posts">Posts</NavLink>
+        {user?.role === "admin" && <NavLink to="/admin">Admin</NavLink>}
         {user && (
           <NavLink to="#" onClick={logout}>
-          <MdLogout/>
+            <MdLogout />
           </NavLink>
         )}
+      </div>
+      <div className="avatar">
         {user && (
-          <NavLink
-            to="/"
-            className={(navData) => (navData.isActive ? "active" : "none")}
-          >
-            <img src={user.avatar}/>
+          <NavLink to="/">
+            <img src={user.avatar} />
           </NavLink>
         )}
-      </nav>
+      </div>
     </div>
   );
 };

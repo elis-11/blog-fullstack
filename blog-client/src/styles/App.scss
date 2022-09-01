@@ -21,7 +21,7 @@ code {
   justify-content: center;
   text-align: center;
   align-items: center;
-  img{
+  img {
     box-shadow: 1px 1px 2px white, 0 0 15px white, 0 0 15px white;
     border: 1px solid white;
   }
@@ -54,29 +54,43 @@ code {
     height: 7vh;
     border-top: 2px solid #ccc;
   }
-
-  nav {
+  .Navbar {
     display: flex;
-    justify-content: center;
-    gap: 30px;
-    padding: 2rem;
-    img{
-      width: 2rem;
-      border-radius: 50%;
-      border: 1px solid #ccc;
-      padding-left: 0;
-    }
-
-    a {
-      text-transform: uppercase;
-      text-decoration: none;
-      color: rgb(98, 100, 95);
+    justify-content: space-evenly;
+    place-items: center;
+    .logo {
+      font-size: 3rem;
       font-weight: bold;
-      font-size: 25px;
-    }
-     a.active {
+      a {
+        text-decoration: none;
         color: #fff;
       }
+    }
+    .nav {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      padding: 2rem;
+
+      a {
+        text-transform: uppercase;
+        text-decoration: none;
+        color: rgb(98, 100, 95);
+        font-weight: bold;
+        font-size: 25px;
+      }
+      a.active {
+        color: #fff;
+      }
+    }
+    .avatar {
+      img{
+        width: 2.5rem;
+        border-radius: 50%;
+        border: 1px solid #ccc;
+        padding-left: 0;
+      }
+    }
   }
 
   .errors {
@@ -137,9 +151,8 @@ code {
       padding: 0.7rem 1.3rem;
       text-shadow: 1px 1px 2px black, 0 0 15px white, 0 0 15px white;
       &:hover {
-      box-shadow: 1px 1px 2px white, 0 0 15px white, 0 0 15px white;
-      text-shadow: 1px 1px 2px black, 0 0 15px white, 0 0 15px white;
-
+        box-shadow: 1px 1px 2px white, 0 0 15px white, 0 0 15px white;
+        text-shadow: 1px 1px 2px black, 0 0 15px white, 0 0 15px white;
       }
     }
   }
