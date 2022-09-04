@@ -4,15 +4,18 @@ import {
   createPostCommentApi,
   deletePostCommentApi,
   getPostOneApi,
+  updatePostApi,
   updatePostCommentDislikes,
   updatePostCommentLikes,
 } from "../helpers/apiCalls";
 import { AiFillDislike, AiFillLike } from "react-icons/ai";
-import { FaTrashAlt } from "react-icons/fa";
+import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import { useEffect, useRef, useState } from "react";
+import { MdSaveAlt } from "react-icons/md";
 
 export const PostDetails = () => {
-  const { user } = useDataContext();
+  const { user, posts, setPosts } = useDataContext();
+  const [editMode, setEditMode] = useState(false);
   const [post, setPost] = useState();
 
   const { id } = useParams();
@@ -30,6 +33,33 @@ export const PostDetails = () => {
     fetchPostData();
   }, []);
 
+  // //!  update-version-state
+    const onPostUpdate = (e) => {
+      // if (!user || !post) return;
+  
+      // create Copy before state update & update in one step
+      const postUpdated = { ...post, [e.target.name]: e.target.value };
+      setPost(postUpdated);
+    }
+      const submitUpdate = async () => { 
+        // send updated post (not saved yet) => to API
+        const postUpdatedApi = await updatePostApi(
+          user.token,
+          post._id,
+          post
+        );
+        console.log(postUpdatedApi);
+        setEditMode(false);
+      
+      // save in Browser
+      const postsCopy = posts.map((_post) => {
+        return _post._id === postUpdatedApi._id ? postUpdatedApi : _post;
+      });
+      setPosts(postsCopy);
+    };
+  
+
+  // create comment
   const onCommentCreate = async () => {
     console.log("Creating new comment...");
 
@@ -90,11 +120,14 @@ export const PostDetails = () => {
   const onCommentDislike = async (commentId) => {
     if (!user || !post) return;
 
-    const commentUpdated= await updatePostCommentDislikes(user.token, commentId)
+    const commentUpdated = await updatePostCommentDislikes(
+      user.token,
+      commentId
+    );
 
-    const commentsUpdated= post.comments.map(comment =>{
+    const commentsUpdated = post.comments.map((comment) => {
       return comment._id === commentId ? commentUpdated : comment;
-    })
+    });
     setPost({ ...post, comments: commentsUpdated });
   };
 
@@ -105,13 +138,31 @@ export const PostDetails = () => {
       <div>
         <img src={post.image} />
       </div>
-      <div className="title">{post.title}</div>
-      <div className="author">
-        <img src={post.author.avatar} className="avatar" />
-        {post.author.name}: {post.createdAt.slice(0, 10)}
+      {/* //! update-version-state */}
+      {editMode ? (
+        <div className="edit">
+          <input name="title" value={post.title} onChange={onPostUpdate} />
+          <input
+            name="description"
+            value={post.description}
+            onChange={onPostUpdate}
+          />
+          {/* <MdSaveAlt className="save" onClick={() => setEditMode(!editMode)} /> */}
+          <MdSaveAlt className="save" onClick={submitUpdate} />
+        </div>
+      ) : (
+        <>
+          <div className="author">
+            <img src={post.author.avatar} className="avatar" />
+            {post.author.name}: {post.createdAt.slice(0, 10)}
+          </div>
+          <div className="title">{post.title}</div>
+          <div>{post.description}</div>
+        </>
+      )}
+      <div className="post-edit">
+        <FaEdit className="edit" onClick={() => setEditMode(!editMode)} />
       </div>
-      <div>{post.description}</div>
-
       {/* create new comment */}
       <div className="add-comment">
         <input
@@ -124,7 +175,8 @@ export const PostDetails = () => {
       </div>
 
       <div className="comments">
-        {([...post.comments] || []).reverse().map((comment) => (
+        {/* {([...post.comments] || []).reverse().map((comment) => ( */}
+        {post.comments?.map((comment) => (
           <div key={comment._id} className="comment">
             <span>
               <img src={comment.author.avatar} className="avatar" />
