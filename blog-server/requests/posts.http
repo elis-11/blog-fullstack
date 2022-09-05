@@ -1,13 +1,13 @@
 @API_URL = http://localhost:5000
 
-@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmVlYTM2NzA5ZGMxYjQ3YzQzM2E1ZGEiLCJuYW1lIjoiRWxpcyIsImVtYWlsIjoiZWxpc0BnbWFpbC5jb20iLCJhdmF0YXIiOiJodHRwczovL3Jlcy5jbG91ZGluYXJ5LmNvbS9kbmdsNGRqdmEvaW1hZ2UvdXBsb2FkL3YxNjU5ODA2NTY5L2wwMXZ2Y2VzeGEyc3BqdGp0dG1kLnBuZyIsInJvbGUiOiJhZG1pbiIsImNyZWF0ZWRBdCI6IjIwMjItMDgtMDZUMTc6MjI6NDcuNTc1WiIsInVwZGF0ZWRBdCI6IjIwMjItMDgtMTVUMTQ6MTI6MjYuMzUwWiIsImlhdCI6MTY2MTY4NjQyNywiZXhwIjoxNjYyMTE4NDI3fQ.hcuC_nyqz5JIrs4I2Nf96D3fFDJ9uj6WPEKqYis9ILA
+@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmVlYTM2NzA5ZGMxYjQ3YzQzM2E1ZGEiLCJuYW1lIjoiRWxpcyIsImVtYWlsIjoiZWxpc0BnbWFpbC5jb20iLCJhdmF0YXIiOiJodHRwczovL3Jlcy5jbG91ZGluYXJ5LmNvbS9kbmdsNGRqdmEvaW1hZ2UvdXBsb2FkL3YxNjU5ODA2NTY5L2wwMXZ2Y2VzeGEyc3BqdGp0dG1kLnBuZyIsInJvbGUiOiJhZG1pbiIsImNyZWF0ZWRBdCI6IjIwMjItMDgtMDZUMTc6MjI6NDcuNTc1WiIsInVwZGF0ZWRBdCI6IjIwMjItMDktMDNUMDc6MTE6MTguMDg2WiIsImlhdCI6MTY2MjM3OTg3NCwiZXhwIjoxNjYyODExODc0fQ.e4_5V9ZI2afra0aR-E1nVovvvpmzi6ur7jkYUfR9IW0
 
 ###All Posts
 GET {{API_URL}}/posts
 
 
 ### Single Post 
-GET {{API_URL}}/posts/62f6c21d8360b0e44d348bf2
+GET {{API_URL}}/posts/6307a3bc33a1fd9c0a72919e
 
 ### Single Post + all realted comments
 GET {{API_URL}}/posts/62f6c21d8360b0e44d348bf2
@@ -33,15 +33,23 @@ Authorization: {{TOKEN}}
 
 
 ### Update Post
-PATCH {{API_URL}}/posts/62f934a3288b94afefeacdf4
+PATCH {{API_URL}}/posts/6307a94333a1fd9c0a72920f
 Content-Type: application/json
 Authorization: {{TOKEN}}
 
 {
-    "title": "Tralala"
+    "title": "I am Senior TypeScript Dev soon...."
 }
 
 
 ### Delete Post
 DELETE {{API_URL}}/posts/6307347ca3adad91dc0543c4
+Authorization: {{TOKEN}}
+
+### Post update Likes
+PATCH {{API_URL}}/posts/6307a3bc33a1fd9c0a72919e/update_likes
+Authorization: {{TOKEN}}
+
+### Post update Dislikes
+PATCH {{API_URL}}/posts/6307a3bc33a1fd9c0a72919e/update_dislikes
 Authorization: {{TOKEN}}

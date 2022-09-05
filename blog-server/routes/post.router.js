@@ -9,7 +9,7 @@ const postRouter = Router();
 // get all Posts +
 postRouter.get("/", async (req, res, next) => {
   // const postsAll = await Post.find();
-  const postsAll = await Post.find()  //.populate("author"); // to schow author avatar
+  const postsAll = await Post.find(); //.populate("author"); // to schow author avatar
   res.json(postsAll);
 });
 
@@ -23,8 +23,8 @@ postRouter.get("/", async (req, res, next) => {
 
 // get single post + all realted comments +
 postRouter.get("/:id", async (req, res, next) => {
-  const post = await Post.findById(req.params.id)   //.populate("author");
-  const comments = await Comment.find({ post: req.params.id })
+  const post = await Post.findById(req.params.id); //.populate("author");
+  const comments = await Comment.find({ post: req.params.id });
   // .populate("author");
   res.json({
     ...post.toObject(),
@@ -107,7 +107,60 @@ postRouter.patch("/:id", auth, async (req, res, next) => {
 
   try {
     const postUpdated = await Post.findByIdAndUpdate(postId, postUpdateData, {
-      new: true,}) //  .populate("author");
+      new: true,
+    }); //  .populate("author");
+    res.json(postUpdated);
+  } catch (err) {
+    next(err);
+  }
+});
+
+//***likes & dislikes*** */
+postRouter.patch("/:id/update_likes", auth, async (req, res, next) => {
+  const postId = req.params.id;
+  const loggedInUserId = req.user._id;
+
+  // increment likes field by one
+  try {
+    const postToUpdate = await Post.findById(postId);
+
+    // check if logged in user is already in array of likers
+    const likedAlready = postToUpdate.likes.find(
+      (liker) => liker == loggedInUserId
+    );
+
+    //if liked already => remove from array
+    if (likedAlready) {
+      postToUpdate.likes.pull(loggedInUserId);
+    }
+    // if not liked so far => add to array
+    else {
+      postToUpdate.likes.push(loggedInUserId);
+    }
+
+    // save update and return
+    const postUpdated = await postToUpdate.save();
+    res.json(postUpdated);
+  } catch (err) {
+    next(err);
+  }
+});
+
+postRouter.patch("/:id/update_dislikes", auth, async (req, res, next) => {
+  const postId = req.params.id;
+  const loggedInUserId = req.user._id;
+
+  try {
+    const postToUpdate = await Post.findById(postId);
+    const dislikedAlready = postToUpdate.dislikes.find(
+      (disliker) => disliker == loggedInUserId
+    );
+    if (dislikedAlready) {
+      postToUpdate.dislikes.pull(loggedInUserId);
+    } else {
+      postToUpdate.dislikes.push(loggedInUserId);
+    }
+    const postUpdated = await postToUpdate.save();
     res.json(postUpdated);
   } catch (err) {
     next(err);

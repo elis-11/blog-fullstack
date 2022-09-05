@@ -20,16 +20,16 @@
       }
     }
   }
-    .search{
-      input{
-        width: 50%;
-        height: 2.3rem;
-        margin-top: 2rem;
-        padding-left: 1rem;
-        border: 2px solid #ccc;
-        background-color: transparent;
-      }
+  .search {
+    input {
+      width: 50%;
+      height: 2.3rem;
+      margin-top: 2rem;
+      padding-left: 1rem;
+      border: 2px solid #ccc;
+      background-color: transparent;
     }
+  }
 
   .content {
     width: 80%;
@@ -69,19 +69,23 @@
           border-radius: 50%;
         }
       }
-      .icons{
+      .title{
+        font-size: 25px;
+        color: rgb(41, 38, 38);
+      }
+      .description{
+        padding: 0.6em;
+      }
+      .icons {
         display: flex;
         justify-content: space-evenly;
         margin: 0.7em;
         color: rgb(129, 126, 126);
-        .like,
-        .dislike,
-        .edit,
-        .delete{
-font-size: 1rem;
+        .delete {
+          font-size: 1rem;
         }
-          &:hover {
-            color: #fff;
+        &:hover {
+          color: #fff;
         }
       }
     }
@@ -93,80 +97,152 @@ font-size: 1rem;
 }
 
 .Details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  place-items: center;
+  width: 100%;
   color: rgb(50, 49, 49);
   margin-top: 3rem;
-  .title {
-    padding: 1em;
-  }
-  .author {
-    padding: 1em;
-  }
-  .add-comment {
-    input {
-      width: 60%;
-      height: 2rem;
-      background-color: transparent;
-      margin: 1rem;
-      padding-left: 1rem;
+  .detail {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    place-items: center;
+    width: 80%;
+    .title {
+      padding: 1em;
+      font-size: 25px;
     }
-    button {
-      font-size: 14px;
-      height: 1.8rem;
-      background: none;
+    .author {
+      padding: 1em;
     }
-  }
-
-  .comments {
-    padding: 20px;
-    border: 2px solid #ccc;
-    .comment {
-      padding: 3px;
-      border: 1px solid #ccc;
+    .icons {
       display: flex;
+      justify-content: space-around;
+      width: 40%;
+      color: rgb(129, 126, 126);
+      margin: 0.5em;
+      .like {
+        &:hover {
+          color: #fff;
+        }
+      }
+      .dislike {
+        &:hover {
+          color: #fff;
+        }
+      }
+      .edit {
+        &:hover {
+          color: #fff;
+        }
+      }
+      .save {
+        &:hover {
+          color: #fff;
+        }
+      }
+    }
+
+    .edit-post {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       place-items: center;
-      .avatar {
-        padding: 0.1em;
+      width: 100%;
+      input {
+        height: 2rem;
+        padding-left: 1rem;
+        background: transparent;
       }
-      .name {
-        margin-left: 0.5em;
+      textarea {
+        width: 100%;
+        height: 4rem;
+        padding: 0.5rem;
+        padding-left: 1rem;
+        background: transparent;
+      }
+    }
+
+    .add-comment {
+      min-width: 100%;
+      input {
+        min-width: 60%;
+        height: 2rem;
+        background-color: transparent;
+        margin: 1rem;
+        padding-left: 1rem;
+      }
+      button {
+        font-size: 14px;
+        height: 1.8rem;
+        background: none;
+      }
+    }
+    .comments {
+      min-width: 100%;
+      padding: 20px;
+      border: 2px solid #ccc;
+      .comment {
+        padding: 3px;
+        border: 1px solid #ccc;
         display: flex;
-        width: 7%;
-      }
-      .description {
-        width: 70%;
-        text-align: left;
-      }
-      .stats {
-        width: 10%;
-        display: flex;
-        justify-content: space-evenly;
-      }
-      .icon {
-        color: grey;
-      }
-      .delete {
-        font-size: 1.1rem;
-        color: rgb(130, 127, 127);
+        place-items: center;
+        .avatar {
+          padding: 0.1em;
+        }
+        .name {
+          margin-left: 0.5em;
+          display: flex;
+          width: 7%;
+        }
+        .description {
+          width: 70%;
+          text-align: left;
+        }
+        .stats {
+          width: 10%;
+          display: flex;
+          justify-content: space-evenly;
+        }
+        .like {
+          color: grey;
+          &:hover {
+            color: #fff;
+          }
+        }
+        .dislike {
+          color: grey;
+          &:hover {
+            color: #fff;
+          }
+        }
+        .delete {
+          font-size: 1.1rem;
+          color: rgb(130, 127, 127);
+          &:hover {
+            color: #fff;
+          }
+        }
       }
     }
   }
-}
-.Add {
-  color: red;
 }
 .Add {
   .create {
-    img{
+    img {
       width: 25%;
     }
-    input{
+    input {
       width: 25%;
       height: 2.2rem;
       margin: 0.5rem;
       background-color: transparent;
       padding-left: 1rem;
     }
-    a, button {
+    a,
+    button {
       margin: 0.5em;
       border: none;
       border-radius: 5px;

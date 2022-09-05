@@ -16,7 +16,6 @@ export const getUserOneApi = async (userId) => {
   return response.json();
 };
 
-
 // SIGNUP +
 // export const signupApi = async (name, email, password) => {  // without AVATAR
 export const signupApi = async (name, email, password, avatar) => {
@@ -83,7 +82,7 @@ export const deleteUserApi = async (token, userId) => {
   return response.json();
 };
 
-// *******************POSTS**************
+//! *******************POSTS**************
 // get all posts +
 export const getPostsApi = async () => {
   const response = await fetch(`${API_URL}/posts`);
@@ -100,14 +99,13 @@ export const getPostOneApi = async (postId) => {
 export const createPostApi = async (token, postData) => {
   const response = await fetch(`${API_URL}/posts`, {
     method: "POST",
-    headers: { "Content-Type": "application/json", 
-    Authorization: token },
+    headers: { "Content-Type": "application/json", Authorization: token },
     body: JSON.stringify(postData),
   });
   return response.json();
 };
 
-// UPDATE  POST -
+// UPDATE  POST - (at API)
 export const updatePostApi = async (token, postId, postData) => {
   const response = await fetch(`${API_URL}/posts/${postId}`, {
     method: "PATCH",
@@ -121,6 +119,23 @@ export const updatePostApi = async (token, postId, postData) => {
   return response.json();
 };
 
+// post-likes
+export const updatePostLikes = async (token, postId) => {
+  const response = await fetch(`${API_URL}/posts/${postId}/update_likes`, {
+    method: "PATCH",
+    headers: { Authorization: token },
+  });
+  return response.json();
+};
+// post-dislikes
+export const updatePostDislikes = async (token, postId) => {
+  const response = await fetch(`${API_URL}/posts/${postId}/update_dislikes`, {
+    method: "PATCH",
+    headers: { Authorization: token },
+  });
+  return response.json();
+};
+
 // delete post -
 export const deletePostApi = async (token, postId) => {
   const response = await fetch(`${API_URL}/posts/${postId}`, {
@@ -130,7 +145,7 @@ export const deletePostApi = async (token, postId) => {
   return response.json();
 };
 
-// *******************COMMENTS**************
+//! *******************COMMENTS**************
 // get all comments -
 export const getCommentsApi = async () => {
   const response = await fetch(`${API_URL}/comments`);

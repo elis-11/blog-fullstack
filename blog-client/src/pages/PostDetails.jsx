@@ -7,6 +7,8 @@ import {
   updatePostApi,
   updatePostCommentDislikes,
   updatePostCommentLikes,
+  updatePostDislikes,
+  updatePostLikes,
 } from "../helpers/apiCalls";
 import { AiFillDislike, AiFillLike } from "react-icons/ai";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
@@ -33,31 +35,55 @@ export const PostDetails = () => {
     fetchPostData();
   }, []);
 
-  // //!  update-version-state
-    const onPostUpdate = (e) => {
-      // if (!user || !post) return;
+  //! Post - Update - version-State
+  const onPostUpdate = (e) => {
+    // if (!user || !post) return;
+
+    // create Copy before state update & update in one step
+    const postUpdated = { ...post, [e.target.name]: e.target.value };
+    setPost(postUpdated);
+  };
+  const submitUpdate = async () => {
+    // send updated post (not saved yet) => to API
+    const postUpdatedApi = await updatePostApi(user.token, post._id, post);
+    console.log(postUpdatedApi);
+    setEditMode(false);
+
+    // save in Browser
+    const postsCopy = posts.map((_post) => {
+      return _post._id === postUpdatedApi._id ? postUpdatedApi : _post;
+    });
+    setPosts(postsCopy);
+  };
+
+  //! *****post-likes-dislikes*****
+  const onPostLike = async (postId) => {
+    console.log(postId);
+    if (!user || !post) return;
+
+    // 1.step => update likes at API
+    const postUpdated = await updatePostLikes(user.token, postId);
+    console.log(postUpdated);
+    // 2.step => update likes in state
+    const postsUpdated = posts.map((post) => {
+      return post._id === postId ? [...post, ...postUpdated] : post;
+    });
+    // overwrite posts in post array
+    setPosts(postsUpdated)
+    setPost({...post, ...postUpdated}); 
+    console.log(postsUpdated);
+  };
   
-      // create Copy before state update & update in one step
-      const postUpdated = { ...post, [e.target.name]: e.target.value };
-      setPost(postUpdated);
-    }
-      const submitUpdate = async () => { 
-        // send updated post (not saved yet) => to API
-        const postUpdatedApi = await updatePostApi(
-          user.token,
-          post._id,
-          post
-        );
-        console.log(postUpdatedApi);
-        setEditMode(false);
-      
-      // save in Browser
-      const postsCopy = posts.map((_post) => {
-        return _post._id === postUpdatedApi._id ? postUpdatedApi : _post;
-      });
-      setPosts(postsCopy);
-    };
-  
+  const onPostDislike = async (postId) => {
+    if (!user || !post) return;
+    
+    const postUpdated = await updatePostDislikes(user.token, postId);
+    const postsUpdated = posts.map((post) => {
+      return post._id === postId ? postUpdated : post;
+    });
+    setPost(postUpdated)
+    setPosts(postsUpdated);
+  };
 
   // create comment
   const onCommentCreate = async () => {
@@ -103,7 +129,9 @@ export const PostDetails = () => {
     setPost({ ...post, comments: commentsCopy });
   };
 
+  //! Comments - Likes
   const onCommentLike = async (commentId) => {
+    console.log(commentId);
     if (!user || !post) return;
 
     // 1.step => update likes at API
@@ -135,76 +163,91 @@ export const PostDetails = () => {
 
   return (
     <div className="Details">
-      <div>
-        <img src={post.image} />
-      </div>
-      {/* //! update-version-state */}
-      {editMode ? (
-        <div className="edit">
-          <input name="title" value={post.title} onChange={onPostUpdate} />
-          <input
-            name="description"
-            value={post.description}
-            onChange={onPostUpdate}
-          />
-          {/* <MdSaveAlt className="save" onClick={() => setEditMode(!editMode)} /> */}
+      <div className="detail">
+        <div>
+          <img src={post.image} />
+        </div>
+        {/* //! Update-Post-version-State */}
+        {editMode ? (
+          <div className="edit-post">
+            <input name="title" value={post.title} onChange={onPostUpdate} />
+            <textarea
+              name="description"
+              value={post.description}
+              onChange={onPostUpdate}
+            />
+            {/* <MdSaveAlt className="save" onClick={() => setEditMode(!editMode)} /> */}
+          </div>
+        ) : (
+          <>
+            <div className="author">
+              <img src={post.author?.avatar} className="avatar" />
+              {post.author?.name}: {post.createdAt?.slice(0, 10)}
+              {/* <Moment date={post.createdAt} format="HH:mm DD. MM. YYYY" />{" "} */}
+
+            </div>
+            <div className="title">{post.title}</div>
+            <div>{post.description}</div>
+          </>
+        )}
+        <div className="icons">
+          <div className="likes">
+            <span>
+              <AiFillLike className="like" onClick={() => onPostLike(post._id)} />
+              {post.likes?.length || 0}
+            </span>
+            <span>
+              <AiFillDislike className="dislike" onClick={() => onPostDislike(post._id)} />
+              {post.dislikes?.length || 0}
+            </span>
+          </div>
+            <FaEdit className="edit" onClick={() => setEditMode(!editMode)} />
           <MdSaveAlt className="save" onClick={submitUpdate} />
         </div>
-      ) : (
-        <>
-          <div className="author">
-            <img src={post.author.avatar} className="avatar" />
-            {post.author.name}: {post.createdAt.slice(0, 10)}
-          </div>
-          <div className="title">{post.title}</div>
-          <div>{post.description}</div>
-        </>
-      )}
-      <div className="post-edit">
-        <FaEdit className="edit" onClick={() => setEditMode(!editMode)} />
-      </div>
-      {/* create new comment */}
-      <div className="add-comment">
-        <input
-          autoFocus
-          ref={refCommentNew}
-          type="text"
-          placeholder="Add comment..."
-        />
-        <button onClick={onCommentCreate}>Add</button>
-      </div>
 
-      <div className="comments">
-        {/* {([...post.comments] || []).reverse().map((comment) => ( */}
-        {post.comments?.map((comment) => (
-          <div key={comment._id} className="comment">
-            <span>
-              <img src={comment.author.avatar} className="avatar" />
-            </span>
-            <span className="name">{comment.author.name}</span>
-            <span className="description">{comment.description}</span>
-            <div className="stats">
+        {/* create new comment */}
+        <div className="add-comment">
+          <input
+            autoFocus
+            ref={refCommentNew}
+            type="text"
+            placeholder="Add comment..."
+          />
+          <button onClick={onCommentCreate}>Add</button>
+        </div>
+
+        <div className="comments">
+          {/* {post.comments?.map((comment) => ( */}
+          {([...post.comments] || []).reverse().map((comment) => (
+            <div key={comment._id} className="comment">
               <span>
-                <AiFillLike
-                  className="icon"
-                  onClick={() => onCommentLike(comment._id)}
-                />
-                {comment.likes.length}
+                <img src={comment.author.avatar} className="avatar" />
               </span>
-              <span>
-                <AiFillDislike
-                  className="icon"
-                  onClick={() => onCommentDislike(comment._id)}
-                />
-                {comment.dislikes.length}
-              </span>
+              <span className="name">{comment.author.name}:  </span>
+              <span className="description">{comment.description}</span>
+              <div className="stats">
+                <span>
+                  <AiFillLike
+                    className="like"
+                    onClick={() => onCommentLike(comment._id)}
+                  />
+                  {comment.likes.length || 0}
+                </span>
+                <span>
+                  <AiFillDislike
+                    className="dislike"
+                    onClick={() => onCommentDislike(comment._id)}
+                  />
+                  {comment.dislikes.length || 0}
+                </span>
+              </div>
+              <FaTrashAlt
+                className="delete"
+                onClick={() => onCommentDelete(comment._id)}
+              />
             </div>
-            <FaTrashAlt
-              className="delete"
-              onClick={() => onCommentDelete(comment._id)}
-            />
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );

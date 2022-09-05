@@ -10,8 +10,10 @@ const PostSchema = new Schema(
     // ref search -> 'User'-model
     author: { type: mongoose.Schema.Types.ObjectId, ref: "User", autopopulate: true },
     description: { type: String },
-    likes: { type: Number, default: 0 },
-    dislikes: { type: Number, default: 0 },
+    likes:[{type: mongoose.Schema.Types.ObjectId, ref: "User"}],
+    dislikes: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}],
+    // likes: { type: Number, default: 0 },
+    // dislikes: { type: Number, default: 0 },
     // image: { type: String, default: "default-post.png" },
     image: { type: String },
   },

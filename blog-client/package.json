@@ -13,6 +13,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.4.0",
+    "react-moment": "^1.1.2",
     "react-router-dom": "^6.3.0",
     "sass": "^1.54.0"
   },
