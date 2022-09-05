@@ -6,7 +6,7 @@ import "../components/posts/Posts.scss";
 import { NavLink } from "react-router-dom";
 
 export const Posts = () => {
-  const { posts, setPosts, errors, setErrors } = useDataContext();
+  const {user, posts, setPosts, errors, setErrors } = useDataContext();
   const [search, setSearch] = useState("");
   const inputRef= useRef();
 

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { AiFillDislike, AiFillLike, AiFillDelete } from "react-icons/ai";
+import { AiFillDislike, AiFillLike } from "react-icons/ai";
+import { FaTrashAlt} from "react-icons/fa"
 import { FaEdit } from "react-icons/fa";
 import { MdCancel, MdSaveAlt } from "react-icons/md";
 import { useLocation, useParams } from "react-router-dom";
@@ -62,14 +63,15 @@ export const PostDetails = () => {
     refCommentNew.current.value = "";
   };
 
-  // LIKES
+  //! *****postComment-likes-dislikes*****
+
   const onCommentLike = async (commentId: string) => {
     if (!user || !post) return;
 
-    // 1. step => update s at API
+    // 1. step => update at API
     const commentUpdated = await updatePostCommentLikes(user.token, commentId);
 
-    // 2. step => update s in state
+    // 2. step => update in state
     const commentsUpdated = post.comments.map((comment) => {
       return comment._id === commentId ? commentUpdated : comment;
     });
@@ -78,7 +80,6 @@ export const PostDetails = () => {
     setPost({ ...post, comments: commentsUpdated });
   };
 
-  // DISLIKES
   const onCommentDislike = async (commentId: string) => {
     if (!user || !post) return;
 
@@ -95,7 +96,7 @@ export const PostDetails = () => {
     setPost({ ...post, comments: commentsUpdated });
   };
 
-  // update post
+  //! update post
   const onPostUpdate = async () => {
     // if neither title or description updated => return
     if (!user || !post || !refPostTitle.current || !refPostDescription.current)
@@ -214,7 +215,7 @@ export const PostDetails = () => {
                 {comment.dislikes.length}
               </span>
             </div>
-            <AiFillDelete
+            <FaTrashAlt
               className="delete"
               onClick={() => onCommentDelete(comment._id)}
             />

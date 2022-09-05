@@ -16,17 +16,6 @@ export const AddPost = () => {
   const refDescription = useRef();
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   if (!id) return;
-
-  //   const fetchUserData = async () => {
-  //     const userApi = await getUserOneApi(id);
-  //     console.log(userApi);
-  //     setNewPost(userApi);
-  //   };
-  //   fetchUserData();
-  // }, []);
-
   const onPostCreate = async (e) => {
     e.preventDefault();
     console.log("Creating new post...");
@@ -43,8 +32,9 @@ export const AddPost = () => {
     console.log(postNew);
     const newPostApi = await createPostApi(user.token, postNew);
     console.log(newPostApi);
-    let postsNew = [ ...posts, newPostApi ];
-    setPosts(postsNew);
+    // let postsNew = [ ...posts, newPostApi ];
+    // setPosts(postsNew);
+    setPosts([ ...posts, newPostApi ])
     navigate("/posts");
     refTitle.current.value = "";
     refDescription.current.value = "";

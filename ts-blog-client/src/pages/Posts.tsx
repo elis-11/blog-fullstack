@@ -17,12 +17,10 @@ export const Posts = () => {
       const result = await getPostsApi();
       console.log(result);
       
-
       // if error from backend (e.g. no valid token) => show the error in UI
       if (result.error) {
         return setErrors(result.error);
       }
-      
 
       // store received users in our central data state
       setErrors("");
