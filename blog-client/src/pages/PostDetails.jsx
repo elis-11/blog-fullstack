@@ -62,33 +62,33 @@ export const PostDetails = () => {
     if (!user || !post) return;
 
     // 1.step => update likes at API
-    const postUpdated = await updatePostLikes(user.token, postId);
-    console.log(postUpdated);
+    const postUpdatedLikes = await updatePostLikes(user.token, postId);
+    console.log(postUpdatedLikes);
     // 2.step => update likes in state
-    const postsUpdated = posts.map((post) => {
-      return post._id === postId ? [...post, ...postUpdated] : post;
+    const postsUpdatedLikes = posts.map((post) => {
+      return post._id === postId ? [...post, ...postUpdatedLikes] : post;
     });
     // overwrite posts in post array
-    setPosts(postsUpdated);
-    setPost({ ...post, ...postUpdated });
-    console.log(postsUpdated);
+    setPosts(postsUpdatedLikes);
+    setPost({ ...post, ...postUpdatedLikes });
+    console.log(postsUpdatedLikes);
   };
 
   const onPostDislike = async (postId) => {
     console.log(postId);
     if (!user || !post) return;
 
-    const postUpdated = await updatePostDislikes(user.token, postId);
-    console.log(postUpdated);
+    const postUpdatedDislikes = await updatePostDislikes(user.token, postId);
+    console.log(postUpdatedDislikes);
     const postsUpdated = posts.map((post) => {
-      return post._id === postId ? [...post, ...postUpdated] : post;
+      return post._id === postId ? [...post, ...postUpdatedDislikes] : post;
     });
     setPosts(postsUpdated);
-    setPost({ ...post, ...postUpdated });
+    setPost({ ...post, ...postUpdatedDislikes });
     console.log(postsUpdated);
   };
 
-  // create comment
+  //! create comment
   const onCommentCreate = async () => {
     console.log("Creating new comment...");
 
@@ -115,6 +115,7 @@ export const PostDetails = () => {
     refCommentNew.current.value = "";
   };
 
+  //! Delete comment
   const onCommentDelete = async (commentId) => {
     if (!user || !post) return;
 
@@ -225,13 +226,13 @@ export const PostDetails = () => {
         </div>
 
         <div className="comments">
-          {/* {post.comments?.map((comment) => ( */}
-          {([...post.comments] || []).reverse().map((comment) => (
+          {/* {([...post.comments] || []).reverse().map((comment) => ( */}
+          {post.comments?.map((comment) => (
             <div key={comment._id} className="comment">
               <span>
-                <img src={comment.author.avatar} className="avatar" />
+                <img src={comment.author?.avatar} className="avatar" />
               </span>
-              <span className="name">{comment.author.name}: </span>
+              <span className="name">{comment.author?.name}: </span>
               <span className="description">{comment.description}</span>
               <div className="stats">
                 <span>
