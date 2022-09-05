@@ -31,7 +31,9 @@ export const PostList = ({ posts }) => {
         <div key={post._id} className="post">
           <div className="item">
             <div>
+              <Link to={`/posts/${post._id}`} state={post}>
               <img src={post.image} />
+              </Link>
             </div>
             <div className="author">
               <img src={post.author.avatar} />

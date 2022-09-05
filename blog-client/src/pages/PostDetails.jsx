@@ -1,4 +1,4 @@
-import { useLocation, useParams } from "react-router-dom";
+import { NavLink, useLocation, useParams } from "react-router-dom";
 import { useDataContext } from "../context/DataProvider";
 import {
   createPostCommentApi,
@@ -14,6 +14,7 @@ import { AiFillDislike, AiFillLike } from "react-icons/ai";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import { useEffect, useRef, useState } from "react";
 import { MdSaveAlt } from "react-icons/md";
+import { BsSkipBackwardFill } from "react-icons/bs";
 
 export const PostDetails = () => {
   const { user, posts, setPosts } = useDataContext();
@@ -70,7 +71,7 @@ export const PostDetails = () => {
     });
     // overwrite posts in post array
     setPosts(postsUpdatedLikes);
-    setPost({ ...post, ...postUpdatedLikes });
+    setPost({  ...post, ...postUpdatedLikes });
     console.log(postsUpdatedLikes);
   };
 
@@ -81,10 +82,12 @@ export const PostDetails = () => {
     const postUpdatedDislikes = await updatePostDislikes(user.token, postId);
     console.log(postUpdatedDislikes);
     const postsUpdated = posts.map((post) => {
-      return post._id === postId ? [...post, ...postUpdatedDislikes] : post;
+      // return post._id === postId ? [...post, ...postUpdatedDislikes] : post;
+      return post._id === postId ? postUpdatedDislikes : post;
     });
     setPosts(postsUpdated);
-    setPost({ ...post, ...postUpdatedDislikes });
+    // setPost({ ...post, ...postUpdatedDislikes });
+    setPost(postUpdatedDislikes);
     console.log(postsUpdated);
   };
 
@@ -212,6 +215,9 @@ export const PostDetails = () => {
           </div>
           <FaEdit className="edit" onClick={() => setEditMode(!editMode)} />
           <MdSaveAlt className="save" onClick={submitUpdate} />
+          <NavLink to="/posts">
+            <BsSkipBackwardFill />
+          </NavLink>
         </div>
 
         {/* create new comment */}
@@ -226,8 +232,8 @@ export const PostDetails = () => {
         </div>
 
         <div className="comments">
-          {/* {([...post.comments] || []).reverse().map((comment) => ( */}
-          {post.comments?.map((comment) => (
+          {/* {post.comments?.map((comment) => ( */}
+          {([...post.comments] || []).reverse().map((comment) => (
             <div key={comment._id} className="comment">
               <span>
                 <img src={comment.author?.avatar} className="avatar" />

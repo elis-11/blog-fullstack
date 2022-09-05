@@ -143,6 +143,12 @@
           color: #fff;
         }
       }
+      a {
+      color: rgb(129, 126, 126);
+        &:hover {
+          color: #fff;
+        }
+      }
     }
 
     .edit-post {
