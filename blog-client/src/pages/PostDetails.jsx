@@ -69,20 +69,23 @@ export const PostDetails = () => {
       return post._id === postId ? [...post, ...postUpdated] : post;
     });
     // overwrite posts in post array
-    setPosts(postsUpdated)
-    setPost({...post, ...postUpdated}); 
+    setPosts(postsUpdated);
+    setPost({ ...post, ...postUpdated });
     console.log(postsUpdated);
   };
-  
+
   const onPostDislike = async (postId) => {
+    console.log(postId);
     if (!user || !post) return;
-    
+
     const postUpdated = await updatePostDislikes(user.token, postId);
+    console.log(postUpdated);
     const postsUpdated = posts.map((post) => {
-      return post._id === postId ? postUpdated : post;
+      return post._id === postId ? [...post, ...postUpdated] : post;
     });
-    setPost(postUpdated)
     setPosts(postsUpdated);
+    setPost({ ...post, ...postUpdated });
+    console.log(postsUpdated);
   };
 
   // create comment
@@ -184,7 +187,6 @@ export const PostDetails = () => {
               <img src={post.author?.avatar} className="avatar" />
               {post.author?.name}: {post.createdAt?.slice(0, 10)}
               {/* <Moment date={post.createdAt} format="HH:mm DD. MM. YYYY" />{" "} */}
-
             </div>
             <div className="title">{post.title}</div>
             <div>{post.description}</div>
@@ -193,15 +195,21 @@ export const PostDetails = () => {
         <div className="icons">
           <div className="likes">
             <span>
-              <AiFillLike className="like" onClick={() => onPostLike(post._id)} />
+              <AiFillLike
+                className="like"
+                onClick={() => onPostLike(post._id)}
+              />
               {post.likes?.length || 0}
             </span>
             <span>
-              <AiFillDislike className="dislike" onClick={() => onPostDislike(post._id)} />
+              <AiFillDislike
+                className="dislike"
+                onClick={() => onPostDislike(post._id)}
+              />
               {post.dislikes?.length || 0}
             </span>
           </div>
-            <FaEdit className="edit" onClick={() => setEditMode(!editMode)} />
+          <FaEdit className="edit" onClick={() => setEditMode(!editMode)} />
           <MdSaveAlt className="save" onClick={submitUpdate} />
         </div>
 
@@ -223,7 +231,7 @@ export const PostDetails = () => {
               <span>
                 <img src={comment.author.avatar} className="avatar" />
               </span>
-              <span className="name">{comment.author.name}:  </span>
+              <span className="name">{comment.author.name}: </span>
               <span className="description">{comment.description}</span>
               <div className="stats">
                 <span>
