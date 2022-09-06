@@ -5,6 +5,22 @@
   align-items: center;
   text-align: center;
   margin-top: 3rem;
+  .header {
+    a {
+      border-radius: 5px;
+      font-size: 0.7rem;
+      color: rgb(29, 27, 27);
+      background-color: #fff;
+      text-decoration: none;
+      padding: 0.7rem 1.3rem;
+      text-shadow: 1px 1px 2px black, 0 0 15px white, 0 0 15px white;
+      &:hover {
+        box-shadow: 1px 1px 2px white, 0 0 15px white, 0 0 15px white;
+        text-shadow: 1px 1px 2px black, 0 0 15px white, 0 0 15px white;
+      }
+    }
+  }
+
   .content {
     width: 80%;
     margin: auto;
@@ -137,6 +153,36 @@
         width: 4%;
         font-size: 1.2rem;
         flex-direction: right;
+      }
+    }
+  }
+}
+.Add {
+  .create {
+    img {
+      width: 25%;
+    }
+    input {
+      width: 25%;
+      height: 2.2rem;
+      margin: 0.5rem;
+      background-color: transparent;
+      padding-left: 1rem;
+    }
+    a,
+    button {
+      margin: 0.5em;
+      border: none;
+      border-radius: 5px;
+      font-size: 0.7rem;
+      color: rgb(29, 27, 27);
+      background-color: #fff;
+      text-decoration: none;
+      padding: 0.7rem 1.3rem;
+      text-shadow: 1px 1px 2px black, 0 0 15px white, 0 0 15px white;
+      &:hover {
+        box-shadow: 1px 1px 2px white, 0 0 15px white, 0 0 15px white;
+        text-shadow: 1px 1px 2px black, 0 0 15px white, 0 0 15px white;
       }
     }
   }

@@ -1,6 +1,6 @@
 import { ICommentCreate } from "../types/comment.types";
 import { UserCreate, UserUpdate } from "../types/user.types";
-import {IPostUpdate} from "../types/post.types"
+import {IPostUpdate, IPostCreate} from "../types/post.types"
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -82,8 +82,6 @@ export const deleteUserApi = async (token: string, userId: string) => {
 };
 
 // *******************POSTS**************
-
-
 // get all posts +
 export const getPostsApi = async () => {
   const response = await fetch(`${API_URL}/posts`);
@@ -95,6 +93,16 @@ export const getPostOneApi = async (postId: string) => {
   const response = await fetch(`${API_URL}/posts/${postId}`);
   return response.json();
 };
+
+// Create post
+export const createPostApi=async (token: string, postData: IPostCreate)=>{
+  const response = await fetch(`${API_URL}/posts`, {
+    method: 'POST',
+    headers: {"Content-Type": "application/json", Authorization: token},
+    body: JSON.stringify(postData),
+  })
+  return response.json();
+}
 
 // update post
 export const updatePostApi = async (token: string, postId: string, postData: IPostUpdate)=>{

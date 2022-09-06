@@ -10,6 +10,7 @@ import { Posts } from "./pages/Posts";
 import { PostDetails } from "./pages/PostDetails";
 import { NotFound } from "./pages/NotFound";
 import "./styles/App.scss";
+import { AddPost } from "./components/posts/AddPost";
 
 function App() {
   return (
@@ -24,13 +25,14 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route
-            path="/posts"
+            path="/posts/*"
             element={
               <ProtectedPage>
                 <Posts />
               </ProtectedPage>
             }
           />
+          <Route path="/addpost" element={<AddPost />} />
           <Route
             path="/posts/:id"
             element={
