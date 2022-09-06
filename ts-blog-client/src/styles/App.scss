@@ -39,28 +39,48 @@ footer {
 header {
   height: 20vh;
 }
-
-nav {
+.Navbar {
   display: flex;
-  justify-content: center;
-  gap: 30px;
-
-  img{
-    width: 2rem;
-    border-radius: 50%;
-    border: 1px solid #ccc;
-    padding-left: 0;
-  }
-
-  a {
-    text-transform: uppercase;
-    text-decoration: none;
-    font-size: 1.5rem;
+  justify-content: space-evenly;
+  place-items: center;
+  .logo {
+    font-size: 3rem;
     font-weight: bold;
-    color: #919394;
+    a {
+      text-decoration: none;
+      color: #fff;
+    }
   }
-  a.active {
-    color: #fff;
+
+  .nav {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+
+    img {
+      width: 2rem;
+      border-radius: 50%;
+      border: 1px solid #ccc;
+      padding-left: 0;
+    }
+    a {
+      text-transform: uppercase;
+      text-decoration: none;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #919394;
+    }
+    a.active {
+      color: #fff;
+    }
+  }
+  .avatar {
+    img {
+      width: 2.5rem;
+      border-radius: 50%;
+      border: 1px solid #ccc;
+      padding-left: 0;
+    }
   }
 }
 

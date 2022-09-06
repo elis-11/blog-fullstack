@@ -15,7 +15,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h2>Blog Fullstack TS</h2>
+        <h2>Blog Fullstack</h2>
         <Navbar />
       </header>
       <main>

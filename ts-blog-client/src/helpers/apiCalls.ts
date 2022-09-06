@@ -82,6 +82,8 @@ export const deleteUserApi = async (token: string, userId: string) => {
 };
 
 // *******************POSTS**************
+
+
 // get all posts +
 export const getPostsApi = async () => {
   const response = await fetch(`${API_URL}/posts`);
@@ -102,6 +104,15 @@ const response = await fetch(`${API_URL}/posts/${postId}`, {
   body: JSON.stringify(postData),
 })
 return response.json();
+}
+
+// delete Post
+export const deletePostApi= async (token: string, postId: string)=>{
+  const response = await fetch(`${API_URL}/posts/${postId}`, {
+    method: 'DELETE',
+    headers: {Authorization: token}
+  })
+  return response.json();
 }
 
 // *******************COMMENTS**************

@@ -16,7 +16,9 @@ export const Navbar = () => {
   };
 
   return (
-    <nav>
+    <div className="Navbar">
+      <div className="logo">{user && <NavLink to="/">TS</NavLink>}</div>
+    <div className="nav">
       <NavLink to="/">Home</NavLink>
       {!user && <NavLink to="/login">Login</NavLink>}
       {!user && <NavLink to="/signup">Signup</NavLink>}
@@ -28,11 +30,14 @@ export const Navbar = () => {
           <MdLogout />
         </NavLink>
       )}
+    </div>
+  <div className="avatar">
       {user && (
         <NavLink to="/">
           <img src={user.avatar} />
         </NavLink>
       )}
-    </nav>
+    </div>
+    </div>
   );
 };
