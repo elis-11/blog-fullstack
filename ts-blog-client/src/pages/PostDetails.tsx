@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { AiFillDislike, AiFillLike } from "react-icons/ai";
-import { FaTrashAlt} from "react-icons/fa"
+import { FaTrashAlt } from "react-icons/fa";
 import { FaEdit } from "react-icons/fa";
 import { MdCancel, MdSaveAlt } from "react-icons/md";
 import { useLocation, useParams } from "react-router-dom";
+import { ImagePicker } from "../components/ImagePicker";
 import { useDataContext } from "../context/DataProvider"; // --- version 1
 import {
   createPostCommentApi,
@@ -20,6 +21,7 @@ export const PostDetails = () => {
   const { user, posts, setPosts } = useDataContext();
   const [editMode, setEditMode] = useState(false);
   const [post, setPost] = useState<IPostDetails>();
+  const [image, setImage] = useState<string>();
 
   const { id } = useParams();
 
@@ -32,9 +34,10 @@ export const PostDetails = () => {
     if (!id) return;
 
     const fetchPostData = async () => {
-      const postApi = await getPostOneApi(id);
+      const postApi: IPostDetails = await getPostOneApi(id);
       console.log(postApi.comments);
       setPost(postApi);
+      setImage(postApi.image); // change image
     };
     fetchPostData();
   }, []);
@@ -108,6 +111,9 @@ export const PostDetails = () => {
       description: refPostDescription.current.value,
     };
 
+    // image update => if user picked a new image => place it inside update
+    if (image) postUpdate.image = image
+
     // send update data to API (backend)
     const postUpdated = await updatePostApi(user.token, post._id, postUpdate);
     console.log(postUpdated);
@@ -146,7 +152,9 @@ export const PostDetails = () => {
     <div className="Details">
       <div className="post-details">
         <div>
-          <img src={post.image} />
+          {/* <img src={post.image} /> */}
+          {/* {image && <ImagePicker image={image} setImage={setImage} style={{ width:"300px"}} />} */}
+          {image && <ImagePicker image={image} setImage={setImage} className="post-image" />}
         </div>
 
         {editMode ? (

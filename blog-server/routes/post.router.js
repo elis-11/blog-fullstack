@@ -71,19 +71,21 @@ postRouter.get("/:id", async (req, res, next) => {
 // create new post +
 postRouter.post("/", auth, async (req, res, next) => {
   const postData = req.body;
-  const postImageString = postData.image;
+  // const postImageString = postData.image;
   // console.log(postImageString);
 
   try {
+    // store new post in database
     const post = await Post.create(postData);
     // await post.populate("author");
 
-    if (!postImageString) return;
+    if (!post.image) return;
 
     // upload image to cloudinary
-    const resCloudinary = await cloudinary.uploader.upload(postImageString);
-    console.log(resCloudinary);
+    const resCloudinary = await cloudinary.uploader.upload(post.image);
+    // console.log(resCloudinary);
 
+    // store resaved URL of image in database => user => avatar
     const imageUrlCloudinary = resCloudinary.secure_url;
     const postUpdated = await Post.findByIdAndUpdate(
       post._id,
@@ -99,17 +101,45 @@ postRouter.post("/", auth, async (req, res, next) => {
 
 //******************************* */
 
-// update post +
+// update post without change image +
+// Route: /post/:id
+// postRouter.patch("/:id", auth, async (req, res, next) => {
+//   const postUpdateData = req.body;
+//   const postId = req.params.id;
+
+//   try {
+//     const postUpdated = await Post.findByIdAndUpdate(postId, postUpdateData, {
+//       new: true,
+//     }); //  .populate("author");
+//     res.json(postUpdated);
+//   } catch (err) {
+//     next(err);
+//   }
+// });
+
+// update post with change image +
 // Route: /post/:id
 postRouter.patch("/:id", auth, async (req, res, next) => {
   const postUpdateData = req.body;
   const postId = req.params.id;
 
+  // update post in database
   try {
-    const postUpdated = await Post.findByIdAndUpdate(postId, postUpdateData, {
-      new: true,
-    }); //  .populate("author");
+    const postUpdated = await Post.findByIdAndUpdate(postId, postUpdateData, {new: true}); 
     res.json(postUpdated);
+
+    // has user uploaded an image? if not => skip cloudinary upload
+    if (!postUpdateData.image) return;
+
+    // upload image to cloudinary
+    const resCloudinary = await cloudinary.uploader.upload(postUpdateData.image);
+
+    const avatarUrlCloudinary = resCloudinary.secure_url;
+    await Post.findByIdAndUpdate(
+      postUpdated._id,
+      { image: avatarUrlCloudinary },
+      { new: true }
+    );
   } catch (err) {
     next(err);
   }

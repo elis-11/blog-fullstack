@@ -23,8 +23,22 @@ function App() {
           <Route index element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/posts" element={<Posts />} />
-          <Route path="/posts/:id" element={<PostDetails />} />
+          <Route
+            path="/posts"
+            element={
+              <ProtectedPage>
+                <Posts />
+              </ProtectedPage>
+            }
+          />
+          <Route
+            path="/posts/:id"
+            element={
+              <ProtectedPage>
+                <PostDetails />
+              </ProtectedPage>
+            }
+          />
           <Route
             path="/dashboard"
             element={
