@@ -3,9 +3,10 @@ import { AiFillDislike, AiFillLike } from "react-icons/ai";
 import { FaTrashAlt } from "react-icons/fa";
 import { FaEdit } from "react-icons/fa";
 import { MdCancel, MdSaveAlt } from "react-icons/md";
-import { useLocation, useParams } from "react-router-dom";
+import { NavLink, useLocation, useParams } from "react-router-dom";
 import { ImagePicker } from "../components/ImagePicker";
 import { useDataContext } from "../context/DataProvider"; // --- version 1
+import { BsSkipBackwardFill } from "react-icons/bs";
 import {
   createPostCommentApi,
   deletePostCommentApi,
@@ -112,7 +113,7 @@ export const PostDetails = () => {
     };
 
     // image update => if user picked a new image => place it inside update
-    if (image) postUpdate.image = image
+    if (image) postUpdate.image = image;
 
     // send update data to API (backend)
     const postUpdated = await updatePostApi(user.token, post._id, postUpdate);
@@ -154,7 +155,13 @@ export const PostDetails = () => {
         <div>
           {/* <img src={post.image} /> */}
           {/* {image && <ImagePicker image={image} setImage={setImage} style={{ width:"300px"}} />} */}
-          {image && <ImagePicker image={image} setImage={setImage} className="post-image" />}
+          {image && (
+            <ImagePicker
+              image={image}
+              setImage={setImage}
+              className="post-image"
+            />
+          )}
         </div>
 
         {editMode ? (
@@ -185,9 +192,12 @@ export const PostDetails = () => {
             <div>{post.description}</div>
           </>
         )}
+      <div className="post-icons">
+        <FaEdit className="edit" onClick={() => setEditMode(!editMode)} />
+        <NavLink to="/posts">
+          <BsSkipBackwardFill />
+        </NavLink>
       </div>
-      <div className="post-edit">
-        <FaEdit onClick={() => setEditMode(!editMode)} />
       </div>
 
       {/* create new comment */}

@@ -104,19 +104,32 @@
       background-color: transparent;
       padding: 1rem;
     }
-    .edit-icons {
+    .post-icons {
       display: flex;
-      .edit-icon {
-        margin: 1em;
+      justify-content: space-evenly;   
+      padding: 1rem;   
+      .edit {
+        // margin: 1em;
+        &:hover {
+          color: #fff;
+        }
+      }
+      a {
+        color: grey;
+        margin-left: 1rem;
+        &:hover {
+          color: #fff;
+        }
       }
     }
-  }
   .title {
     padding: 1em;
   }
   .author {
     padding: 1em;
   }
+}
+
   .add-comment {
     input {
       width: 60%;
