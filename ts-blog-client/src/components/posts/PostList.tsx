@@ -2,9 +2,14 @@ import { FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useDataContext } from "../../context/DataProvider";
 import { deletePostApi } from "../../helpers/apiCalls";
+import { IPost } from "../../types/post.types";
 
-export const PostList = () => {
-  const { user, posts, setPosts } = useDataContext();
+type Props = {
+  posts: IPost[]
+}
+
+export const PostList = ({posts}: Props) => {
+  const { user, setPosts } = useDataContext();
 
   const onPostDelete = async (postId: string) => {
     if (!user) return;

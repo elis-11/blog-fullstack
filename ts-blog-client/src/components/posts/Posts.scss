@@ -21,6 +21,16 @@
     }
   }
 
+  .search {
+    input {
+      width: 50%;
+      height: 2.3rem;
+      margin-top: 2rem;
+      padding-left: 1rem;
+      border: 2px solid #ccc;
+      background-color: transparent;
+    }
+  }
   .content {
     width: 80%;
     margin: auto;
