@@ -13,13 +13,16 @@ import {
 import { AiFillDislike, AiFillLike } from "react-icons/ai";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import { useEffect, useRef, useState } from "react";
-import { MdSaveAlt } from "react-icons/md";
+import { MdCancel, MdSaveAlt } from "react-icons/md";
 import { BsSkipBackwardFill } from "react-icons/bs";
+import { ImagePicker } from "../components/ImagePicker";
 
 export const PostDetails = () => {
   const { user, posts, setPosts } = useDataContext();
   const [editMode, setEditMode] = useState(false);
   const [post, setPost] = useState();
+  const [image, setImage] = useState();
+  const [postOriginal, setPostOriginal] = useState();
 
   const { id } = useParams();
 
@@ -32,6 +35,8 @@ export const PostDetails = () => {
       const postApi = await getPostOneApi(id);
       console.log(postApi.comments);
       setPost(postApi);
+      setPostOriginal(postApi);
+      setImage(postApi.image);
     };
     fetchPostData();
   }, []);
@@ -42,7 +47,13 @@ export const PostDetails = () => {
 
     // create Copy before state update & update in one step
     const postUpdated = { ...post, [e.target.name]: e.target.value };
+    if (image) postUpdated.image = image; //!update image
     setPost(postUpdated);
+  };
+
+  const onEditCancel = () => {
+    setEditMode(false);
+    setPost({...postOriginal})
   };
   const submitUpdate = async () => {
     // send updated post (not saved yet) => to API
@@ -56,6 +67,7 @@ export const PostDetails = () => {
     });
     setPosts(postsCopy);
   };
+  // console.log(onPostUpdate);
 
   //! *****post-likes-dislikes*****
   const onPostLike = async (postId) => {
@@ -67,11 +79,11 @@ export const PostDetails = () => {
     console.log(postUpdatedLikes);
     // 2.step => update likes in state
     const postsUpdatedLikes = posts.map((post) => {
-      return post._id === postId ? [...post, ...postUpdatedLikes] : post;
+      return post._id === postId ? {...post, ...postUpdatedLikes} : post;
     });
     // overwrite posts in post array
     setPosts(postsUpdatedLikes);
-    setPost({  ...post, ...postUpdatedLikes });
+    setPost({ ...post, ...postUpdatedLikes });
     console.log(postsUpdatedLikes);
   };
 
@@ -83,11 +95,11 @@ export const PostDetails = () => {
     console.log(postUpdatedDislikes);
     const postsUpdated = posts.map((post) => {
       // return post._id === postId ? [...post, ...postUpdatedDislikes] : post;
-      return post._id === postId ? postUpdatedDislikes : post;
+      return post._id === postId ? {...post, ...postUpdatedDislikes} : post;
+      // return post._id === postId ? postUpdatedDislikes : post;
     });
     setPosts(postsUpdated);
-    // setPost({ ...post, ...postUpdatedDislikes });
-    setPost(postUpdatedDislikes);
+    setPost({ ...post, ...postUpdatedDislikes });
     console.log(postsUpdated);
   };
 
@@ -171,23 +183,43 @@ export const PostDetails = () => {
   return (
     <div className="Details">
       <div className="detail">
-        <div>
-          <img src={post.image} />
-        </div>
         {/* //! Update-Post-version-State */}
         {editMode ? (
-          <div className="edit-post">
-            <input name="title" value={post.title} onChange={onPostUpdate} />
-            <textarea
-              name="description"
-              value={post.description}
-              onChange={onPostUpdate}
-            />
-            {/* <MdSaveAlt className="save" onClick={() => setEditMode(!editMode)} /> */}
+          <div className="post-edit">
+            <div>
+              {/* <img src={post.image} /> */}
+              {image && (
+                <ImagePicker
+                  image={image}
+                  setImage={setImage}
+                  className="post-image"
+                />
+              )}
+            </div>
+            <>
+              <input name="title" value={post.title} onChange={onPostUpdate} />
+              <textarea
+                name="description"
+                value={post.description}
+                onChange={onPostUpdate}
+              ></textarea>
+              <div className="edit-icons">
+                {/* <MdSaveAlt className="save" onClick={() => setEditMode(!editMode)} /> */}
+                <MdSaveAlt className="save" onClick={submitUpdate} />
+                <MdCancel
+                  className="cancel"
+                  onClick={onEditCancel}
+                  // onClick={() => setEditMode(false)}
+                />
+              </div>
+            </>
           </div>
         ) : (
           <>
             <div className="author">
+              <div>
+                <img src={post.image} />
+              </div>
               <img src={post.author?.avatar} className="avatar" />
               {post.author?.name}: {post.createdAt?.slice(0, 10)}
               {/* <Moment date={post.createdAt} format="HH:mm DD. MM. YYYY" />{" "} */}
@@ -214,7 +246,7 @@ export const PostDetails = () => {
             </span>
           </div>
           <FaEdit className="edit" onClick={() => setEditMode(!editMode)} />
-          <MdSaveAlt className="save" onClick={submitUpdate} />
+          {/* <MdSaveAlt className="save" onClick={submitUpdate} /> */}
           <NavLink to="/posts">
             <BsSkipBackwardFill />
           </NavLink>
