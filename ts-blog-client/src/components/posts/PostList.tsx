@@ -26,7 +26,8 @@ export const PostList = ({posts}: Props) => {
 
   return (
     <div className="content">
-      {posts.map((post) => (
+      {/* {posts.map((post) => ( */}
+      {([...posts] || []).reverse().map((post) => (
         <div key={post._id} className="post">
           <div>
             <Link to={`/posts/${post._id}`} state={post}>

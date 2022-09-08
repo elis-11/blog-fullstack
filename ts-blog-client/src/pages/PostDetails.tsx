@@ -11,9 +11,11 @@ import {
   createPostCommentApi,
   deletePostCommentApi,
   getPostOneApi,
-  updatePostApi,
   updatePostCommentDislikes,
+  updatePostApi,
   updatePostCommentLikes,
+  updatePostLikes,
+  updatePostDislikes,
 } from "../helpers/apiCalls";
 import { ICommentCreate } from "../types/comment.types";
 import { IPost, IPostDetails, IPostUpdate } from "../types/post.types";
@@ -43,6 +45,69 @@ export const PostDetails = () => {
     fetchPostData();
   }, []);
 
+    //! update post
+    const onPostUpdate = async () => {
+      // if neither title or description updated => return
+      if (!user || !post || !refPostTitle.current || !refPostDescription.current)
+        return;
+  
+      // update object for sending to API
+      const postUpdate: IPostUpdate = {
+        title: refPostTitle.current.value,
+        description: refPostDescription.current.value,
+      };
+  
+      // image update => if user picked a new image => place it inside update
+      if (image) postUpdate.image = image;
+  
+      // send update data to API (backend)
+      const postUpdated = await updatePostApi(user.token, post._id, postUpdate);
+      console.log(postUpdated);
+  
+      // update post in list of posts using map!
+      const postsUpdated = posts.map((_post) => {
+        return _post._id === post._id ? postUpdated : _post;
+      });
+      setPosts(postsUpdated); // put copy in to state => overwrite posts
+      setPost(postUpdated); // update post in current page
+      setEditMode(false); //
+    };
+  
+    //! ***post-liles/dislikes***
+    const onPostLike = async (postId: string) => {
+      console.log(postId);
+      if (!user || !post) return;
+  
+      // 1.step => update likes at API
+      const postUpdatedLikes = await updatePostLikes(user.token, postId);
+      console.log(postUpdatedLikes);
+      // 2.step => update likes in state
+      const postsUpdatedLikes = posts.map((post) => {
+        return post._id === postId ? {...post, ...postUpdatedLikes} : post;
+      });
+      // overwrite post in post array
+      setPosts(postsUpdatedLikes);
+      setPost({ ...post, ...postUpdatedLikes });
+      console.log(postsUpdatedLikes);
+    };
+    
+    const onPostDislike= async (postId:string) => {
+      console.log(postId);
+      if(!user || !post) return;
+  
+      const postUpdatedDislikes= await updatePostDislikes(user.token, postId);
+      console.log(postUpdatedDislikes);
+  
+      const postsUpdatedDislikes=posts.map(post => {
+        return post._id === postId ? {...post, ...postUpdatedDislikes} : post
+      })
+  setPosts(postsUpdatedDislikes)    
+  setPost({...post, ...postUpdatedDislikes})
+      console.log(postsUpdatedDislikes);
+      
+    }  
+
+    //! comment-create
   const onCommentCreate = async () => {
     console.log("Creating new comment...");
 
@@ -100,34 +165,6 @@ export const PostDetails = () => {
     setPost({ ...post, comments: commentsUpdated });
   };
 
-  //! update post
-  const onPostUpdate = async () => {
-    // if neither title or description updated => return
-    if (!user || !post || !refPostTitle.current || !refPostDescription.current)
-      return;
-
-    // update object for sending to API
-    const postUpdate: IPostUpdate = {
-      title: refPostTitle.current.value,
-      description: refPostDescription.current.value,
-    };
-
-    // image update => if user picked a new image => place it inside update
-    if (image) postUpdate.image = image;
-
-    // send update data to API (backend)
-    const postUpdated = await updatePostApi(user.token, post._id, postUpdate);
-    console.log(postUpdated);
-
-    // update post in list of posts using map!
-    const postsUpdated = posts.map((_post) => {
-      return _post._id === post._id ? postUpdated : _post;
-    });
-    setPosts(postsUpdated); // put copy in to state => overwrite posts
-    setPost(postUpdated); // update post in current page
-    setEditMode(false); //
-  };
-
   // delete comment
   const onCommentDelete = async (commentId: string) => {
     if (!user || !post) return;
@@ -154,7 +191,6 @@ export const PostDetails = () => {
       <div className="post-details">
         <div>
           {/* <img src={post.image} /> */}
-          {/* {image && <ImagePicker image={image} setImage={setImage} style={{ width:"300px"}} />} */}
           {image && (
             <ImagePicker
               image={image}
@@ -166,20 +202,17 @@ export const PostDetails = () => {
 
         {editMode ? (
           // show edit files
-          <>
+          <div className="post-edit">
             <input defaultValue={post.title} type="text" ref={refPostTitle} />
             <textarea
               defaultValue={post.description}
               ref={refPostDescription}
             ></textarea>
             <div className="edit-icons">
-              <MdCancel
-                className="edit-icon"
-                onClick={() => setEditMode(false)}
-              />
-              <MdSaveAlt className="edit-icon" onClick={onPostUpdate} />
+              <MdSaveAlt className="save" onClick={onPostUpdate} />
+              <MdCancel className="cancel" onClick={() => setEditMode(false)} />
             </div>
-          </>
+          </div>
         ) : (
           // show readonly post info
           <>
@@ -192,12 +225,26 @@ export const PostDetails = () => {
             <div>{post.description}</div>
           </>
         )}
-      <div className="post-icons">
-        <FaEdit className="edit" onClick={() => setEditMode(!editMode)} />
-        <NavLink to="/posts">
-          <BsSkipBackwardFill />
-        </NavLink>
-      </div>
+        <div className="post-icons">
+          <div className="likes">
+            <span>
+              <AiFillLike
+                className="like"
+                onClick={() => onPostLike(post._id)}
+              /> {post.likes?.length || 0}
+            </span>
+            <span>
+              <AiFillDislike
+                className="dislike"
+                onClick={() => onPostDislike(post._id)}
+              /> {post.dislikes?.length || 0}
+            </span>
+          </div>
+          <FaEdit className="edit" onClick={() => setEditMode(!editMode)} />
+          <NavLink to="/posts">
+            <BsSkipBackwardFill />
+          </NavLink>
+        </div>
       </div>
 
       {/* create new comment */}

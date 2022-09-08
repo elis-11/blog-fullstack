@@ -114,6 +114,23 @@ const response = await fetch(`${API_URL}/posts/${postId}`, {
 return response.json();
 }
 
+// post-likes
+export const updatePostLikes = async (token: string, postId: string) => {
+  const response = await fetch(`${API_URL}/posts/${postId}/update_likes`, {
+    method: 'PATCH',
+    headers: { Authorization: token}
+  })
+  return response.json();
+}
+// post-dislikes
+export const updatePostDislikes = async (token: string, postId: string) => {
+  const response = await fetch(`${API_URL}/posts/${postId}/update_dislikes`, {
+    method: 'PATCH',
+    headers: { Authorization: token}
+  })
+  return response.json();
+}
+
 // delete Post
 export const deletePostApi= async (token: string, postId: string)=>{
   const response = await fetch(`${API_URL}/posts/${postId}`, {

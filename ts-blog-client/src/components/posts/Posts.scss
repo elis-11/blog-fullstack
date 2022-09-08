@@ -84,6 +84,7 @@
 .Details {
   color: grey;
   margin-top: 3rem;
+  width: 100%;
   .post-details {
     display: flex;
     flex-direction: column;
@@ -91,23 +92,56 @@
     .post-image {
       width: 12rem;
     }
-    input {
-      width: 40%;
-      height: 2rem;
-      background-color: transparent;
-      padding: 1rem;
+    .post-edit {
+      input {
+        width: 30rem;
+        height: 2rem;
+        // border: 1px solid red;
+        background-color: transparent;
+        padding: 1rem;
+      }
+      textarea {
+        display: block;
+        width: 30rem;
+        height: 4rem;
+        background-color: transparent;
+        padding: 1rem;
+      }
+      .edit-icons {
+        display: flex;
+        justify-content: center;
+        padding: 1rem;
+        .save {
+          &:hover {
+            color: #fff;
+          }
+        }
+        .cancel {
+          margin-left: 15px;
+          &:hover {
+            color: #fff;
+          }
+        }
+      }
     }
-    textarea {
-      display: block;
-      width: 40%;
-      height: 4rem;
-      background-color: transparent;
-      padding: 1rem;
-    }
+
     .post-icons {
       display: flex;
-      justify-content: space-evenly;   
-      padding: 1rem;   
+      justify-content: space-evenly;
+      padding: 1rem;
+      .likes {
+        margin-right: 3rem;
+        .like {
+          &:hover {
+            color: #fff;
+          }
+        }
+        .dislike {
+          &:hover {
+            color: #fff;
+          }
+        }
+      }
       .edit {
         // margin: 1em;
         &:hover {
@@ -116,19 +150,19 @@
       }
       a {
         color: grey;
-        margin-left: 1rem;
+        margin-left: 3rem;
         &:hover {
           color: #fff;
         }
       }
     }
-  .title {
-    padding: 1em;
+    .title {
+      padding: 1em;
+    }
+    .author {
+      padding: 1em;
+    }
   }
-  .author {
-    padding: 1em;
-  }
-}
 
   .add-comment {
     input {
