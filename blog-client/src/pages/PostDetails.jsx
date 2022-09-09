@@ -22,7 +22,7 @@ export const PostDetails = () => {
   const [editMode, setEditMode] = useState(false);
   const [post, setPost] = useState();
   const [image, setImage] = useState();
-  const [postOriginal, setPostOriginal] = useState();
+  const [postOriginal, setPostOriginal] = useState();  // Cancel
 
   const { id } = useParams();
 
@@ -35,7 +35,7 @@ export const PostDetails = () => {
       const postApi = await getPostOneApi(id);
       console.log(postApi.comments);
       setPost(postApi);
-      setPostOriginal(postApi);
+      setPostOriginal(postApi);    // Cancel
       setImage(postApi.image);
     };
     fetchPostData();
@@ -51,10 +51,11 @@ export const PostDetails = () => {
     setPost(postUpdated);
   };
 
-  const onEditCancel = () => {
+  const onEditCancel = () => {     // Cancel
     setEditMode(false);
     setPost({...postOriginal})
   };
+  
   const submitUpdate = async () => {
     // send updated post (not saved yet) => to API
     const postUpdatedApi = await updatePostApi(user.token, post._id, post);
@@ -183,9 +184,6 @@ export const PostDetails = () => {
   return (
     <div className="Details">
       <div className="detail">
-        {/* //! Update-Post-version-State */}
-        {editMode ? (
-          <div className="post-edit">
             <div>
               {/* <img src={post.image} /> */}
               {image && (
@@ -196,7 +194,9 @@ export const PostDetails = () => {
                 />
               )}
             </div>
-            <>
+        {/* //! Update-Post-version-State */}
+        {editMode ? (
+          <div className="post-edit">
               <input name="title" value={post.title} onChange={onPostUpdate} />
               <textarea
                 name="description"
@@ -212,14 +212,10 @@ export const PostDetails = () => {
                   // onClick={() => setEditMode(false)}
                 />
               </div>
-            </>
           </div>
         ) : (
           <>
             <div className="author">
-              <div>
-                <img src={post.image} />
-              </div>
               <img src={post.author?.avatar} className="avatar" />
               {post.author?.name}: {post.createdAt?.slice(0, 10)}
               {/* <Moment date={post.createdAt} format="HH:mm DD. MM. YYYY" />{" "} */}
