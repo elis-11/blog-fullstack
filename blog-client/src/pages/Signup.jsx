@@ -22,14 +22,14 @@ export const Signup = () => {
     const name = refName.current.value;
     const email = refEmail.current.value;
     const password = refPassword.current.value;
-    const avatar= avatarPreview
+    const avatar = avatarPreview;
 
     if (!name || !email || !password) {
       return setErrors("Something went wrong! Try again!");
     }
 
     // const result = await signupApi(name, email, password); // without AVATAR
-    const result = await signupApi(name, email, password, avatar); // with AVATAR
+    const result = await signupApi({ name, email, password, avatar }); // with AVATAR
     console.log(result);
 
     if (result.error) {

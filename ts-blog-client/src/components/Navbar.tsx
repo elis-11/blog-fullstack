@@ -18,26 +18,26 @@ export const Navbar = () => {
   return (
     <div className="Navbar">
       <div className="logo">{user && <NavLink to="/">TS</NavLink>}</div>
-    <div className="nav">
-      <NavLink to="/">Home</NavLink>
-      {!user && <NavLink to="/login">Login</NavLink>}
-      {!user && <NavLink to="/signup">Signup</NavLink>}
-      {user && <NavLink to="/dashboard">Dashboard</NavLink>}
-      <NavLink to="/posts">Posts</NavLink>
-      {user?.role === "admin" && <NavLink to="/admin">Admin</NavLink>}
-      {user && (
-        <NavLink to="#" onClick={logout}>
-          <MdLogout />
-        </NavLink>
-      )}
-    </div>
-  <div className="avatar">
-      {user && (
-        <NavLink to="/">
-          <img src={user.avatar} />
-        </NavLink>
-      )}
-    </div>
+      <div className="nav">
+        <NavLink to="/">Home</NavLink>
+        {!user && <NavLink to="/login">Login</NavLink>}
+        {!user && <NavLink to="/signup">Signup</NavLink>}
+        {user && <NavLink to="/dashboard">Dashboard</NavLink>}
+        <NavLink to="/posts">Posts</NavLink>
+        {user?.role === "admin" && <NavLink to="/admin">Admin</NavLink>}
+        {user && (
+          <NavLink to="#" onClick={logout}>
+            <MdLogout />
+          </NavLink>
+        )}
+      </div>
+      <div className="avatar">
+        {user && (
+          <NavLink to="/">
+            <img src={user.avatar} />
+          </NavLink>
+        )}
+      </div>
     </div>
   );
 };

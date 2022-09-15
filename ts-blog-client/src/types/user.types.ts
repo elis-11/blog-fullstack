@@ -1,5 +1,14 @@
 import {IPost} from "./post.types"
 
+export interface User {
+  _id: string,
+  name: string,
+  email: string,
+  avatar?: string
+  role: string,
+  token: string, 
+}
+
 export interface UserCreate {
   name: string;
   email: string
@@ -15,15 +24,6 @@ export interface UserUpdate {
   password?: string
   avatar?: string
   role?: string
-}
-
-export interface User {
-  _id: string,
-  name: string,
-  email: string,
-  avatar?: string
-  role: string,
-  token: string, 
 }
 
 export type ContextData = {

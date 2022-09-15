@@ -1,20 +1,6 @@
 import { IComment } from "./comment.types";
 import { User } from "./user.types";
 
-export interface IPostCreate {
-  title: string;
-  author: string;
-  // author: User;
-  description?: string;
-  image?: string;
-}
-
-export interface IPostUpdate {
-  title?: string;
-  description?: string;
-  image?: string;
-}
-
 export interface IPost {
   _id: string;
   title: string;
@@ -27,6 +13,20 @@ export interface IPost {
   image?: string;
   createdAt: string;
   updatedAt: string;
+}
+
+export interface IPostCreate {
+  title: string;
+  author: string;
+  // author: User;
+  description?: string;
+  image?: string;
+}
+
+export interface IPostUpdate {
+  title?: string;
+  description?: string;
+  image?: string;
 }
 
 export interface IPostDetails extends IPost {
