@@ -11,6 +11,7 @@ type Props = {
 export const PostList = ({posts}: Props) => {
   const { user, setPosts } = useDataContext();
 
+  //! delete post
   const onPostDelete = async (postId: string) => {
     if (!user) return;
 

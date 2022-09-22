@@ -117,7 +117,7 @@ postRouter.post("/", auth, async (req, res, next) => {
 //   }
 // });
 
-// update post with change image +
+// update post + change image 
 // Route: /post/:id
 postRouter.patch("/:id", auth, async (req, res, next) => {
   const postUpdateData = req.body;

@@ -1,6 +1,6 @@
 import { ICommentCreate } from "../types/comment.types";
 import { UserCreate, UserUpdate } from "../types/user.types";
-import {IPostUpdate, IPostCreate} from "../types/post.types"
+import { IPostUpdate, IPostCreate } from "../types/post.types";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -95,50 +95,54 @@ export const getPostOneApi = async (postId: string) => {
 };
 
 // Create post
-export const createPostApi=async (token: string, postData: IPostCreate)=>{
+export const createPostApi = async (token: string, postData: IPostCreate) => {
   const response = await fetch(`${API_URL}/posts`, {
-    method: 'POST',
-    headers: {"Content-Type": "application/json", Authorization: token},
+    method: "POST",
+    headers: { "Content-Type": "application/json", Authorization: token },
     body: JSON.stringify(postData),
-  })
+  });
   return response.json();
-}
+};
 
 // update post
-export const updatePostApi = async (token: string, postId: string, postData: IPostUpdate)=>{
-const response = await fetch(`${API_URL}/posts/${postId}`, {
-  method: 'PATCH',
-  headers: { 'Content-Type': 'application/json', Authorization: token},
-  body: JSON.stringify(postData),
-})
-return response.json();
-}
+export const updatePostApi = async (
+  token: string,
+  postId: string,
+  postData: IPostUpdate
+) => {
+  const response = await fetch(`${API_URL}/posts/${postId}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json", Authorization: token },
+    body: JSON.stringify(postData),
+  });
+  return response.json();
+};
 
 // post-likes
 export const updatePostLikes = async (token: string, postId: string) => {
   const response = await fetch(`${API_URL}/posts/${postId}/update_likes`, {
-    method: 'PATCH',
-    headers: { Authorization: token}
-  })
+    method: "PATCH",
+    headers: { Authorization: token },
+  });
   return response.json();
-}
+};
 // post-dislikes
 export const updatePostDislikes = async (token: string, postId: string) => {
   const response = await fetch(`${API_URL}/posts/${postId}/update_dislikes`, {
-    method: 'PATCH',
-    headers: { Authorization: token}
-  })
+    method: "PATCH",
+    headers: { Authorization: token },
+  });
   return response.json();
-}
+};
 
 // delete Post
-export const deletePostApi= async (token: string, postId: string)=>{
+export const deletePostApi = async (token: string, postId: string) => {
   const response = await fetch(`${API_URL}/posts/${postId}`, {
-    method: 'DELETE',
-    headers: {Authorization: token}
-  })
+    method: "DELETE",
+    headers: { Authorization: token },
+  });
   return response.json();
-}
+};
 
 // *******************COMMENTS**************
 // Create Comment +
