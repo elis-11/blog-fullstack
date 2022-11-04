@@ -46,7 +46,7 @@ export const Login = () => {
             type="text"
             ref={refEmail}
             placeholder="Email"
-            defaultValue={"artur@gmail.com"}
+            defaultValue={"albert@gmail.com"}
           />
         </div>
         <div>
@@ -54,7 +54,7 @@ export const Login = () => {
             type="password"
             ref={refPassword}
             placeholder="Password"
-            defaultValue={"artur"}
+            defaultValue={"albert"}
 
           />
         </div>
