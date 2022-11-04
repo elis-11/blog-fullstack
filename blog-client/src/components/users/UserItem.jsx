@@ -47,7 +47,6 @@ export const UserItem = ({ user }) => {
 
   return (
     <div className="user" key={user._id}>
-
       {editMode ? (
         <div className="edit">
           <div className="avatar">

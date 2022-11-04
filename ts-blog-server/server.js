@@ -22,7 +22,8 @@ app.use(
     //credentials: true, // accept incoming cookies
   )
 ); // this is enough setup for token exchange
-app.use(express.json({ limit: "300KB" })); // JSON Parser => req.body
+app.use(express.json({ limit: "1MB" })); // JSON Parser => req.body
+// app.use(express.json({ limit: "300KB" })); // JSON Parser => req.body
 // app.use(express.json({ limit: config.UPLOAD_LIMIT })); // JSON Parser => req.body
 
 app.get("/", (req, res) => {
