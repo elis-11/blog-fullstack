@@ -52,9 +52,7 @@ export const MemItem = ({ user }) => {
       {editMode ? (
         <div className="edit">
           <div className="avatar">
-            <img
-              src={userCopy.avatar}
-            />
+            <img src={userCopy.avatar} />
           </div>
           <input
             className="name"
@@ -71,8 +69,8 @@ export const MemItem = ({ user }) => {
           <MdSaveAlt className="save" onClick={submitUpdate} />
         </div>
       ) : (
-        <div className="item">
-          <div className="avatar">
+        <div className="avatar">
+          <div className="item">
             <img
               style={{ width: "30px", borderRadius: "50%" }}
               src={user.avatar}
